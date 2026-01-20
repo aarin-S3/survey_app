@@ -1,0 +1,15 @@
+{
+  "extends": "@quasar/app-webpack/tsconfig-preset",
+  "compilerOptions": {
+    "baseUrl": ".",
+    // This ignores strict type checks inside node_modules libraries
+    // (Helps prevent errors from conflicting library versions)
+    "skipLibCheck": true
+  },
+  "include": [
+    "src/**/*.ts",
+    "src/**/*.vue",
+    "src/**/*.js",
+    "vitest.config.mts"
+  ]
+}

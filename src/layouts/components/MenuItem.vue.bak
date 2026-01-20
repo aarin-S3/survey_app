@@ -1,0 +1,97 @@
+<template>
+  <q-item-label header v-if="isTitle">
+    <div class="title-item " style="color: #455a64; ">
+      {{text}}
+    </div>
+  </q-item-label>
+<q-expansion-item
+
+  :icon="icon"
+  :label="text"
+  :content-inset-level="0.1"
+  v-else-if="child.length > 0"
+  active-class="my-active"
+  class="my-font-color"
+>
+    <child-item
+      v-for="(m, i) in child"
+      :key="i"
+      :to="m.to"
+      :text="m.text"
+      :icon="m.icon"
+      :description="m.description"
+      :badge="m.badge"
+    />
+  </q-expansion-item>
+  <child-item
+    v-else
+    :to="to"
+    :text="text"
+    :icon="icon"
+    :description="description"
+    
+  />
+</template>
+<script lang="ts">
+import { ChildMenu } from './types'
+import { defineComponent, PropType } from 'vue'
+import ChildItem from './ChildMenu.vue'
+
+export default defineComponent({
+  components: { ChildItem },
+  props: {
+    isTitle: {
+      type: Boolean,
+      default: false
+    },
+    icon: {
+      type: String,
+      default: 'dashboard'
+    },
+    text: {
+      type: String,
+      default: '-'
+    },
+    to: {
+      type: String,
+      default: ''
+    },
+    hasChild: {
+      default: false,
+      type: Boolean
+    },
+    child: {
+      type: Array as PropType<ChildMenu[]>,
+      default: () => []
+    }
+  }
+})
+</script>
+<style lang='sass' scoped>
+.my-font-color
+  color: #455a64 !important
+
+.q-list--dark, .q-item--dark 
+   color: #455a64 !important
+   border-color: rgba(255, 255, 255, 0.28)
+
+.q-item--dark 
+   color: #90a4ae !important
+   border-color: rgba(255, 255, 255, 0.28)
+
+</style>
+<style scoped>
+
+.draw{
+  border-top:1px solid green ;
+  border-bottom: 1px solid red ;
+}
+
+.q-expansion-item--expanded
+{
+ border-top: 1px solid ;
+ border-bottom: 1px solid ;
+}
+
+</style>
+
