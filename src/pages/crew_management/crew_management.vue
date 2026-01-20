@@ -92,24 +92,23 @@
 
             <HomePage name="Substation 1 Survey" v-show="currentPage === 'home'"></HomePage>
 
-            <FormLayout v-show="currentPage === 'form1'"/>
-            <!-- <HomePage name="Form 1" v-show="currentPage === 'form1'"></HomePage> -->
-            <HomePage name="Form 2" v-show="currentPage === 'form2'"></HomePage>
-            <HomePage name="Form 3" v-show="currentPage === 'form3'"></HomePage>
-            <HomePage name="Form 4" v-show="currentPage === 'form4'"></HomePage>
-            <HomePage name="Form 5" v-show="currentPage === 'form5'"></HomePage>
-            <HomePage name="Form 6" v-show="currentPage === 'form6'"></HomePage>
-            <HomePage name="Form 7" v-show="currentPage === 'form7'"></HomePage>
-            <HomePage name="Form 8" v-show="currentPage === 'form8'"></HomePage>
-            <HomePage name="Form 9" v-show="currentPage === 'form9'"></HomePage>
-            <HomePage name="Form 10" v-show="currentPage === 'form10'"></HomePage>
-            <HomePage name="Form 11" v-show="currentPage === 'form11'"></HomePage>
-            <HomePage name="Form 12" v-show="currentPage === 'form12'"></HomePage>
-            <HomePage name="Form 13" v-show="currentPage === 'form13'"></HomePage>
-            <HomePage name="Form 14" v-show="currentPage === 'form14'"></HomePage>
-            <HomePage name="Form 15" v-show="currentPage === 'form15'"></HomePage>
-            <HomePage name="Form 16" v-show="currentPage === 'form16'"></HomePage>
-
+            <!-- <FormLayoutOne v-show="currentPage === 'form1'"/> -->
+            <FormLayoutOne name="Servey Form 1" v-show="currentPage === 'form1'"></FormLayoutOne>
+            <FormLayoutTwo name="Servey Form 2" v-show="currentPage === 'form2'"></FormLayoutTwo>
+            <FormLayoutThree name="Servey Form 3" v-show="currentPage === 'form3'"></FormLayoutThree>
+            <FormLayoutFour name="Servey Form 4" v-show="currentPage === 'form4'"></FormLayoutFour>
+            <FormLayoutFive name="Servey Form 5" v-show="currentPage === 'form5'"></FormLayoutFive>
+            <FormLayoutSix name="Servey Form 6" v-show="currentPage === 'form6'"></FormLayoutSix>
+            <FormLayoutSeven name="Servey Form 7" v-show="currentPage === 'form7'"></FormLayoutSeven>
+            <FormLayoutEight name="Servey Form 8" v-show="currentPage === 'form8'"></FormLayoutEight>
+            <FormLayoutNine name="Servey Form 9" v-show="currentPage === 'form9'"></FormLayoutNine>
+            <FormLayoutTen name="Servey Form 10" v-show="currentPage === 'form10'"></FormLayoutTen>
+            <FormLayoutEleven name="Servey Form 11" v-show="currentPage === 'form11'"></FormLayoutEleven>
+            <FormLayoutTwelve name="Servey Form 12" v-show="currentPage === 'form12'"></FormLayoutTwelve>
+            <FormLayoutThirteen name="Servey Form 13" v-show="currentPage === 'form13'"></FormLayoutThirteen>
+            <FormLayoutFourteen name="Servey Form 14" v-show="currentPage === 'form14'"></FormLayoutFourteen>
+            <FormLayoutFifteen name="Servey Form 15" v-show="currentPage === 'form15'"></FormLayoutFifteen>
+            <FormLayoutSixteen name="Servey Form 16" v-show="currentPage === 'form16'"></FormLayoutSixteen>
 
             <!-- <Dashboard v-show="currentPage === 'dashboard'"
                :currentPage="currentPage"
@@ -163,6 +162,22 @@ import DonutChart from '../dashboard/components/chartjs/donut_chart/donut_chart.
 import BarChart from '../dashboard/components/chartjs/bar_chart/bar_chart.vue'
 import Dashboard from './components/sub_pages/dashboard.vue'
 import FormLayout from './components/dialog/form_layout.vue'
+import FormLayoutOne from './components/dialog/form_layout_One.vue'
+import FormLayoutTwo from './components/dialog/form_layout_Two.vue'
+import FormLayoutThree from './components/dialog/form_layout_Three.vue'
+import FormLayoutFour from './components/dialog/form_layout_Four.vue'
+import FormLayoutFive from './components/dialog/form_layout_Five.vue'
+import FormLayoutSix from './components/dialog/form_layout_Six.vue'
+import FormLayoutSeven from './components/dialog/form_layout_Seven.vue'
+import FormLayoutEight from './components/dialog/form_layout_Eight.vue'
+import FormLayoutNine from './components/dialog/form_layout_Nine.vue'
+import FormLayoutTen from './components/dialog/form_layout_Ten.vue'
+import FormLayoutEleven from './components/dialog/form_layout_Eleven.vue'
+import FormLayoutTwelve from './components/dialog/form_layout_Twelve.vue'
+import FormLayoutThirteen from './components/dialog/form_layout_Thirteen.vue'
+import FormLayoutFourteen from './components/dialog/form_layout_Fourteen.vue'
+import FormLayoutFifteen from './components/dialog/form_layout_Fifteen.vue'
+import FormLayoutSixteen from './components/dialog/form_layout_Sixteen.vue'
 import { useSurveyStore } from '../../stores/survey_store'
 
 defineOptions({
