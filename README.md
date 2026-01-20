@@ -6,7 +6,7 @@ Clone this repository
 
 ## Use this command to install dependencies 
 ```bash
-  npm install --legacy-peer-deps
+  npm install
 ```
 
 ## Use this command to run the project
