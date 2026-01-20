@@ -6,7 +6,7 @@
             <h4 v-on:click="currentPage = 'home'"
                :style="[$q.dark.isActive ? 'color:#9e9e9e;' : 'color:#424242;', $q.screen.lt.md ? 'display: none;' : 'display: inline-block;']"
                style="font-size: 1rem;  font-weight: 400; cursor: pointer;">
-              {{ surveyStore.currentSurveyName }}
+               {{ surveyStore.currentSurveyName }}
                <q-icon :class="$q.dark.isActive ? 'drawer_btn--dark' : ''"
                   :name="currentPage === 'home' ? '' : 'chevron_right'" style="width: 10px;" />
             </h4>
@@ -20,41 +20,27 @@
 
             <q-breadcrumbs :class="$q.dark.isActive ? 'text-grey-4' : 'text-grey-7'" active-color="secondary" style=""
                :style="$q.screen.lt.md ? 'font-size: 10px;' : 'font-size: 13px;'">
-               <q-breadcrumbs-el v-if="currentPage === 'form1'" label="Form 1"
-                  style="margin-top: 2px; margin-left: 3px;" />
-               <q-breadcrumbs-el v-if="currentPage === 'form2'" label="Form 2"
-                  style="margin-top: 2px; margin-left: 3px;" />
-               <q-breadcrumbs-el v-if="currentPage === 'form3'" label="Form 3"
-                  style="margin-top: 2px; margin-left: 3px;" />
-               <q-breadcrumbs-el v-if="currentPage === 'form4'" label="Form 4"
-                  style="margin-top: 2px; margin-left: 3px;" />
-               <q-breadcrumbs-el v-if="currentPage === 'form5'" label="Form 5"
-                  style="margin-top: 2px; margin-left: 3px;" />
-               <q-breadcrumbs-el v-if="currentPage === 'form6'" label="Form 6"
-                  style="margin-top: 2px; margin-left: 3px;" />
-               <q-breadcrumbs-el v-if="currentPage === 'form7'" label="Form 7"
-                  style="margin-top: 2px; margin-left: 3px;" />
-               <q-breadcrumbs-el v-if="currentPage === 'form8'" label="Form 8"
-                  style="margin-top: 2px; margin-left: 3px;" />
-               <q-breadcrumbs-el v-if="currentPage === 'form9'" label="Form 9"
-                  style="margin-top: 2px; margin-left: 3px;" />
-               <q-breadcrumbs-el v-if="currentPage === 'form10'" label="Form 10"
-                  style="margin-top: 2px; margin-left: 3px;" />
-               <q-breadcrumbs-el v-if="currentPage === 'form11'" label="Form 11"
-                  style="margin-top: 2px; margin-left: 3px;" />
-               <q-breadcrumbs-el v-if="currentPage === 'form12'" label="Form 12"
-                  style="margin-top: 2px; margin-left: 3px;" />
-               <q-breadcrumbs-el v-if="currentPage === 'form13'" label="Form 13"
-                  style="margin-top: 2px; margin-left: 3px;" />
-               <q-breadcrumbs-el v-if="currentPage === 'form14'" label="Form 14"
-                  style="margin-top: 2px; margin-left: 3px;" />
-               <q-breadcrumbs-el v-if="currentPage === 'form15'" label="Form 15"
-                  style="margin-top: 2px; margin-left: 3px;" />
-               <q-breadcrumbs-el v-if="currentPage === 'form16'" label="Form 16"
+               <q-breadcrumbs-el v-if="activeMenu" :label="activeMenu.MenuName"
                   style="margin-top: 2px; margin-left: 3px;" />
             </q-breadcrumbs>
 
             <q-space />
+            <q-btn-dropdown flat dense borderless icon="folder" no-caps label="Saved" style="margin-right: 6px;"
+               :class="$q.screen.lt.sm ? 'my-drop-btn-share-small' : 'my-drop-btn-share'">
+               <q-list style="border-color: #005517 !important; border-color: transparent !important;"
+                  :style="$q.screen.lt.sm ? 'height: 63px !important;' : ''">
+                  <q-item clickable v-close-popup v-for="version in SavedVersions"
+                     style="min-height: 31px !important; height: 31px !important; padding: 0px 2px !important;">
+                     <q-item-section avatar style="padding: 0px !important;">
+                        <q-avatar icon="folder" text-color="grey" style="font-size: 2rem;" />
+                     </q-item-section>
+                     <q-item-section style="padding: 0px !important;">
+                        <q-item-label
+                           style="padding-left: -5px !important; padding-right: 8px !important; font-size: 0.75rem;">{{ version }}</q-item-label>
+                     </q-item-section>
+                  </q-item>
+               </q-list>
+            </q-btn-dropdown>
             <q-btn flat dense bordered label="Submit" :text-color="$q.dark.isActive ? 'grey-4' : 'grey-9'" class=""
                :class="$q.screen.lt.sm ? 'btn-size-dialog-small' : 'btn-size-dialog'">
                <q-tooltip :offset="[10, 5]"
@@ -66,7 +52,7 @@
          </q-toolbar>
       </div>
 
-      <div class="col row no-wrap overflow-hidden">
+      <div class="row no-wrap overflow-hidden" :style="$q.screen.lt.sm ? 'height: calc(100vh - 160px); min-height: height: calc(100vh - 160px)' : '' || $q.screen.lt.md ? '' : 'height: calc(100vh - 100px); min-height: calc(100vh - 100px);'">
          <div class="col-auto menu-container"
             style="width: 130px; height: 85vh; padding: 0px; margin-left: 0px; margin-top: 7px; border-radius: 3px; ">
             <q-list>
@@ -77,7 +63,8 @@
                   <q-item-section avatar style="padding: 1px 0px; margin: 0px;">
                      <div style="display: flex; margin-top: 10px;">
                         <q-icon :name="item.icon" style="font-size: 21px;" />
-                        <p style="font-size: 12px; display: inline; margin-top: 2px; margin-left: 3px;">{{ item.MenuName }}</p>
+                        <p style="font-size: 12px; display: inline; margin-top: 2px; margin-left: 3px;">{{ item.MenuName
+                           }}</p>
                      </div>
                   </q-item-section>
                   <q-tooltip anchor="center right" self="center left" :offset="[10, 0]"
@@ -93,23 +80,40 @@
             <HomePage name="Substation 1 Survey" v-show="currentPage === 'home'"></HomePage>
 
             <!-- <FormLayoutOne v-show="currentPage === 'form1'"/> -->
-            <FormLayoutOne name="Servey Form 1" v-show="currentPage === 'form1'"></FormLayoutOne>
-            <FormLayoutTwo name="Servey Form 2" v-show="currentPage === 'form2'"></FormLayoutTwo>
-            <FormLayoutThree name="Servey Form 3" v-show="currentPage === 'form3'"></FormLayoutThree>
-            <FormLayoutFour name="Servey Form 4" v-show="currentPage === 'form4'"></FormLayoutFour>
-            <FormLayoutFive name="Servey Form 5" v-show="currentPage === 'form5'"></FormLayoutFive>
-            <FormLayoutSix name="Servey Form 6" v-show="currentPage === 'form6'"></FormLayoutSix>
-            <FormLayoutSeven name="Servey Form 7" v-show="currentPage === 'form7'"></FormLayoutSeven>
-            <FormLayoutEight name="Servey Form 8" v-show="currentPage === 'form8'"></FormLayoutEight>
-            <FormLayoutNine name="Servey Form 9" v-show="currentPage === 'form9'"></FormLayoutNine>
-            <FormLayoutTen name="Servey Form 10" v-show="currentPage === 'form10'"></FormLayoutTen>
-            <FormLayoutEleven name="Servey Form 11" v-show="currentPage === 'form11'"></FormLayoutEleven>
-            <FormLayoutTwelve name="Servey Form 12" v-show="currentPage === 'form12'"></FormLayoutTwelve>
-            <FormLayoutThirteen name="Servey Form 13" v-show="currentPage === 'form13'"></FormLayoutThirteen>
-            <FormLayoutFourteen name="Servey Form 14" v-show="currentPage === 'form14'"></FormLayoutFourteen>
-            <FormLayoutFifteen name="Servey Form 15" v-show="currentPage === 'form15'"></FormLayoutFifteen>
-            <FormLayoutSixteen name="Servey Form 16" v-show="currentPage === 'form16'"></FormLayoutSixteen>
-
+            <FormLayoutOne :name="arrSideMenu[0].MenuName" v-show="currentPage === `${arrSideMenu[0].currentListPage}`">
+            </FormLayoutOne>
+            <FormLayoutTwo :name="arrSideMenu[1].MenuName" v-show="currentPage === `${arrSideMenu[1].currentListPage}`">
+            </FormLayoutTwo>
+            <FormLayoutThree :name="arrSideMenu[2].MenuName"
+               v-show="currentPage === `${arrSideMenu[2].currentListPage}`"></FormLayoutThree>
+            <FormLayoutFour :name="arrSideMenu[3].MenuName"
+               v-show="currentPage === `${arrSideMenu[3].currentListPage}`"></FormLayoutFour>
+            <FormLayoutFive :name="arrSideMenu[4].MenuName"
+               v-show="currentPage === `${arrSideMenu[4].currentListPage}`"></FormLayoutFive>
+            <FormLayoutSix :name="arrSideMenu[5].MenuName" v-show="currentPage === `${arrSideMenu[5].currentListPage}`">
+            </FormLayoutSix>
+            <FormLayoutSeven :name="arrSideMenu[6].MenuName"
+               v-show="currentPage === `${arrSideMenu[6].currentListPage}`"></FormLayoutSeven>
+            <FormLayoutEight :name="arrSideMenu[7].MenuName"
+               v-show="currentPage === `${arrSideMenu[7].currentListPage}`"></FormLayoutEight>
+            <FormLayoutNine :name="arrSideMenu[8].MenuName"
+               v-show="currentPage === `${arrSideMenu[8].currentListPage}`"></FormLayoutNine>
+            <FormLayoutTen :name="arrSideMenu[9].MenuName" v-show="currentPage === `${arrSideMenu[9].currentListPage}`">
+            </FormLayoutTen>
+            <FormLayoutEleven :name="arrSideMenu[10].MenuName"
+               v-show="currentPage === `${arrSideMenu[10].currentListPage}`"></FormLayoutEleven>
+            <FormLayoutTwelve :name="arrSideMenu[11].MenuName"
+               v-show="currentPage === `${arrSideMenu[11].currentListPage}`"></FormLayoutTwelve>
+            <FormLayoutThirteen :name="arrSideMenu[12].MenuName"
+               v-show="currentPage === `${arrSideMenu[12].currentListPage}`"></FormLayoutThirteen>
+            <FormLayoutFourteen :name="arrSideMenu[13].MenuName"
+               v-show="currentPage === `${arrSideMenu[13].currentListPage}`"></FormLayoutFourteen>
+            <FormLayoutFifteen :name="arrSideMenu[14].MenuName"
+               v-show="currentPage === `${arrSideMenu[14].currentListPage}`"></FormLayoutFifteen>
+            <FormLayoutSixteen :name="arrSideMenu[15].MenuName"
+               v-show="currentPage === `${arrSideMenu[15].currentListPage}`"></FormLayoutSixteen>
+            <FormLayoutSixteen :name="arrSideMenu[15].MenuName"
+               v-show="currentPage === `${arrSideMenu[15].currentListPage}`"></FormLayoutSixteen>
             <!-- <Dashboard v-show="currentPage === 'dashboard'"
                :currentPage="currentPage"
                :dbnumberData="arrCircularValues"
@@ -221,24 +225,39 @@ const instAuditLogtable = ref(null)
 const formRef = ref(null)
 const switchingOrderTextarea = ref(null)
 
+const SavedVersions = ref(["Saved Version 1", "Saved Version 2",  "Saved Version 3",   "Saved Version 4"]);
+
 const arrSideMenu = ref([
-   { currentListPage: 'form1', MenuName: 'Survey Form 1', icon: 'looks_one' },
-   { currentListPage: 'form2', MenuName: 'Survey Form 2', icon: 'looks_two' },
-   { currentListPage: 'form3', MenuName: 'Survey Form 3', icon: 'looks_3' },
-   { currentListPage: 'form4', MenuName: 'Survey Form 4', icon: 'looks_4' },
-   { currentListPage: 'form5', MenuName: 'Survey Form 5', icon: 'looks_5' },
-   { currentListPage: 'form6', MenuName: 'Survey Form 6', icon: 'looks_6' },
-   { currentListPage: 'form7', MenuName: 'Survey Form 7', icon: 'book' },
-   { currentListPage: 'form8', MenuName: 'Survey Form 8', icon: 'book' },
-   { currentListPage: 'form9', MenuName: 'Survey Form 9', icon: 'book' },
-   { currentListPage: 'form10', MenuName: 'Survey Form 10', icon: 'book' },
-   { currentListPage: 'form11', MenuName: 'Survey Form 11', icon: 'book' },
-   { currentListPage: 'form12', MenuName: 'Survey Form 12', icon: 'book' },
-   { currentListPage: 'form13', MenuName: 'Survey Form 13', icon: 'book' },
-   { currentListPage: 'form14', MenuName: 'Survey Form 14', icon: 'book' },
-   { currentListPage: 'form15', MenuName: 'Survey Form 15', icon: 'book' },
-   { currentListPage: 'form16', MenuName: 'Survey Form 16', icon: 'book' },
+   { currentListPage: 'form1', MenuName: 'Substation Basic Details', icon: 'looks_one' },
+   { currentListPage: 'form2', MenuName: 'Substation Details', icon: 'looks_two' },
+   { currentListPage: 'form3', MenuName: 'Feeder List', icon: 'looks_3' },
+   { currentListPage: 'form4', MenuName: 'Communication Cable Details', icon: 'looks_4' },
+   { currentListPage: 'form5', MenuName: 'Capacitor Bank Details', icon: 'looks_5' },
+   { currentListPage: 'form6', MenuName: 'Transformer Details', icon: 'looks_6' },
+   { currentListPage: 'form7', MenuName: 'Feeder Details – ADM', icon: 'book' },
+   { currentListPage: 'form8', MenuName: 'CRP Relay Details', icon: 'book' },
+   { currentListPage: 'form9', MenuName: 'Annexures 1', icon: 'book' },
+   { currentListPage: 'form10', MenuName: 'Annexures 2', icon: 'book' },
+   { currentListPage: 'form11', MenuName: 'Annexures 3', icon: 'book' },
+   { currentListPage: 'form12', MenuName: 'Annexures 4', icon: 'book' },
+   { currentListPage: 'form13', MenuName: 'Annexures 5', icon: 'book' },
+   { currentListPage: 'form14', MenuName: 'Annexures 6', icon: 'book' },
+   { currentListPage: 'form15', MenuName: 'Annexures 7', icon: 'book' },
+   { currentListPage: 'form16', MenuName: 'Panel Metering Chamber Dimensions', icon: 'book' },
+   { currentListPage: 'form17', MenuName: 'Existing AC Distribution Panel', icon: 'book' },
+   { currentListPage: 'form18', MenuName: 'ACDB Details', icon: 'book' },
+   { currentListPage: 'form19', MenuName: 'DCDB Details', icon: 'book' },
+   { currentListPage: 'form20', MenuName: 'Mobile Connectivity', icon: 'book' },
+   { currentListPage: 'form21', MenuName: 'List of SS Photos', icon: 'book' },
 ])
+
+
+// This variable sets the current breadcrumb values
+const activeMenu = computed(() =>
+   arrSideMenu.value.find(
+      item => item.currentListPage === currentPage.value
+   )
+)
 
 const arrBreadCrumb = ref([
    { label: 'Dashboard', currentListPage: 'dashboard' },

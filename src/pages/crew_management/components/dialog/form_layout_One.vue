@@ -1,8 +1,8 @@
 <template>
    <!-- <q-dialog v-model="internalModel" @before-show="resetPosition" transition-show="scale"
     transition-hide="minimize-to-footer" seamless> -->
-   <q-card :class="$q.dark.isActive ? 'bg-card-dark' : 'bg-card-light'"
-      :style="[{ height: '93%', width: '50%', display: 'flex', flexDirection: 'column', borderRadius: '2px' }]">
+   <q-card :class="[$q.dark.isActive ? 'bg-card-dark' : 'bg-card-light']"
+      :style="[{ height: $q.screen.lt.md ? 'calc(100vh - 160px)' : 'calc(100vh - 100px)', width: $q.screen.lt.md ? '100%' : '50%', display: 'flex', flexDirection: 'column', borderRadius: '2px',boxShadow: 'none !important' }]">
 
       <q-bar class="my-dialog text-white"
          :style="$q.dark.isActive ? 'background: #2f2f2f' : 'background: #385562'">
