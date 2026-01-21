@@ -306,7 +306,7 @@ const deleteFeeder = () => {
 }
 
 .header-section {
-  background: #3c4b64;
+  background: #1778da;
   /* Indigo dark background from image */
   padding: 20px;
   border-bottom: 1px solid #ffffff40;
@@ -327,13 +327,13 @@ const deleteFeeder = () => {
 }
 
 .survey-input {
-  background: #ffffff;
+  /* background: #ffffff; */
   border: none;
   height: 28px;
   padding: 4px 8px;
   border-radius: 2px;
   font-size: 13px;
-  color: #757575;
+  color: #9c9c9c;
   /* Grey text as requested */
   width: 100%;
 }
@@ -379,14 +379,14 @@ const deleteFeeder = () => {
 }
 
 .field-input-dark {
-  background: #ffffff;
+  /* background: #0e0d0d; */
   /* White box */
   border: 1px solid #bdbdbd;
   border-radius: 4px;
   padding: 8px 12px;
   width: 100%;
   font-size: 14px;
-  color: #757575;
+  color: #8b8b8b;
   /* Grey text */
 }
 

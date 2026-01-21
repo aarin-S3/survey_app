@@ -88,9 +88,9 @@
             </FormLayoutOne>
             <FormLayoutTwo :name="arrSideMenu[1].MenuName" v-show="currentPage === `${arrSideMenu[1].currentListPage}`">
             </FormLayoutTwo>
+            <Table2 :name="arrSideMenu[2].MenuName" v-show="currentPage === `${arrSideMenu[2].currentListPage}`"></Table2>
             <FormLayoutThree :name="arrSideMenu[3].MenuName"
                v-show="currentPage === `${arrSideMenu[3].currentListPage}`"></FormLayoutThree>
-            <Table :name="arrSideMenu[2].MenuName" v-show="currentPage === `${arrSideMenu[2].currentListPage}`"></Table>
             <FormLayoutFive :name="arrSideMenu[4].MenuName"
                v-show="currentPage === `${arrSideMenu[4].currentListPage}`"></FormLayoutFive>
             <FormLayoutSix :name="arrSideMenu[5].MenuName" v-show="currentPage === `${arrSideMenu[5].currentListPage}`">
@@ -184,7 +184,7 @@ import FormLayoutTwelve from './components/dialog/form_layout_Twelve.vue'
 import FormLayoutThirteen from './components/dialog/form_layout_Thirteen.vue'
 import FormLayoutFourteen from './components/dialog/form_layout_Fourteen.vue'
 import FormLayoutFifteen from './components/dialog/form_layout_Fifteen.vue'
-import Table from './components/tabulators/table.vue'
+import Table2 from './components/tabulators/table2.vue'
 import { useSurveyStore } from '../../stores/survey_store'
 
 defineOptions({

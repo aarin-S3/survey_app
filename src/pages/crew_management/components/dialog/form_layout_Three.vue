@@ -2,241 +2,110 @@
    <!-- <q-dialog v-model="internalModel" @before-show="resetPosition" transition-show="scale"
     transition-hide="minimize-to-footer" seamless> -->
    <q-card :class="[$q.dark.isActive ? 'background: #2f2f2f' : 'background: #385562']"
-      :style="[{ height: $q.screen.lt.md ? 'calc(100vh - 160px)' : 'calc(100vh - 100px)', width: '100%', display: 'flex', flexDirection: 'column', borderRadius: '2px',boxShadow: 'none !important' }]">
-                        <q-tab-panel name="notification_details" class="q-pa-none" style="width: 52%;  margin: 15px auto;">
-         <q-bar class="my-dialog text-white q-pa-none" :style="$q.dark.isActive ? 'background: #2f2f2f' : 'background: #385562'" style="margin: auto;">
+      :style="[{ height: $q.screen.lt.md ? 'calc(100vh - 160px)' : 'calc(100vh - 100px)', width: '100%', display: 'flex', flexDirection: 'column', borderRadius: '2px', boxShadow: 'none !important' }]">
+      <q-tab-panel name="notification_details" class="q-pa-none" style="margin: 15px auto;">
+         <q-bar class="my-dialog text-white q-pa-none"
+            :style="$q.dark.isActive ? 'background: #2f2f2f' : 'background: #385562'" style="margin: auto;">
 
             <div :class="$q.dark.isActive ? 'dialog-header-dark' : 'dialog-header-light'">{{ props.name }}</div>
 
             <q-space />
          </q-bar>
 
-               <div class="row q-col-gutter-sm">
+         <!-- <div class="row q-col-gutter-sm">
 
-                  <div class="col-12 col-md-6">
-                     <div class="text-subtitle2 q-mb-sm"
-                        :class="$q.dark.isActive ? 'dialog-subtitle-dark' : 'dialog-subtitle-light'">Survey Creation
-                     </div>
+               </div> -->
+         <!-- Communication Cable Details -->
+         <div class="q-mt-md">
 
-                     <div class="row items-center q-mb-xs">
-                        <div class="col-3 text-caption"
-                           :class="$q.dark.isActive ? 'dialog-field-label-dark' : 'dialog-field-label-light'">Name</div>
-                        <div class="col-9">
-                           <q-input dense outlined v-model="form.name"
-                              :class="$q.dark.isActive ? 'dialog-field-label-dark' : 'dialog-field-label-light'" />
-                        </div>
-                     </div>
-
-                     <div class="row items-center q-mb-xs">
-                        <div class="col-3 text-caption"
-                           :class="$q.dark.isActive ? 'dialog-field-label-dark' : 'dialog-field-label-light'">Phone
-                        </div>
-                        <div class="col-9">
-                           <q-input dense outlined v-model="form.phone"
-                              :class="$q.dark.isActive ? 'dialog-field-label-dark' : 'dialog-field-label-light'" />
-                        </div>
-                     </div>
-
-                     <div class="row items-center q-mb-xs">
-                        <div class="col-3 text-caption"
-                           :class="$q.dark.isActive ? 'dialog-field-label-dark' : 'dialog-field-label-light'">Email
-                        </div>
-                        <div class="col-9">
-                           <q-input dense outlined v-model="form.email"
-                              :class="$q.dark.isActive ? 'dialog-field-label-dark' : 'dialog-field-label-light'" />
-                        </div>
-                     </div>
-
-                     <div class="row items-center q-mb-md">
-                        <div class="col-3 text-caption"
-                           :class="$q.dark.isActive ? 'dialog-field-label-dark' : 'dialog-field-label-light'">Service
-                           Center
-                        </div>
-                        <div class="col-9">
-                           <q-input dense outlined v-model="form.serviceCenter"
-                              :class="$q.dark.isActive ? 'dialog-field-label-dark' : 'dialog-field-label-light'" />
-                        </div>
-                     </div>
-
-                     <div class="row items-start q-mb-xs">
-                        <div class="col-3 text-caption"
-                           :class="$q.dark.isActive ? 'dialog-field-label-dark' : 'dialog-field-label-light'">Mailing
-                           Address
-                        </div>
-                        <div class="col-9">
-                           <q-input dense outlined v-model="form.address"
-                              :class="$q.dark.isActive ? 'dialog-field-label-dark' : 'dialog-field-label-light'" />
-                        </div>
-                     </div>
-                  </div>
-
-                  <div class="col-12 col-md-6" :style="{ paddingTop: $q.screen.lt.md ? '0px' : '42px' }">
-
-                     <div class="row items-center q-mb-xs">
-                        <div class="text-caption"
-                           :class="[$q.dark.isActive ? 'dialog-field-label-dark' : 'dialog-field-label-light', $q.screen.lt.md ? 'col-3' : 'col-4']">
-                           Creation Date
-                        </div>
-                        <div class="" :class="[$q.screen.lt.md ? 'col-9' : 'col-8']">
-                           <q-input dense outlined v-model="form.creationDate" type="date"
-                              :class="['date-wrapper', $q.dark.isActive ? 'date-mode-dark' : 'date-mode-light', $q.dark.isActive ? 'dialog-field-label-dark' : 'dialog-field-label-light']" />
-                        </div>
-                     </div>
-
-                     <div class="row items-center q-mb-xs">
-                        <div class="" :class="[$q.screen.lt.md ? 'col-3' : 'col-4']"></div>
-                        <div class="" :class="[$q.screen.lt.md ? 'col-9' : 'col-8']">
-                           <q-checkbox
-                              :class="$q.dark.isActive ? 'dialog-field-label-dark' : 'dialog-field-label-light'"
-                              v-model="form.overrideMailing" label="Override Mailing Date" dense size="sm"
-                              style="font-size: 12px;" />
-                        </div>
-                     </div>
-
-                     <div class="row items-center q-mb-xs" style="margin-bottom: 20px;">
-                        <div class="text-caption"
-                           :class="[$q.dark.isActive ? 'dialog-field-label-dark' : 'dialog-field-label-light', $q.screen.lt.md ? 'col-3' : 'col-4']">
-                           Work Order ID
-                        </div>
-                        <div class="" :class="[$q.screen.lt.md ? 'col-9' : 'col-8']">
-                           <q-input dense outlined v-model="form.workOrderId"
-                              :class="$q.dark.isActive ? 'dialog-field-label-dark' : 'dialog-field-label-light'" />
-                        </div>
-                     </div>
-
-                     <div class="row items-center q-mb-xs">
-                        <div class="text-caption"
-                           :class="[$q.dark.isActive ? 'dialog-field-label-dark' : 'dialog-field-label-light', $q.screen.lt.md ? 'col-3' : 'col-4']">
-                           Event Type</div>
-                        <div class="" :class="[$q.screen.lt.md ? 'col-9' : 'col-8']">
-                           <q-select dense outlined v-model="form.eventType" :options="eventTypes" behavior="menu"
-                              :class="$q.dark.isActive ? 'dialog-field-label-dark' : 'dialog-field-label-light'" />
-                        </div>
-                     </div>
-
-                     <div class="row items-center q-mb-xs">
-                        <div class="text-caption"
-                           :class="[$q.dark.isActive ? 'dialog-field-label-dark' : 'dialog-field-label-light', $q.screen.lt.md ? 'col-3' : 'col-4']">
-                           Outage
-                        </div>
-                        <div class="" :class="[$q.screen.lt.md ? 'col-9' : 'col-8']">
-                           <q-select dense outlined v-model="form.outageType" :options="outageTypes" behavior="menu"
-                              :class="$q.dark.isActive ? 'dialog-field-label-dark' : 'dialog-field-label-light'" />
-                        </div>
-                     </div>
-                  </div>
+            <div class="row items-center justify-between q-mb-sm">
+               <div class="text-subtitle2" :class="subtitleClass">
+                  Data Table
                </div>
 
-               <q-separator :color="$q.dark.isActive ? 'grey-8' : 'grey-4'" class="q-my-md" />
+               <q-btn dense outline icon="add" label="Add Row" class="q-ml-sm" @click="openDialog" />
+            </div>
 
-               <div class="row q-col-gutter-md">
+            <q-table flat bordered dense :rows="communicationRows" :columns="columns" row-key="id" hide-pagination
+               class="communication-table">
+               <template v-slot:body-cell-sNo="props">
+                  <q-td>{{ props.row.sNo }}</q-td>
+               </template>
 
-                  <div class="col-12 col-md-6">
-                     <div class="text-subtitle2 q-mb-sm"
-                        :class="$q.dark.isActive ? 'dialog-subtitle-dark' : 'dialog-subtitle-light'">Scheduled Event
-                        Date and
-                        Time</div>
+               <template v-slot:body-cell-loopNo="props">
+                  <q-td>{{ props.row.loopNo }}</q-td>
+               </template>
 
-                     <div class="row items-center q-mb-xs">
-                        <div class="col-3 text-caption"
-                           :class="$q.dark.isActive ? 'dialog-field-label-dark' : 'dialog-field-label-light'">Start Time
-                        </div>
-                        <div class="col-9">
-                           <q-input dense outlined v-model="form.schedStart" type="datetime-local"
-                              :class="['date-wrapper', $q.dark.isActive ? 'date-mode-dark' : 'date-mode-light', $q.dark.isActive ? 'dialog-field-label-dark' : 'dialog-field-label-light']" />
-                        </div>
-                     </div>
+               <template v-slot:body-cell-feeders="props">
+                  <q-td>{{ props.row.feeders.join(', ') }}</q-td>
+               </template>
 
-                     <div class="row items-center q-mb-xs">
-                        <div class="col-3 text-caption"
-                           :class="$q.dark.isActive ? 'dialog-field-label-dark' : 'dialog-field-label-light'">End Time
-                        </div>
-                        <div class="col-9">
-                           <q-input dense outlined v-model="form.schedEnd" type="datetime-local"
-                              :class="['date-wrapper', $q.dark.isActive ? 'date-mode-dark' : 'date-mode-light', $q.dark.isActive ? 'dialog-field-label-dark' : 'dialog-field-label-light']" />
-                        </div>
-                     </div>
+               <template v-slot:body-cell-distance="props">
+                  <q-td>{{ props.row.distance }}</q-td>
+               </template>
 
-                     <div class="row items-center q-mb-xs">
-                        <div class="col-3 text-caption"
-                           :class="$q.dark.isActive ? 'dialog-field-label-dark' : 'dialog-field-label-light'">Duration
-                           (h:m)
-                        </div>
-                        <div class="col-4">
-                           <q-input dense outlined v-model="form.schedDuration" mask="##:##" placeholder="00:05"
-                              :class="$q.dark.isActive ? 'dialog-field-label-dark' : 'dialog-field-label-light'" />
-                        </div>
-                     </div>
-                  </div>
+               <template v-slot:body-cell-tray="props">
+                  <q-td>{{ props.row.trayAvailable ? 'Yes' : 'No' }}</q-td>
+               </template>
 
-                  <div class="col-12 col-md-6">
-                     <div class="text-subtitle2 q-mb-sm"
-                        :class="$q.dark.isActive ? 'dialog-subtitle-dark' : 'dialog-subtitle-light'">Alternate Event
-                        Date and
-                        Time</div>
+               <template v-slot:body-cell-length="props">
+                  <q-td>{{ props.row.loopingLength }}</q-td>
+               </template>
+            </q-table>
 
-                     <div class="row items-center q-mb-xs">
-                        <div class="col-3 text-caption"
-                           :class="$q.dark.isActive ? 'dialog-field-label-dark' : 'dialog-field-label-light'">Start Time
-                        </div>
-                        <div class="col-9">
-                           <q-input dense outlined v-model="form.altStart" type="datetime-local"
-                              :class="['date-wrapper', $q.dark.isActive ? 'date-mode-dark' : 'date-mode-light', $q.dark.isActive ? 'dialog-field-label-dark' : 'dialog-field-label-light']" />
-                        </div>
-                     </div>
+         </div>
 
-                     <div class="row items-center q-mb-xs">
-                        <div class="col-3 text-caption"
-                           :class="$q.dark.isActive ? 'dialog-field-label-dark' : 'dialog-field-label-light'">End Time
-                        </div>
-                        <div class="col-9">
-                           <q-input dense outlined v-model="form.altEnd" type="datetime-local"
-                              :class="['date-wrapper', $q.dark.isActive ? 'date-mode-dark' : 'date-mode-light', $q.dark.isActive ? 'dialog-field-label-dark' : 'dialog-field-label-light']" />
-                        </div>
-                     </div>
+         <q-dialog v-model="dialogOpen" persistent>
+            <q-card style="width: 600px; max-width: 95vw">
 
-                     <div class="row items-center q-mb-xs">
-                        <div class="col-3 text-caption"
-                           :class="$q.dark.isActive ? 'dialog-field-label-dark' : 'dialog-field-label-light'">Duration
-                           (h:m)
-                        </div>
-                        <div class="col-4">
-                           <q-input dense outlined v-model="form.altDuration" mask="##:##" placeholder="00:05"
-                              :class="$q.dark.isActive ? 'dialog-field-label-dark' : 'dialog-field-label-light'" />
-                        </div>
-                     </div>
-                  </div>
-               </div>
-               <q-separator :color="$q.dark.isActive ? 'grey-8' : 'grey-4'" class="q-my-md" />
+               <q-bar :class="$q.dark.isActive ? 'bg-dark' : 'bg-primary'" class="text-white">
+                  <div>Add Communication Cable Details</div>
+                  <q-space />
+                  <q-btn dense flat icon="close" v-close-popup />
+               </q-bar>
 
-               <div class="text-subtitle2 q-mb-sm"
-                  :class="$q.dark.isActive ? 'dialog-subtitle-dark' : 'dialog-subtitle-light'">Switching Order</div>
-               <div class="row items-center q-mb-xs">
-                  <div class="col-12">
-                     <q-input dense outlined v-model="form.switchingOrder"
-                        :class="$q.dark.isActive ? 'dialog-field-label-dark' : 'dialog-field-label-light'" />
-                  </div>
-               </div>
+               <q-card-section class="q-gutter-sm">
 
-               <div class="text-subtitle2 q-mb-sm"
-                  :class="$q.dark.isActive ? 'dialog-subtitle-dark' : 'dialog-subtitle-light'">Creator Comment</div>
-               <div class="row items-center q-mb-xs">
-                  <div class="col-12">
-                     <q-input dense outlined v-model="form.creatorComment"
-                        :class="$q.dark.isActive ? 'dialog-field-label-dark' : 'dialog-field-label-light'" />
-                  </div>
-               </div>
+                  <!-- Loop No -->
+                  <q-select dense stack-label outlined label="Loop No" v-model="form.loopNo" :options="loopOptions" />
 
-            </q-tab-panel>
+                  <!-- Feeders -->
+                  <q-select dense stack-label outlined multiple label="RTU to nearby 1st feeder (Max 5)"
+                     v-model="form.feeders" :options="feederOptions" :max-values="5" />
+
+                  <!-- Distance -->
+                  <q-input stack-label outlined label="RTU to feeder distance" v-model="form.distance" />
+
+                  <!-- Cable Tray -->
+                  <q-option-group inline label="Cable tray available" type="radio" :options="yesNoOptions"
+                     v-model="form.trayAvailable" />
+
+                  <!-- Looping Cable Length -->
+                  <q-input stack-label outlined label="Panel to Panel looping cable length"
+                     v-model="form.loopingLength" />
+
+               </q-card-section>
+
+               <q-card-actions align="right">
+                  <q-btn flat label="Cancel" @click="cancelRow" v-close-popup />
+                  <q-btn label="Save" color="primary" @click="saveRow" />
+               </q-card-actions>
+
+            </q-card>
+         </q-dialog>
 
 
-      <q-separator :color="$q.dark.isActive ? 'grey-8' : 'grey-4'" class="q-my-xs" />
 
-      <q-card-actions class="row justify-between items-center" style=" padding: 2px;">
+      </q-tab-panel>
+
+
+      <!-- <q-separator :color="$q.dark.isActive ? 'grey-8' : 'grey-4'" class="q-my-xs" /> -->
+
+      <!-- <q-card-actions class="row justify-between items-center" style=" padding: 2px;">
          <div class="text-red-4 q-ml-md text-caption">
             <q-icon name="error" /> Representative name required
          </div>
-         <!-- <div>
+         <div>
             <q-btn label="Cancel" :class="$q.dark.isActive ? 'dialog-field-label-dark' : 'dialog-field-label-light'"
                style="padding: 2.5px 4px !important; font-size:10.5px !important; border-radius: 0px; border-width: 2px !important;"
                outline v-close-popup />
@@ -245,8 +114,8 @@
                type="submit">
                Save
             </button>
-         </div> -->
-      </q-card-actions>
+         </div>
+      </q-card-actions> -->
 
    </q-card>
    <!-- </q-dialog> -->
@@ -255,59 +124,113 @@
 <script setup>
 import { ref, reactive, computed } from 'vue'
 import { useWindowManager } from '../../../../stores/window_manager'
+import { useQuasar } from 'quasar'
+const $q = useQuasar()
 
 const props = defineProps(['modelValue', 'name'])
 const emit = defineEmits(['update:modelValue'])
 const store = useWindowManager()
 
-const internalModel = computed({
-   get: () => props.modelValue,
-   set: (val) => emit('update:modelValue', val)
-})
+/* ---------------- TABLE ---------------- */
 
-const tab = ref('notification_details')
-const dialogId = 'work-order-dia'
+const communicationRows = ref([])
 
-// Minimize Logic
-const onMinimize = () => {
-   store.minimize(dialogId, 'Work Order Dialog', () => {
-      internalModel.value = true
-   })
-   internalModel.value = false
-}
+const columns = [
+   { name: 'S. No', label: 'S. No', field: 'sNo', align: 'left' },
+   { name: 'loopNo', label: 'Loop No', field: 'loopNo', align: 'left' },
+   { name: 'feeders', label: 'Feeder Name', field: 'feeders' },
+   { name: 'distance', label: 'Distance', field: 'distance' },
+   { name: 'tray', label: 'Cable Tray', field: 'trayAvailable' },
+   { name: 'length', label: 'Looping Cable Length', field: 'loopingLength' }
+]
 
-// Draggable Logic
-const dialogPos = ref({ x: 0, y: 0 })
-const dialogStyle = computed(() => {
-   return {
-      transform: `translate(${dialogPos.value.x}px, ${dialogPos.value.y}px)`
-   }
-})
-const onPan = (evt) => {
-   dialogPos.value = {
-      x: dialogPos.value.x + evt.delta.x,
-      y: dialogPos.value.y + evt.delta.y
-   }
-}
-const resetPosition = () => {
-   dialogPos.value = { x: 0, y: 0 }
-}
+/* ---------------- DIALOG ---------------- */
 
-// Form Data
-const eventTypes = ['replacing meters', 'maintenance', 'emergency']
-const outageTypes = ['Regular Outage', 'Planned Outage']
+const dialogOpen = ref(false)
 
 const form = reactive({
-   name: '', phone: '', email: '', serviceCenter: '', address: '',
-   creationDate: '2025-09-29', overrideMailing: false, workOrderId: '',
-   eventType: 'replacing meters', outageType: 'Regular Outage',
-   schedStart: '2025-09-30T00:00', schedEnd: '2025-09-30T00:05', schedDuration: '00:05',
-   altStart: '2025-10-01T00:00', altEnd: '2025-10-01T00:05', altDuration: '00:05',
-   useAlternate: false, switchingOrder: "", creatorComment: ''
+   loopNo: null,
+   feeders: [],
+   distance: '',
+   trayAvailable: false,
+   loopingLength: ''
 })
+
+const resetForm = () => {
+   form.loopNo = null
+   form.feeders = []
+   form.distance = ''
+   form.trayAvailable = false
+   form.loopingLength = ''
+}
+
+let nSerialNumber = 0;
+
+const openDialog = () => {
+   resetForm()
+   nSerialNumber++;
+   dialogOpen.value = true
+}
+
+const saveRow = () => {
+   communicationRows.value.push({
+      id: Date.now(),
+      sNo: nSerialNumber,
+      loopNo: form.loopNo,
+      feeders: [...form.feeders],
+      distance: form.distance,
+      trayAvailable: form.trayAvailable,
+      loopingLength: form.loopingLength
+   })
+
+   dialogOpen.value = false
+}
+
+const cancelRow = () => {
+   nSerialNumber--;
+}
+
+/* ---------------- OPTIONS ---------------- */
+
+const loopOptions = Array.from({ length: 12 }, (_, i) => i + 1)
+
+const feederOptions = [
+   'Feeder-A',
+   'Feeder-B',
+   'Feeder-C',
+   'Feeder-D',
+   'Feeder-E',
+   'Feeder-F'
+]
+
+const yesNoOptions = [
+   { label: 'Yes', value: true },
+   { label: 'No', value: false }
+]
+
+/* ---------------- STYLES ---------------- */
+
+const subtitleClass = computed(() =>
+   $q.dark.isActive ? 'dialog-subtitle-dark' : 'dialog-subtitle-light'
+)
+
 </script>
 
 <style scoped>
+.communication-table {
+   font-size: 12px;
+}
+
+.communication-table th {
+   background: #a7cbe8;
+   font-weight: 600;
+}
+
+/* .communication-table td {
+  background: #fff;
+} */
+
+
 /* --- SCOPED STYLES (Colors, Buttons, Inputs) --- */
 .bg-card-light {
    background: white;
