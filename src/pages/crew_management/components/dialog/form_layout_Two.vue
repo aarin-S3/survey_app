@@ -1,17 +1,20 @@
 <template>
+   <!-- <h3 :style="$q.screen.lt.sm ?  'margin-top: 15px; background-color: blue; line-height: 1.8rem; font-size: 1.4rem;' : ' margin-top: 20px; font-size: 1.6rem;'" style="text-align: center; " :class="$q.dark.isActive ? 'dialog-header-dark' : 'dialog-header-light'">{{ props.name }}</h3> -->
+   <!-- <h3 style="text-align: center; margin-bottom: -30px;" :class="$q.dark.isActive ? 'dialog-header-dark' : 'dialog-header-light'">{{ props.name }}</h3> -->
    <q-card :class="[$q.dark.isActive ? 'background: #2f2f2f' : 'background: #385562']"
       :style="[{ height: $q.screen.lt.md ? 'calc(100vh - 160px)' : 'calc(100vh - 100px)', width: '100%', display: 'flex', flexDirection: 'column', border: 'none', boxShadow: 'none !important' }]">
 
-      <q-tab-panel name="notification_details" class="q-pa-none" style="width: 52%;  margin: 15px auto;">
+       
+      <q-tab-panel name="notification_details" class="q-pa-none" style=" width: 65%;  margin: 0px auto; padding-bottom: 2rem !important;">
          <q-bar class="my-dialog text-white q-pa-none"
             :style="$q.dark.isActive ? 'background: #2f2f2f' : 'background: #385562'" style="margin: auto;">
 
-            <div :class="$q.dark.isActive ? 'dialog-header-dark' : 'dialog-header-light'">{{ props.name }}</div>
+            <div :class="$q.dark.isActive ? 'dialog-form-header-dark' : 'dialog-form-header-light'">{{ props.name }}</div>
 
             <q-space />
          </q-bar>
 
-         <div class="text-subtitle2 q-mb-sm"
+         <div class="text-subtitle2 q-mb-sm" style="margin-top: 2rem !important"
             :class="$q.dark.isActive ? 'dialog-subtitle-dark' : 'dialog-subtitle-light'">Indoor/Outdoor CIVIL Work
             Completion Status
          </div>
@@ -22,54 +25,13 @@
             </div>
          </div>
 
+         <q-separator spaced style="margin: 1.5rem 0;" />
+
 
          <div class="text-subtitle1 q-mb-sm" :class="$q.dark.isActive ? 'dialog-header-dark' : 'dialog-header-light'">
             Proposed location of
             Communication equipment Details
          </div>
-
-         <!-- <div class="row q-col-gutter-md q-mb-md">
-
-            <div class="col-12 col-sm-6">
-               <div class="text-subtitle2 q-mb-sm"
-                  :class="$q.dark.isActive ? 'dialog-subtitle-dark' : 'dialog-subtitle-light'">
-                  MPLS Cable route available
-               </div>
-               <q-option-group v-model="form.mplsAvailable" :options="yesNoOptions" color="secondary" inline dense
-                  :class="$q.dark.isActive ? 'dialog-field-label-dark' : 'dialog-field-label-light'"
-                  />
-            </div>
-
-            <div class="col-12 col-sm-6">
-               <div class="text-subtitle2 q-mb-sm"
-                  :class="$q.dark.isActive ? 'dialog-subtitle-dark' : 'dialog-subtitle-light'">
-                  High Gain Antenna Required at Site
-               </div>
-               <q-option-group v-model="form.highGainRequired" :options="yesNoOptions" color="secondary" inline dense
-                  :class="$q.dark.isActive ? 'dialog-field-label-dark' : 'dialog-field-label-light'" />
-            </div>
-
-            <div class="text-subtitle2 q-mb-sm"
-               :class="$q.dark.isActive ? 'dialog-subtitle-dark' : 'dialog-subtitle-light'"> Distance from RTU to High
-               gain antenna mounting location Text Field
-            </div>
-
-            <div class="row items-center q-mb-md">
-               <div class="col-12">
-                  <q-input dense outlined v-model="form.switchingOrder"
-                     :class="$q.dark.isActive ? 'dialog-field-label-dark' : 'dialog-field-label-light'" />
-               </div>
-            </div>
-
-            <div class="text-subtitle2 q-mb-sm"
-                  :class="$q.dark.isActive ? 'dialog-subtitle-dark' : 'dialog-subtitle-light'">
-                  Cable route available for High gain Antenna	
-               </div>
-               <q-option-group v-model="form.mplsAvailable" :options="yesNoOptions" color="secondary" inline dense
-                  :class="$q.dark.isActive ? 'dialog-field-label-dark' : 'dialog-field-label-light'"
-                  />
-            </div> -->
-         <!-- </div> -->
 
 
          <div class="row q-col-gutter-md q-mb-md">
@@ -112,66 +74,11 @@
 
          </div>
 
+         <q-separator spaced style="margin: 1.5rem 0;" />
+
          <div class="text-subtitle1 q-mb-sm" :class="$q.dark.isActive ? 'dialog-header-dark' : 'dialog-header-light'">
             Station AC & DC (Battery Charger & ACDB) Supply Details: -
          </div>
-
-         <!-- <div class="row q-col-gutter-md q-mb-md">
-
-            <div class="col-12 col-sm-6">
-               <div class="text-subtitle2 q-mb-sm"
-                  :class="$q.dark.isActive ? 'dialog-subtitle-dark' : 'dialog-subtitle-light'">
-                  230VAC for Utilities available
-               </div>
-               <q-option-group v-model="form.utilitiesAcAvailable" :options="yesNoOptions" color="secondary" inline
-                  dense :class="$q.dark.isActive ? 'dialog-field-label-dark' : 'dialog-field-label-light'" />
-            </div>
-
-            <div class="col-12 col-sm-6">
-               <div class="text-subtitle2 q-mb-sm"
-                  :class="$q.dark.isActive ? 'dialog-subtitle-dark' : 'dialog-subtitle-light'">
-                  DC Voltage for Breakers on 66kV
-               </div>
-               <q-input dense outlined v-model="form.dcVolt66" placeholder="Enter Voltage"
-                  :class="$q.dark.isActive ? 'dialog-field-label-dark' : 'dialog-field-label-light'" />
-            </div>
-
-            <div class="col-12 col-sm-6">
-               <div class="text-subtitle2 q-mb-sm"
-                  :class="$q.dark.isActive ? 'dialog-subtitle-dark' : 'dialog-subtitle-light'">
-                  DC Voltage for Breakers on 33kV
-               </div>
-               <q-input dense outlined v-model="form.dcVolt33" placeholder="Enter Voltage"
-                  :class="$q.dark.isActive ? 'dialog-field-label-dark' : 'dialog-field-label-light'" />
-            </div>
-
-            <div class="col-12 col-sm-6">
-               <div class="text-subtitle2 q-mb-sm"
-                  :class="$q.dark.isActive ? 'dialog-subtitle-dark' : 'dialog-subtitle-light'">
-                  DC Voltage for Breakers on 11kV
-               </div>
-               <q-input dense outlined v-model="form.dcVolt11" placeholder="Enter Voltage"
-                  :class="$q.dark.isActive ? 'dialog-field-label-dark' : 'dialog-field-label-light'" />
-            </div>
- 
-              <div class="col-12 col-sm-6">
-               <div class="text-subtitle2 q-mb-sm"
-                  :class="$q.dark.isActive ? 'dialog-subtitle-dark' : 'dialog-subtitle-light'">
-                  Details of Substation Battery Bank 66kv
-               </div>
-               <q-option-group v-model="form.substationBatteryBank66kv" :options="availNAOptions" color="secondary" inline
-                  dense :class="$q.dark.isActive ? 'dialog-field-label-dark' : 'dialog-field-label-light'" />
-            </div>
-
-             <div class="col-12 col-sm-6">
-               <div class="text-subtitle2 q-mb-sm"
-                  :class="$q.dark.isActive ? 'dialog-subtitle-dark' : 'dialog-subtitle-light'">
-                  Shunt available or not in 66kv Battery charger
-               </div>
-               <q-option-group v-model="form.shuntAvailable66kv" :options="availNAOptions" color="secondary" inline
-                  dense :class="$q.dark.isActive ? 'dialog-field-label-dark' : 'dialog-field-label-light'" />
-            </div>
-         </div> -->
 
          <div class="row q-col-gutter-md q-mb-md">
 
@@ -427,6 +334,8 @@
 
          </div>
 
+         <q-separator spaced style="margin: 1.5rem 0;" />
+
          <div class="text-subtitle1 q-mb-sm" :class="$q.dark.isActive ? 'dialog-header-dark' : 'dialog-header-light'">
             Single Line Diagram Details:
          </div>
@@ -438,7 +347,8 @@
                   :class="$q.dark.isActive ? 'dialog-subtitle-dark' : 'dialog-subtitle-light'">
                   Draw the Single Line Diagram of the Station showing all existing bays as well as future bays
                </div>
-               <q-file outlined v-model="form.singleLineDiagram" label="Click to select photo" accept="image/*" clearable>
+               <q-file outlined v-model="form.singleLineDiagram" label="Click to select photo" accept="image/*"
+                  clearable>
                   <template v-slot:prepend>
                      <q-icon name="image" />
                   </template>
@@ -460,6 +370,7 @@
 
          </div>
 
+         <q-separator spaced style="margin: 1.5rem 0;" />
          <div class="text-subtitle1 q-mb-sm" :class="$q.dark.isActive ? 'dialog-header-dark' : 'dialog-header-light'">
             Substation Earthing Details:
          </div>
@@ -486,6 +397,7 @@
             </div>
          </div>
 
+         <q-separator spaced style="margin: 1.5rem 0;" />
          <div class="text-subtitle1 q-mb-sm" :class="$q.dark.isActive ? 'dialog-header-dark' : 'dialog-header-light'">
             Storage Details:
          </div>
@@ -527,6 +439,8 @@
             </div>
          </div>
 
+         <q-separator spaced style="margin: 1.5rem 0;" />
+
          <div class="text-subtitle1 q-mb-sm" :class="$q.dark.isActive ? 'dialog-header-dark' : 'dialog-header-light'">
             Ethernet Switch details:
          </div>
@@ -541,6 +455,7 @@
                <q-input dense outlined v-model="form.makeOfSwitch"
                   :class="$q.dark.isActive ? 'dialog-field-label-dark' : 'dialog-field-label-light'" />
             </div>
+
             <div class="col-12 col-sm-6">
                <div class="text-subtitle2 q-mb-sm"
                   :class="$q.dark.isActive ? 'dialog-subtitle-dark' : 'dialog-subtitle-light'">
@@ -571,8 +486,8 @@
                      Upload Photo for Switch {{ n }}
                   </div>
 
-                  <q-file outlined v-model="form.switchPhotos[n - 1]" label="Click to select photo" accept="image/*" clearable
-                     :class="$q.dark.isActive ? 'dialog-field-label-dark' : 'dialog-field-label-light'">
+                  <q-file outlined v-model="form.switchPhotos[n - 1]" label="Click to select photo" accept="image/*"
+                     clearable :class="$q.dark.isActive ? 'dialog-field-label-dark' : 'dialog-field-label-light'">
                      <template v-slot:prepend>
                         <q-icon name="image" />
                      </template>
@@ -586,7 +501,7 @@
                </div>
             </div>
 
-            <div class="col-6 col-sm-3" v-for="i in 4" :key="`sw-${i}`">
+            <div class="col-12 col-sm-6 col-md-3" v-for="i in 4" :key="`sw-${i}`">
                <div class="text-subtitle3 q-mb-sm"
                   :class="$q.dark.isActive ? 'dialog-subtitle-dark' : 'dialog-subtitle-light'">
                   {{ `SW-${i}` }}
@@ -604,34 +519,121 @@
                   dense :class="$q.dark.isActive ? 'dialog-field-label-dark' : 'dialog-field-label-light'" />
             </div>
 
-             <div class="col-12 col-sm-6">
+            <div class="col-12 col-sm-6">
                <div class="text-subtitle2 q-mb-sm"
                   :class="$q.dark.isActive ? 'dialog-subtitle-dark' : 'dialog-subtitle-light'">
-                  Ethernet Switch is working 
+                  Ethernet Switch is working
                </div>
                <q-option-group v-model="form.ethernetSwitchIsWorking" :options="yesNoOptions" color="secondary" inline
                   dense :class="$q.dark.isActive ? 'dialog-field-label-dark' : 'dialog-field-label-light'" />
             </div>
 
-            <div class="col-12 col-sm-6"
-               v-if="form.ethernetSwitchIsWorking === 'yes'">
+            <div class="col-12 col-sm-6" v-if="form.ethernetSwitchIsWorking === 'yes'">
                <div class="text-subtitle2 q-mb-sm"
                   :class="$q.dark.isActive ? 'dialog-subtitle-dark' : 'dialog-subtitle-light'">
                   Upload Ethernet Switch Photo
                </div>
-               <q-file outlined v-model="form.ethernetSwitchPhoto" label="Click to select photo" accept="image/*" clearable>
+               <q-file outlined v-model="form.ethernetSwitchPhoto" label="Click to select photo" accept="image/*"
+                  clearable>
                   <template v-slot:prepend>
                      <q-icon name="image" />
                   </template>
                </q-file>
             </div>
 
+         </div>
 
+         <q-separator spaced style="margin: 1.5rem 0;" />
 
+         <div class="text-subtitle1 q-mb-sm" :class="$q.dark.isActive ? 'dialog-header-dark' : 'dialog-header-light'">
+            Additional Reports/Documents Expected Apart from Above
          </div>
 
 
+         <div class="row q-col-gutter-md q-mb-md">
 
+            <div class="col-12 col-sm-6">
+               <div class="text-subtitle2 q-mb-sm"
+                  :class="$q.dark.isActive ? 'dialog-subtitle-dark' : 'dialog-subtitle-light'">
+                  Substation Single Line Diagram
+               </div>
+               <q-option-group v-model="form.substationSingleLineDiagram" :options="yesNoOptions" color="secondary"
+                  inline dense :class="$q.dark.isActive ? 'dialog-field-label-dark' : 'dialog-field-label-light'" />
+            </div>
+
+            <div class="col-12 col-sm-6" v-if="form.substationSingleLineDiagram === 'yes'">
+               <div class="text-subtitle2 q-mb-sm"
+                  :class="$q.dark.isActive ? 'dialog-subtitle-dark' : 'dialog-subtitle-light'">
+                  Upload Substation Single Line Diagram
+               </div>
+               <q-file outlined v-model="form.substationSingleLineDiagramPhoto" label="Click to select photo"
+                  accept="image/*" clearable>
+                  <template v-slot:prepend>
+                     <q-icon name="image" />
+                  </template>
+               </q-file>
+            </div>
+
+            <div class="col-12 col-sm-6">
+               <div class="text-subtitle2 q-mb-sm"
+                  :class="$q.dark.isActive ? 'dialog-subtitle-dark' : 'dialog-subtitle-light'">
+                  Control Room Layout
+               </div>
+               <q-option-group v-model="form.controlRoomLayout" :options="yesNoOptions" color="secondary" inline dense
+                  :class="$q.dark.isActive ? 'dialog-field-label-dark' : 'dialog-field-label-light'" />
+            </div>
+
+            <div class="col-12 col-sm-6" v-if="form.controlRoomLayout === 'yes'">
+               <div class="text-subtitle2 q-mb-sm"
+                  :class="$q.dark.isActive ? 'dialog-subtitle-dark' : 'dialog-subtitle-light'">
+                  Upload Control Room Layout
+               </div>
+               <q-file outlined v-model="form.controlRoomLayoutPhoto" label="Click to select photo" accept="image/*"
+                  clearable>
+                  <template v-slot:prepend>
+                     <q-icon name="image" />
+                  </template>
+               </q-file>
+            </div>
+
+            <div class="col-12 col-sm-6">
+               <div class="text-subtitle2 q-mb-sm"
+                  :class="$q.dark.isActive ? 'dialog-subtitle-dark' : 'dialog-subtitle-light'">
+                  Space Available /Not for LDMS (only for 66/33Kv)
+               </div>
+               <q-option-group v-model="form.spaceAvailable" :options="yesNoOptions" color="secondary" inline dense
+                  :class="$q.dark.isActive ? 'dialog-field-label-dark' : 'dialog-field-label-light'" />
+            </div>
+
+            <div class="col-12 col-sm-6">
+               <div class="text-subtitle2 q-mb-sm"
+                  :class="$q.dark.isActive ? 'dialog-subtitle-dark' : 'dialog-subtitle-light'">
+                  LDMS distance from proposed RTU
+               </div>
+               <q-input dense outlined v-model="form.ldmsDistanceFromProposedRTU"
+                  :class="$q.dark.isActive ? 'dialog-field-label-dark' : 'dialog-field-label-light'" />
+            </div>
+
+            <div class="col-12 col-sm-6">
+               <div class="text-subtitle2 q-mb-sm"
+                  :class="$q.dark.isActive ? 'dialog-subtitle-dark' : 'dialog-subtitle-light'">
+                  LDMS to ACDB Distance
+               </div>
+               <q-input dense outlined v-model="form.ldmsToAcdbDistance"
+                  :class="$q.dark.isActive ? 'dialog-field-label-dark' : 'dialog-field-label-light'" />
+            </div>
+
+            <div class="col-12 col-sm-6">
+               <div class="text-subtitle2 q-mb-sm"
+                  :class="$q.dark.isActive ? 'dialog-subtitle-dark' : 'dialog-subtitle-light'">
+                  Furniture available or not for LDMS (Table & chair)
+               </div>
+               <q-option-group v-model="form.furnitureAvailable" :options="yesNoOptions" color="secondary" inline dense
+                  :class="$q.dark.isActive ? 'dialog-field-label-dark' : 'dialog-field-label-light'" />
+            </div>
+
+
+         </div>
 
 
 
@@ -644,6 +646,9 @@
 
 <script setup>
 import { reactive } from 'vue'
+import { useQuasar } from 'quasar'
+
+const $q = useQuasar()
 
 const props = defineProps(['name'])
 
@@ -710,6 +715,14 @@ const form = reactive({
    relayToSwitchCableLaid: 'no',
    ethernetSwitchIsWorking: 'no',
    ethernetSwitchPhoto: null,
+   substationSingleLineDiagram: 'no',
+   substationSingleLineDiagramPhoto: null,
+   controlRoomLayout: 'no',
+   controlRoomLayoutPhoto: null,
+   spaceAvailable: 'no',
+   ldmsDistanceFromProposedRTU: '',
+   ldmsToAcdbDistance: '',
+   furnitureAvailable: 'no',
 
 
 
