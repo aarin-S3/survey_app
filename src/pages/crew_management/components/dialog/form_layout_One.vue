@@ -1,53 +1,32 @@
 <template>
    <!-- <q-dialog v-model="internalModel" @before-show="resetPosition" transition-show="scale"
     transition-hide="minimize-to-footer" seamless> -->
-   <q-card :class="[$q.dark.isActive ? 'bg-card-dark' : 'bg-card-light']"
-      :style="[{ height: $q.screen.lt.md ? 'calc(100vh - 160px)' : 'calc(100vh - 100px)', width: $q.screen.lt.md ? '100%' : '50%', display: 'flex', flexDirection: 'column', borderRadius: '2px',boxShadow: 'none !important' }]">
+   <q-card :class="[$q.dark.isActive ? 'background: #2f2f2f' : 'background: #385562']"
+      :style="[{ height: $q.screen.lt.md ? 'calc(100vh - 160px)' : 'calc(100vh - 100px)', width: '100%', display: 'flex', flexDirection: 'column', borderRadius: '2px',boxShadow: 'none !important' }]">
 
-      <q-bar class="my-dialog text-white"
-         :style="$q.dark.isActive ? 'background: #2f2f2f' : 'background: #385562'">
 
-         <div :class="$q.dark.isActive ? 'dialog-header-dark' : 'dialog-header-light'">{{ props.name }}</div>
+                  <q-tab-panel name="notification_details" class="q-pa-none" style="width: 52%;  margin: 15px auto;">
+         <q-bar class="my-dialog text-white q-pa-none" :style="$q.dark.isActive ? 'background: #2f2f2f' : 'background: #385562'" style="margin: auto;">
 
-         <q-space />
+            <div :class="$q.dark.isActive ? 'dialog-header-dark' : 'dialog-header-light'">{{ props.name }}</div>
 
-         <!-- <q-btn dense flat icon="minimize" @click="onMinimize" class="q-mr-xs"
-            :class="$q.dark.isActive ? 'dialog-btn-dark' : 'dialog-btn-light'" style="padding-bottom: 13px;">
-            <q-tooltip>Minimize Window</q-tooltip>
-         </q-btn> -->
-
-         <!-- <q-btn dense flat icon="close" v-close-popup
-            :class="$q.dark.isActive ? 'dialog-btn-dark' : 'dialog-btn-light'" /> -->
-      </q-bar>
-
-      <q-separator :color="$q.dark.isActive ? 'grey-8' : 'grey-4'" style="margin: 0px;" />
-
-      <q-scroll-area class="col q-pa-md"
-         :thumb-style="{ backgroundColor: 'var(--scroll-bar-color)', width: '5px', borderRadius: '5px', opacity: 0.7 }"
-         style="padding-top: 5px; padding-bottom: 5px;">
-         <q-tab-panels v-model="tab" animated class="bg-transparent text-white">
-
-            <q-tab-panel name="notification_details" class="q-pa-none">
+            <q-space />
+         </q-bar>
 
                <div class="row q-col-gutter-sm">
-
                   <div class="col-12 col-md-6">
-                     <div class="text-subtitle2 q-mb-sm"
-                        :class="$q.dark.isActive ? 'dialog-subtitle-dark' : 'dialog-subtitle-light'">Survey Creation
-                     </div>
-
-                     <div class="row items-center q-mb-xs">
+                     <div class="items-center q-mb-xs">
                         <div class="col-3 text-caption"
-                           :class="$q.dark.isActive ? 'dialog-field-label-dark' : 'dialog-field-label-light'">Name</div>
+                           :class="$q.dark.isActive ? 'dialog-field-label-dark' : 'dialog-field-label-light'">Servey Engineer Name</div>
                         <div class="col-9">
                            <q-input dense outlined v-model="form.name"
                               :class="$q.dark.isActive ? 'dialog-field-label-dark' : 'dialog-field-label-light'" />
                         </div>
                      </div>
 
-                     <div class="row items-center q-mb-xs">
+                     <div class="items-center q-mb-xs">
                         <div class="col-3 text-caption"
-                           :class="$q.dark.isActive ? 'dialog-field-label-dark' : 'dialog-field-label-light'">Phone
+                           :class="$q.dark.isActive ? 'dialog-field-label-dark' : 'dialog-field-label-light'">Servey Engineer Contact No.
                         </div>
                         <div class="col-9">
                            <q-input dense outlined v-model="form.phone"
@@ -55,20 +34,28 @@
                         </div>
                      </div>
 
-                     <div class="row items-center q-mb-xs">
+                     <div class="items-center q-mb-xs">
                         <div class="col-3 text-caption"
-                           :class="$q.dark.isActive ? 'dialog-field-label-dark' : 'dialog-field-label-light'">Email
+                           :class="$q.dark.isActive ? 'dialog-field-label-dark' : 'dialog-field-label-light'">Location GPS
                         </div>
-                        <div class="col-9">
-                           <q-input dense outlined v-model="form.email"
-                              :class="$q.dark.isActive ? 'dialog-field-label-dark' : 'dialog-field-label-light'" />
+                        <div class="row">
+                           <div class="col-5 q-mr-xs">
+                              <q-input dense outlined v-model="form.email" placeholder="Lat"
+                                 :class="$q.dark.isActive ? 'dialog-field-label-dark' : 'dialog-field-label-light'" />
+                           </div>
+                           <div class="col-5">
+                              <q-input dense outlined v-model="form.email" placeholder="Lng"
+                                 :class="$q.dark.isActive ? 'dialog-field-label-dark' : 'dialog-field-label-light'" />
+                           </div>
                         </div>
                      </div>
 
-                     <div class="row items-center q-mb-md">
+                     <div class="text-subtitle2 q-mb-sm"
+                        :class="$q.dark.isActive ? 'dialog-subtitle-dark' : 'dialog-subtitle-light'">Substation Details: <b>Heading</b></div>
+
+                     <div class="items-center q-mb-md">
                         <div class="col-3 text-caption"
-                           :class="$q.dark.isActive ? 'dialog-field-label-dark' : 'dialog-field-label-light'">Service
-                           Center
+                           :class="$q.dark.isActive ? 'dialog-field-label-dark' : 'dialog-field-label-light'">Substation Name
                         </div>
                         <div class="col-9">
                            <q-input dense outlined v-model="form.serviceCenter"
@@ -76,16 +63,36 @@
                         </div>
                      </div>
 
-                     <div class="row items-start q-mb-xs">
+                     <div class="items-start q-mb-xs">
                         <div class="col-3 text-caption"
-                           :class="$q.dark.isActive ? 'dialog-field-label-dark' : 'dialog-field-label-light'">Mailing
-                           Address
+                           :class="$q.dark.isActive ? 'dialog-field-label-dark' : 'dialog-field-label-light'">Placement of Control relay Panels
                         </div>
                         <div class="col-9">
                            <q-input dense outlined v-model="form.address"
                               :class="$q.dark.isActive ? 'dialog-field-label-dark' : 'dialog-field-label-light'" />
                         </div>
                      </div>
+
+                     <div class="items-center q-mb-xs">
+                        <div class="text-caption"
+                           :class="[$q.dark.isActive ? 'dialog-field-label-dark' : 'dialog-field-label-light', $q.screen.lt.md ? 'col-3' : 'col-4']">
+                           Voltage Levels</div>
+                        <div class="" :class="[$q.screen.lt.md ? 'col-9' : 'col-8']">
+                           <q-select dense outlined v-model="form.arrVoltageLevels" :options="arrVoltageLevels" behavior="menu"
+                              :class="$q.dark.isActive ? 'dialog-field-label-dark' : 'dialog-field-label-light'" />
+                        </div>
+                     </div>
+                     
+                     <div class="items-center q-mb-xs">
+                        <div class="text-caption"
+                           :class="[$q.dark.isActive ? 'dialog-field-label-dark' : 'dialog-field-label-light', $q.screen.lt.md ? 'col-3' : 'col-4']">
+                           Bay Details</div>
+                        <div class="" :class="[$q.screen.lt.md ? 'col-9' : 'col-8']">
+                           <q-select dense outlined v-model="form.arrVoltageLevels" :options="arrVoltageLevels" behavior="menu"
+                              :class="$q.dark.isActive ? 'dialog-field-label-dark' : 'dialog-field-label-light'" />
+                        </div>
+                     </div>
+
                   </div>
 
                   <div class="col-12 col-md-6" :style="{ paddingTop: $q.screen.lt.md ? '0px' : '42px' }">
@@ -248,9 +255,6 @@
             </q-tab-panel>
 
 
-         </q-tab-panels>
-      </q-scroll-area>
-
       <q-separator :color="$q.dark.isActive ? 'grey-8' : 'grey-4'" class="q-my-xs" />
 
       <q-card-actions class="row justify-between items-center" style=" padding: 2px;">
@@ -315,13 +319,50 @@ const resetPosition = () => {
 }
 
 // Form Data
+const arrVoltageLevels = ['66 kV', '33 kV', '11 kV']
+const baySchema = {
+  '66': {
+    bus: 0,
+    incomerLine: 0,
+    transformer_66_33: 0,
+    transformer_66_11: 0,
+    outgoing: 0,
+    busCoupler: 0,
+    interconnector: 0,
+    capacitorBank: 0
+  },
+  '33': {
+    bus: 0,
+    incomerLine: 0,
+    incomerTransformer: 0,
+    transformer_33_11: 0,
+    outgoing: 0,
+    busCoupler: 0,
+    interconnector: 0,
+    capacitorBank: 0,
+    busSection: 0
+  },
+  '11': {
+    bus: 0,
+    incomer: 0,
+    transformer_11_415: 0,
+    outgoing: 0,
+    busCoupler: 0,
+    interconnector: 0,
+    capacitorBank: 0,
+    busSection: 0
+  }
+}
+
 const eventTypes = ['replacing meters', 'maintenance', 'emergency']
+const dropdown20 = Array.from({ length: 20 }, (_, i) => i + 1)
+const dropdown30 = Array.from({ length: 30 }, (_, i) => i + 1)
 const outageTypes = ['Regular Outage', 'Planned Outage']
 
 const form = reactive({
    name: '', phone: '', email: '', serviceCenter: '', address: '',
    creationDate: '2025-09-29', overrideMailing: false, workOrderId: '',
-   eventType: 'replacing meters', outageType: 'Regular Outage',
+   eventType: 'replacing meters',arrVoltageLevels:'66 kV', bays: JSON.parse(JSON.stringify(baySchema)), outageType: 'Regular Outage',
    schedStart: '2025-09-30T00:00', schedEnd: '2025-09-30T00:05', schedDuration: '00:05',
    altStart: '2025-10-01T00:00', altEnd: '2025-10-01T00:05', altDuration: '00:05',
    useAlternate: false, switchingOrder: "", creatorComment: ''

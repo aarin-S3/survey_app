@@ -1,32 +1,15 @@
 <template>
    <!-- <q-dialog v-model="internalModel" @before-show="resetPosition" transition-show="scale"
     transition-hide="minimize-to-footer" seamless> -->
-   <q-card :class="[$q.dark.isActive ? 'bg-card-dark' : 'bg-card-light']"
-      :style="[{ height: $q.screen.lt.md ? 'calc(100vh - 160px)' : 'calc(100vh - 100px)', width: $q.screen.lt.md ? '100%' : '50%', display: 'flex', flexDirection: 'column', borderRadius: '2px', boxShadow: 'none !important' }]">
+   <q-card :class="[$q.dark.isActive ? 'background: #2f2f2f' : 'background: #385562']"
+      :style="[{ height: $q.screen.lt.md ? 'calc(100vh - 160px)' : 'calc(100vh - 100px)', width: '100%', display: 'flex', flexDirection: 'column', borderRadius: '2px',boxShadow: 'none !important' }]">
+                        <q-tab-panel name="notification_details" class="q-pa-none" style="width: 52%;  margin: 15px auto;">
+         <q-bar class="my-dialog text-white q-pa-none" :style="$q.dark.isActive ? 'background: #2f2f2f' : 'background: #385562'" style="margin: auto;">
 
-      <q-bar class="my-dialog text-white" :style="$q.dark.isActive ? 'background: #2f2f2f' : 'background: #385562'">
+            <div :class="$q.dark.isActive ? 'dialog-header-dark' : 'dialog-header-light'">{{ props.name }}</div>
 
-         <div :class="$q.dark.isActive ? 'dialog-header-dark' : 'dialog-header-light'">{{ props.name }}</div>
-
-         <q-space />
-
-         <!-- <q-btn dense flat icon="minimize" @click="onMinimize" class="q-mr-xs"
-            :class="$q.dark.isActive ? 'dialog-btn-dark' : 'dialog-btn-light'" style="padding-bottom: 13px;">
-            <q-tooltip>Minimize Window</q-tooltip>
-         </q-btn> -->
-
-         <!-- <q-btn dense flat icon="close" v-close-popup
-            :class="$q.dark.isActive ? 'dialog-btn-dark' : 'dialog-btn-light'" /> -->
-      </q-bar>
-
-      <q-separator :color="$q.dark.isActive ? 'grey-8' : 'grey-4'" style="margin: 0px;" />
-
-      <q-scroll-area class="col q-pa-md"
-         :thumb-style="{ backgroundColor: 'var(--scroll-bar-color)', width: '5px', borderRadius: '5px', opacity: 0.7 }"
-         style="padding-top: 5px; padding-bottom: 5px;">
-         <q-tab-panels v-model="tab" animated class="bg-transparent text-white">
-
-            <q-tab-panel name="notification_details" class="q-pa-none">
+            <q-space />
+         </q-bar>
 
                <div class="row q-col-gutter-sm">
 
@@ -246,9 +229,6 @@
 
             </q-tab-panel>
 
-
-         </q-tab-panels>
-      </q-scroll-area>
 
       <q-separator :color="$q.dark.isActive ? 'grey-8' : 'grey-4'" class="q-my-xs" />
 

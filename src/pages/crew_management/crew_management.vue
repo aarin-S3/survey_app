@@ -12,7 +12,7 @@
             </h4>
             <h4 v-on:click="currentPage = 'home'"
                :style="[$q.dark.isActive ? 'color:#9e9e9e;' : 'color:#424242;', $q.screen.lt.md ? 'display: inline-block;' : 'display: none;']"
-               style="font-size: 1rem;  font-weight: 400; cursor: pointer;">
+               style="font-size: 1rem;  font-weight: 400; cursor: pointer; ">
                {{ surveyStore.currentSurveyName }}
                <q-icon :class="$q.dark.isActive ? 'drawer_btn--dark' : ''"
                   :name="currentPage === 'home' ? '' : 'chevron_right'" style="width: 10px;" />
@@ -36,12 +36,13 @@
                      </q-item-section>
                      <q-item-section style="padding: 0px !important;">
                         <q-item-label
-                           style="padding-left: -5px !important; padding-right: 8px !important; font-size: 0.75rem;">{{ version }}</q-item-label>
+                           style="padding-left: -5px !important; padding-right: 8px !important; font-size: 0.75rem;">{{
+                           version }}</q-item-label>
                      </q-item-section>
                   </q-item>
                </q-list>
             </q-btn-dropdown>
-            <q-btn flat dense bordered label="Submit" :text-color="$q.dark.isActive ? 'grey-4' : 'grey-9'" class=""
+            <q-btn flat dense bordered label="Submit" text-color="grey-2" class=""
                :class="$q.screen.lt.sm ? 'btn-size-dialog-small' : 'btn-size-dialog'">
                <q-tooltip :offset="[10, 5]"
                   style="background-color: #1d1d1d; border: 1px solid white; font: 100 !important">
@@ -52,9 +53,12 @@
          </q-toolbar>
       </div>
 
-      <div class="row no-wrap overflow-hidden" :style="$q.screen.lt.sm ? 'height: calc(100vh - 160px); min-height: height: calc(100vh - 160px)' : '' || $q.screen.lt.md ? '' : 'height: calc(100vh - 100px); min-height: calc(100vh - 100px);'">
+      <q-separator></q-separator>
+
+      <div class="row no-wrap overflow-hidden"
+         :style="$q.screen.lt.sm ? 'height: calc(100vh - 160px); min-height: height: calc(100vh - 160px)' : '' || $q.screen.lt.md ? '' : 'height: calc(100vh - 100px); min-height: calc(100vh - 100px);'">
          <div class="col-auto menu-container"
-            style="width: 130px; height: 85vh; padding: 0px; margin-left: 0px; margin-top: 7px; border-radius: 3px; ">
+            style="width: 200px; height: 85vh; border-right: 4px solid gray; padding: 0px; margin-left: 0px; margin-top: 7px; border-radius: 3px; ">
             <q-list>
                <q-item v-for="item in arrSideMenu" :key="item.currentListPage" clickable v-ripple
                   @click="currentPage = item.currentListPage" :active="currentPage === item.currentListPage"
@@ -64,7 +68,7 @@
                      <div style="display: flex; margin-top: 10px;">
                         <q-icon :name="item.icon" style="font-size: 21px;" />
                         <p style="font-size: 12px; display: inline; margin-top: 2px; margin-left: 3px;">{{ item.MenuName
-                           }}</p>
+                        }}</p>
                      </div>
                   </q-item-section>
                   <q-tooltip anchor="center right" self="center left" :offset="[10, 0]"
@@ -84,10 +88,9 @@
             </FormLayoutOne>
             <FormLayoutTwo :name="arrSideMenu[1].MenuName" v-show="currentPage === `${arrSideMenu[1].currentListPage}`">
             </FormLayoutTwo>
-            <FormLayoutThree :name="arrSideMenu[2].MenuName"
-               v-show="currentPage === `${arrSideMenu[2].currentListPage}`"></FormLayoutThree>
-            <FormLayoutFour :name="arrSideMenu[3].MenuName"
-               v-show="currentPage === `${arrSideMenu[3].currentListPage}`"></FormLayoutFour>
+            <FormLayoutThree :name="arrSideMenu[3].MenuName"
+               v-show="currentPage === `${arrSideMenu[3].currentListPage}`"></FormLayoutThree>
+            <Table :name="arrSideMenu[2].MenuName" v-show="currentPage === `${arrSideMenu[2].currentListPage}`"></Table>
             <FormLayoutFive :name="arrSideMenu[4].MenuName"
                v-show="currentPage === `${arrSideMenu[4].currentListPage}`"></FormLayoutFive>
             <FormLayoutSix :name="arrSideMenu[5].MenuName" v-show="currentPage === `${arrSideMenu[5].currentListPage}`">
@@ -181,7 +184,7 @@ import FormLayoutTwelve from './components/dialog/form_layout_Twelve.vue'
 import FormLayoutThirteen from './components/dialog/form_layout_Thirteen.vue'
 import FormLayoutFourteen from './components/dialog/form_layout_Fourteen.vue'
 import FormLayoutFifteen from './components/dialog/form_layout_Fifteen.vue'
-import FormLayoutSixteen from './components/dialog/form_layout_Sixteen.vue'
+import Table from './components/tabulators/table.vue'
 import { useSurveyStore } from '../../stores/survey_store'
 
 defineOptions({
@@ -225,7 +228,7 @@ const instAuditLogtable = ref(null)
 const formRef = ref(null)
 const switchingOrderTextarea = ref(null)
 
-const SavedVersions = ref(["Saved Version 1", "Saved Version 2",  "Saved Version 3",   "Saved Version 4"]);
+const SavedVersions = ref(["Saved Version 1", "Saved Version 2", "Saved Version 3", "Saved Version 4"]);
 
 const arrSideMenu = ref([
    { currentListPage: 'form1', MenuName: 'Substation Basic Details', icon: 'looks_one' },

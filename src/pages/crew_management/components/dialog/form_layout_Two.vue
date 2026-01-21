@@ -1,274 +1,273 @@
 <template>
    <!-- <q-dialog v-model="internalModel" @before-show="resetPosition" transition-show="scale"
     transition-hide="minimize-to-footer" seamless> -->
-   <q-card :class="[$q.dark.isActive ? 'bg-card-dark' : 'bg-card-light']"
+   <!-- <q-card :class="[$q.dark.isActive ? 'bg-card-dark' : 'bg-card-light']"
       :style="[{ height: $q.screen.lt.md ? 'calc(100vh - 160px)' : 'calc(100vh - 100px)', width: $q.screen.lt.md ? '100%' : '50%', display: 'flex', flexDirection: 'column', borderRadius: '2px', boxShadow: 'none !important' }]">
 
       <q-bar class="my-dialog text-white" :style="$q.dark.isActive ? 'background: #2f2f2f' : 'background: #385562'">
 
          <div :class="$q.dark.isActive ? 'dialog-header-dark' : 'dialog-header-light'">{{ props.name }}</div>
 
-         <q-space />
+         <q-space /> -->
 
-         <!-- <q-btn dense flat icon="minimize" @click="onMinimize" class="q-mr-xs"
+   <!-- <q-btn dense flat icon="minimize" @click="onMinimize" class="q-mr-xs"
             :class="$q.dark.isActive ? 'dialog-btn-dark' : 'dialog-btn-light'" style="padding-bottom: 13px;">
             <q-tooltip>Minimize Window</q-tooltip>
          </q-btn> -->
 
-         <!-- <q-btn dense flat icon="close" v-close-popup
+   <!-- <q-btn dense flat icon="close" v-close-popup
             :class="$q.dark.isActive ? 'dialog-btn-dark' : 'dialog-btn-light'" /> -->
-      </q-bar>
+   <!-- </q-bar> -->
 
-      <q-separator :color="$q.dark.isActive ? 'grey-8' : 'grey-4'" style="margin: 0px;" />
+   <!-- <q-separator :color="$q.dark.isActive ? 'grey-8' : 'grey-4'" style="margin: 0px;" />
 
       <q-scroll-area class="col q-pa-md"
          :thumb-style="{ backgroundColor: 'var(--scroll-bar-color)', width: '5px', borderRadius: '5px', opacity: 0.7 }"
          style="padding-top: 5px; padding-bottom: 5px;">
-         <q-tab-panels v-model="tab" animated class="bg-transparent text-white">
+         <q-tab-panels v-model="tab" animated class="bg-transparent text-white"> -->
 
-            <q-tab-panel name="notification_details" class="q-pa-none">
+   <div>
 
-               <div class="row q-col-gutter-sm">
+      <q-tab-panel name="notification_details" class="q-pa-none" style="width: 52%;  margin: 15px auto;">
+         <q-bar class="my-dialog text-white q-pa-none" :style="$q.dark.isActive ? 'background: #2f2f2f' : 'background: #385562'" style="margin: auto;">
 
-                  <div class="col-12 col-md-6">
-                     <div class="text-subtitle2 q-mb-sm"
-                        :class="$q.dark.isActive ? 'dialog-subtitle-dark' : 'dialog-subtitle-light'">Survey Creation
-                     </div>
+            <div :class="$q.dark.isActive ? 'dialog-header-dark' : 'dialog-header-light'">{{ props.name }}</div>
 
-                     <div class="row items-center q-mb-xs">
-                        <div class="col-3 text-caption"
-                           :class="$q.dark.isActive ? 'dialog-field-label-dark' : 'dialog-field-label-light'">Name</div>
-                        <div class="col-9">
-                           <q-input dense outlined v-model="form.name"
-                              :class="$q.dark.isActive ? 'dialog-field-label-dark' : 'dialog-field-label-light'" />
-                        </div>
-                     </div>
+            <q-space />
+         </q-bar>
 
-                     <div class="row items-center q-mb-xs">
-                        <div class="col-3 text-caption"
-                           :class="$q.dark.isActive ? 'dialog-field-label-dark' : 'dialog-field-label-light'">Phone
-                        </div>
-                        <div class="col-9">
-                           <q-input dense outlined v-model="form.phone"
-                              :class="$q.dark.isActive ? 'dialog-field-label-dark' : 'dialog-field-label-light'" />
-                        </div>
-                     </div>
+         <div class="row q-col-gutter-sm">
 
-                     <div class="row items-center q-mb-xs">
-                        <div class="col-3 text-caption"
-                           :class="$q.dark.isActive ? 'dialog-field-label-dark' : 'dialog-field-label-light'">Email
-                        </div>
-                        <div class="col-9">
-                           <q-input dense outlined v-model="form.email"
-                              :class="$q.dark.isActive ? 'dialog-field-label-dark' : 'dialog-field-label-light'" />
-                        </div>
-                     </div>
-
-                     <div class="row items-center q-mb-md">
-                        <div class="col-3 text-caption"
-                           :class="$q.dark.isActive ? 'dialog-field-label-dark' : 'dialog-field-label-light'">Service
-                           Center
-                        </div>
-                        <div class="col-9">
-                           <q-input dense outlined v-model="form.serviceCenter"
-                              :class="$q.dark.isActive ? 'dialog-field-label-dark' : 'dialog-field-label-light'" />
-                        </div>
-                     </div>
-
-                     <div class="row items-start q-mb-xs">
-                        <div class="col-3 text-caption"
-                           :class="$q.dark.isActive ? 'dialog-field-label-dark' : 'dialog-field-label-light'">Mailing
-                           Address
-                        </div>
-                        <div class="col-9">
-                           <q-input dense outlined v-model="form.address"
-                              :class="$q.dark.isActive ? 'dialog-field-label-dark' : 'dialog-field-label-light'" />
-                        </div>
-                     </div>
-                  </div>
-
-                  <div class="col-12 col-md-6" :style="{ paddingTop: $q.screen.lt.md ? '0px' : '42px' }">
-
-                     <div class="row items-center q-mb-xs">
-                        <div class="text-caption"
-                           :class="[$q.dark.isActive ? 'dialog-field-label-dark' : 'dialog-field-label-light', $q.screen.lt.md ? 'col-3' : 'col-4']">
-                           Creation Date
-                        </div>
-                        <div class="" :class="[$q.screen.lt.md ? 'col-9' : 'col-8']">
-                           <q-input dense outlined v-model="form.creationDate" type="date"
-                              :class="['date-wrapper', $q.dark.isActive ? 'date-mode-dark' : 'date-mode-light', $q.dark.isActive ? 'dialog-field-label-dark' : 'dialog-field-label-light']" />
-                        </div>
-                     </div>
-
-                     <div class="row items-center q-mb-xs">
-                        <div class="" :class="[$q.screen.lt.md ? 'col-3' : 'col-4']"></div>
-                        <div class="" :class="[$q.screen.lt.md ? 'col-9' : 'col-8']">
-                           <q-checkbox
-                              :class="$q.dark.isActive ? 'dialog-field-label-dark' : 'dialog-field-label-light'"
-                              v-model="form.overrideMailing" label="Override Mailing Date" dense size="sm"
-                              style="font-size: 12px;" />
-                        </div>
-                     </div>
-
-                     <div class="row items-center q-mb-xs" style="margin-bottom: 20px;">
-                        <div class="text-caption"
-                           :class="[$q.dark.isActive ? 'dialog-field-label-dark' : 'dialog-field-label-light', $q.screen.lt.md ? 'col-3' : 'col-4']">
-                           Work Order ID
-                        </div>
-                        <div class="" :class="[$q.screen.lt.md ? 'col-9' : 'col-8']">
-                           <q-input dense outlined v-model="form.workOrderId"
-                              :class="$q.dark.isActive ? 'dialog-field-label-dark' : 'dialog-field-label-light'" />
-                        </div>
-                     </div>
-
-                     <div class="row items-center q-mb-xs">
-                        <div class="text-caption"
-                           :class="[$q.dark.isActive ? 'dialog-field-label-dark' : 'dialog-field-label-light', $q.screen.lt.md ? 'col-3' : 'col-4']">
-                           Event Type</div>
-                        <div class="" :class="[$q.screen.lt.md ? 'col-9' : 'col-8']">
-                           <q-select dense outlined v-model="form.eventType" :options="eventTypes" behavior="menu"
-                              :class="$q.dark.isActive ? 'dialog-field-label-dark' : 'dialog-field-label-light'" />
-                        </div>
-                     </div>
-
-                     <div class="row items-center q-mb-xs">
-                        <div class="text-caption"
-                           :class="[$q.dark.isActive ? 'dialog-field-label-dark' : 'dialog-field-label-light', $q.screen.lt.md ? 'col-3' : 'col-4']">
-                           Outage
-                        </div>
-                        <div class="" :class="[$q.screen.lt.md ? 'col-9' : 'col-8']">
-                           <q-select dense outlined v-model="form.outageType" :options="outageTypes" behavior="menu"
-                              :class="$q.dark.isActive ? 'dialog-field-label-dark' : 'dialog-field-label-light'" />
-                        </div>
-                     </div>
-                  </div>
-               </div>
-
-               <q-separator :color="$q.dark.isActive ? 'grey-8' : 'grey-4'" class="q-my-md" />
-
-               <div class="row q-col-gutter-md">
-
-                  <div class="col-12 col-md-6">
-                     <div class="text-subtitle2 q-mb-sm"
-                        :class="$q.dark.isActive ? 'dialog-subtitle-dark' : 'dialog-subtitle-light'">Scheduled Event
-                        Date and
-                        Time</div>
-
-                     <div class="row items-center q-mb-xs">
-                        <div class="col-3 text-caption"
-                           :class="$q.dark.isActive ? 'dialog-field-label-dark' : 'dialog-field-label-light'">Start Time
-                        </div>
-                        <div class="col-9">
-                           <q-input dense outlined v-model="form.schedStart" type="datetime-local"
-                              :class="['date-wrapper', $q.dark.isActive ? 'date-mode-dark' : 'date-mode-light', $q.dark.isActive ? 'dialog-field-label-dark' : 'dialog-field-label-light']" />
-                        </div>
-                     </div>
-
-                     <div class="row items-center q-mb-xs">
-                        <div class="col-3 text-caption"
-                           :class="$q.dark.isActive ? 'dialog-field-label-dark' : 'dialog-field-label-light'">End Time
-                        </div>
-                        <div class="col-9">
-                           <q-input dense outlined v-model="form.schedEnd" type="datetime-local"
-                              :class="['date-wrapper', $q.dark.isActive ? 'date-mode-dark' : 'date-mode-light', $q.dark.isActive ? 'dialog-field-label-dark' : 'dialog-field-label-light']" />
-                        </div>
-                     </div>
-
-                     <div class="row items-center q-mb-xs">
-                        <div class="col-3 text-caption"
-                           :class="$q.dark.isActive ? 'dialog-field-label-dark' : 'dialog-field-label-light'">Duration
-                           (h:m)
-                        </div>
-                        <div class="col-4">
-                           <q-input dense outlined v-model="form.schedDuration" mask="##:##" placeholder="00:05"
-                              :class="$q.dark.isActive ? 'dialog-field-label-dark' : 'dialog-field-label-light'" />
-                        </div>
-                     </div>
-                  </div>
-
-                  <div class="col-12 col-md-6">
-                     <div class="text-subtitle2 q-mb-sm"
-                        :class="$q.dark.isActive ? 'dialog-subtitle-dark' : 'dialog-subtitle-light'">Alternate Event
-                        Date and
-                        Time</div>
-
-                     <div class="row items-center q-mb-xs">
-                        <div class="col-3 text-caption"
-                           :class="$q.dark.isActive ? 'dialog-field-label-dark' : 'dialog-field-label-light'">Start Time
-                        </div>
-                        <div class="col-9">
-                           <q-input dense outlined v-model="form.altStart" type="datetime-local"
-                              :class="['date-wrapper', $q.dark.isActive ? 'date-mode-dark' : 'date-mode-light', $q.dark.isActive ? 'dialog-field-label-dark' : 'dialog-field-label-light']" />
-                        </div>
-                     </div>
-
-                     <div class="row items-center q-mb-xs">
-                        <div class="col-3 text-caption"
-                           :class="$q.dark.isActive ? 'dialog-field-label-dark' : 'dialog-field-label-light'">End Time
-                        </div>
-                        <div class="col-9">
-                           <q-input dense outlined v-model="form.altEnd" type="datetime-local"
-                              :class="['date-wrapper', $q.dark.isActive ? 'date-mode-dark' : 'date-mode-light', $q.dark.isActive ? 'dialog-field-label-dark' : 'dialog-field-label-light']" />
-                        </div>
-                     </div>
-
-                     <div class="row items-center q-mb-xs">
-                        <div class="col-3 text-caption"
-                           :class="$q.dark.isActive ? 'dialog-field-label-dark' : 'dialog-field-label-light'">Duration
-                           (h:m)
-                        </div>
-                        <div class="col-4">
-                           <q-input dense outlined v-model="form.altDuration" mask="##:##" placeholder="00:05"
-                              :class="$q.dark.isActive ? 'dialog-field-label-dark' : 'dialog-field-label-light'" />
-                        </div>
-                     </div>
-                  </div>
-               </div>
-               <q-separator :color="$q.dark.isActive ? 'grey-8' : 'grey-4'" class="q-my-md" />
-
+            <div class="col-12 col-md-6">
                <div class="text-subtitle2 q-mb-sm"
-                  :class="$q.dark.isActive ? 'dialog-subtitle-dark' : 'dialog-subtitle-light'">Switching Order</div>
+                  :class="$q.dark.isActive ? 'dialog-subtitle-dark' : 'dialog-subtitle-light'">Survey Creation
+               </div>
+
                <div class="row items-center q-mb-xs">
-                  <div class="col-12">
-                     <q-input dense outlined v-model="form.switchingOrder"
+                  <div class="col-3 text-caption"
+                     :class="$q.dark.isActive ? 'dialog-field-label-dark' : 'dialog-field-label-light'">Name</div>
+                  <div class="col-9">
+                     <q-input dense outlined v-model="form.name"
                         :class="$q.dark.isActive ? 'dialog-field-label-dark' : 'dialog-field-label-light'" />
                   </div>
                </div>
 
-               <div class="text-subtitle2 q-mb-sm"
-                  :class="$q.dark.isActive ? 'dialog-subtitle-dark' : 'dialog-subtitle-light'">Creator Comment</div>
                <div class="row items-center q-mb-xs">
-                  <div class="col-12">
-                     <q-input dense outlined v-model="form.creatorComment"
+                  <div class="col-3 text-caption"
+                     :class="$q.dark.isActive ? 'dialog-field-label-dark' : 'dialog-field-label-light'">Phone
+                  </div>
+                  <div class="col-9">
+                     <q-input dense outlined v-model="form.phone"
                         :class="$q.dark.isActive ? 'dialog-field-label-dark' : 'dialog-field-label-light'" />
                   </div>
                </div>
 
-            </q-tab-panel>
+               <div class="row items-center q-mb-xs">
+                  <div class="col-3 text-caption"
+                     :class="$q.dark.isActive ? 'dialog-field-label-dark' : 'dialog-field-label-light'">Email
+                  </div>
+                  <div class="col-9">
+                     <q-input dense outlined v-model="form.email"
+                        :class="$q.dark.isActive ? 'dialog-field-label-dark' : 'dialog-field-label-light'" />
+                  </div>
+               </div>
+
+               <div class="row items-center q-mb-md">
+                  <div class="col-3 text-caption"
+                     :class="$q.dark.isActive ? 'dialog-field-label-dark' : 'dialog-field-label-light'">Service
+                     Center
+                  </div>
+                  <div class="col-9">
+                     <q-input dense outlined v-model="form.serviceCenter"
+                        :class="$q.dark.isActive ? 'dialog-field-label-dark' : 'dialog-field-label-light'" />
+                  </div>
+               </div>
+
+               <div class="row items-start q-mb-xs">
+                  <div class="col-3 text-caption"
+                     :class="$q.dark.isActive ? 'dialog-field-label-dark' : 'dialog-field-label-light'">Mailing
+                     Address
+                  </div>
+                  <div class="col-9">
+                     <q-input dense outlined v-model="form.address"
+                        :class="$q.dark.isActive ? 'dialog-field-label-dark' : 'dialog-field-label-light'" />
+                  </div>
+               </div>
+            </div>
+
+            <div class="col-12 col-md-6" :style="{ paddingTop: $q.screen.lt.md ? '0px' : '42px' }">
+
+               <div class="row items-center q-mb-xs">
+                  <div class="text-caption"
+                     :class="[$q.dark.isActive ? 'dialog-field-label-dark' : 'dialog-field-label-light', $q.screen.lt.md ? 'col-3' : 'col-4']">
+                     Creation Date
+                  </div>
+                  <div class="" :class="[$q.screen.lt.md ? 'col-9' : 'col-8']">
+                     <q-input dense outlined v-model="form.creationDate" type="date"
+                        :class="['date-wrapper', $q.dark.isActive ? 'date-mode-dark' : 'date-mode-light', $q.dark.isActive ? 'dialog-field-label-dark' : 'dialog-field-label-light']" />
+                  </div>
+               </div>
+
+               <div class="row items-center q-mb-xs">
+                  <div class="" :class="[$q.screen.lt.md ? 'col-3' : 'col-4']"></div>
+                  <div class="" :class="[$q.screen.lt.md ? 'col-9' : 'col-8']">
+                     <q-checkbox :class="$q.dark.isActive ? 'dialog-field-label-dark' : 'dialog-field-label-light'"
+                        v-model="form.overrideMailing" label="Override Mailing Date" dense size="sm"
+                        style="font-size: 12px;" />
+                  </div>
+               </div>
+
+               <div class="row items-center q-mb-xs" style="margin-bottom: 20px;">
+                  <div class="text-caption"
+                     :class="[$q.dark.isActive ? 'dialog-field-label-dark' : 'dialog-field-label-light', $q.screen.lt.md ? 'col-3' : 'col-4']">
+                     Work Order ID
+                  </div>
+                  <div class="" :class="[$q.screen.lt.md ? 'col-9' : 'col-8']">
+                     <q-input dense outlined v-model="form.workOrderId"
+                        :class="$q.dark.isActive ? 'dialog-field-label-dark' : 'dialog-field-label-light'" />
+                  </div>
+               </div>
+
+               <div class="row items-center q-mb-xs">
+                  <div class="text-caption"
+                     :class="[$q.dark.isActive ? 'dialog-field-label-dark' : 'dialog-field-label-light', $q.screen.lt.md ? 'col-3' : 'col-4']">
+                     Event Type</div>
+                  <div class="" :class="[$q.screen.lt.md ? 'col-9' : 'col-8']">
+                     <q-select dense outlined v-model="form.eventType" :options="eventTypes" behavior="menu"
+                        :class="$q.dark.isActive ? 'dialog-field-label-dark' : 'dialog-field-label-light'" />
+                  </div>
+               </div>
+
+               <div class="row items-center q-mb-xs">
+                  <div class="text-caption"
+                     :class="[$q.dark.isActive ? 'dialog-field-label-dark' : 'dialog-field-label-light', $q.screen.lt.md ? 'col-3' : 'col-4']">
+                     Outage
+                  </div>
+                  <div class="" :class="[$q.screen.lt.md ? 'col-9' : 'col-8']">
+                     <q-select dense outlined v-model="form.outageType" :options="outageTypes" behavior="menu"
+                        :class="$q.dark.isActive ? 'dialog-field-label-dark' : 'dialog-field-label-light'" />
+                  </div>
+               </div>
+            </div>
+         </div>
+
+         <q-separator :color="$q.dark.isActive ? 'grey-8' : 'grey-4'" class="q-my-md" />
+
+         <div class="row q-col-gutter-md">
+
+            <div class="col-12 col-md-6">
+               <div class="text-subtitle2 q-mb-sm"
+                  :class="$q.dark.isActive ? 'dialog-subtitle-dark' : 'dialog-subtitle-light'">Scheduled Event
+                  Date and
+                  Time</div>
+
+               <div class="row items-center q-mb-xs">
+                  <div class="col-3 text-caption"
+                     :class="$q.dark.isActive ? 'dialog-field-label-dark' : 'dialog-field-label-light'">Start Time
+                  </div>
+                  <div class="col-9">
+                     <q-input dense outlined v-model="form.schedStart" type="datetime-local"
+                        :class="['date-wrapper', $q.dark.isActive ? 'date-mode-dark' : 'date-mode-light', $q.dark.isActive ? 'dialog-field-label-dark' : 'dialog-field-label-light']" />
+                  </div>
+               </div>
+
+               <div class="row items-center q-mb-xs">
+                  <div class="col-3 text-caption"
+                     :class="$q.dark.isActive ? 'dialog-field-label-dark' : 'dialog-field-label-light'">End Time
+                  </div>
+                  <div class="col-9">
+                     <q-input dense outlined v-model="form.schedEnd" type="datetime-local"
+                        :class="['date-wrapper', $q.dark.isActive ? 'date-mode-dark' : 'date-mode-light', $q.dark.isActive ? 'dialog-field-label-dark' : 'dialog-field-label-light']" />
+                  </div>
+               </div>
+
+               <div class="row items-center q-mb-xs">
+                  <div class="col-3 text-caption"
+                     :class="$q.dark.isActive ? 'dialog-field-label-dark' : 'dialog-field-label-light'">Duration
+                     (h:m)
+                  </div>
+                  <div class="col-4">
+                     <q-input dense outlined v-model="form.schedDuration" mask="##:##" placeholder="00:05"
+                        :class="$q.dark.isActive ? 'dialog-field-label-dark' : 'dialog-field-label-light'" />
+                  </div>
+               </div>
+            </div>
+
+            <div class="col-12 col-md-6">
+               <div class="text-subtitle2 q-mb-sm"
+                  :class="$q.dark.isActive ? 'dialog-subtitle-dark' : 'dialog-subtitle-light'">Alternate Event
+                  Date and
+                  Time</div>
+
+               <div class="row items-center q-mb-xs">
+                  <div class="col-3 text-caption"
+                     :class="$q.dark.isActive ? 'dialog-field-label-dark' : 'dialog-field-label-light'">Start Time
+                  </div>
+                  <div class="col-9">
+                     <q-input dense outlined v-model="form.altStart" type="datetime-local"
+                        :class="['date-wrapper', $q.dark.isActive ? 'date-mode-dark' : 'date-mode-light', $q.dark.isActive ? 'dialog-field-label-dark' : 'dialog-field-label-light']" />
+                  </div>
+               </div>
+
+               <div class="row items-center q-mb-xs">
+                  <div class="col-3 text-caption"
+                     :class="$q.dark.isActive ? 'dialog-field-label-dark' : 'dialog-field-label-light'">End Time
+                  </div>
+                  <div class="col-9">
+                     <q-input dense outlined v-model="form.altEnd" type="datetime-local"
+                        :class="['date-wrapper', $q.dark.isActive ? 'date-mode-dark' : 'date-mode-light', $q.dark.isActive ? 'dialog-field-label-dark' : 'dialog-field-label-light']" />
+                  </div>
+               </div>
+
+               <div class="row items-center q-mb-xs">
+                  <div class="col-3 text-caption"
+                     :class="$q.dark.isActive ? 'dialog-field-label-dark' : 'dialog-field-label-light'">Duration
+                     (h:m)
+                  </div>
+                  <div class="col-4">
+                     <q-input dense outlined v-model="form.altDuration" mask="##:##" placeholder="00:05"
+                        :class="$q.dark.isActive ? 'dialog-field-label-dark' : 'dialog-field-label-light'" />
+                  </div>
+               </div>
+            </div>
+         </div>
+         <q-separator :color="$q.dark.isActive ? 'grey-8' : 'grey-4'" class="q-my-md" />
+
+         <div class="text-subtitle2 q-mb-sm"
+            :class="$q.dark.isActive ? 'dialog-subtitle-dark' : 'dialog-subtitle-light'">Switching Order</div>
+         <div class="row items-center q-mb-xs">
+            <div class="col-12">
+               <q-input dense outlined v-model="form.switchingOrder"
+                  :class="$q.dark.isActive ? 'dialog-field-label-dark' : 'dialog-field-label-light'" />
+            </div>
+         </div>
+
+         <div class="text-subtitle2 q-mb-sm"
+            :class="$q.dark.isActive ? 'dialog-subtitle-dark' : 'dialog-subtitle-light'">Creator Comment</div>
+         <div class="row items-center q-mb-xs">
+            <div class="col-12">
+               <q-input dense outlined v-model="form.creatorComment"
+                  :class="$q.dark.isActive ? 'dialog-field-label-dark' : 'dialog-field-label-light'" />
+            </div>
+         </div>
+
+      </q-tab-panel>
+   </div>
 
 
-         </q-tab-panels>
-      </q-scroll-area>
 
-      <q-separator :color="$q.dark.isActive ? 'grey-8' : 'grey-4'" class="q-my-xs" />
+   <!-- </q-tab-panels>
+      </q-scroll-area> -->
+
+   <!-- <q-separator :color="$q.dark.isActive ? 'grey-8' : 'grey-4'" class="q-my-xs" />
 
       <q-card-actions class="row justify-between items-center" style=" padding: 2px;">
          <div class="text-red-4 q-ml-md text-caption">
             <q-icon name="error" /> Representative name required
          </div>
-         <!-- <div>
-            <q-btn label="Cancel" :class="$q.dark.isActive ? 'dialog-field-label-dark' : 'dialog-field-label-light'"
-               style="padding: 2.5px 4px !important; font-size:10.5px !important; border-radius: 0px; border-width: 2px !important;"
-               outline v-close-popup />
-            <button class="custom-create-btn"
-               style="padding: 4px 5px !important; font-size: 11px !important;  margin-left: 5px; margin-top: -1px !important;"
-               type="submit">
-               Save
-            </button>
-         </div> -->
       </q-card-actions>
 
-   </q-card>
+   </q-card> -->
    <!-- </q-dialog> -->
 </template>
 
