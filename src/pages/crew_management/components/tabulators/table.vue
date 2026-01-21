@@ -8,7 +8,7 @@
       <div class="report-header col-auto q-pa-sm  text-white z-top">
          <div class="header-content">
             <div class="row items-center justify-between q-mb-sm">
-               <div class="text-subtitle1 text-weight-bold text-uppercase">Feeder List</div>
+               <div class="text-subtitle1 text-weight-bold text-uppercase">Sub-Station Survey</div>
                <div class="text-caption text-uppercase text-grey-4">Feeder List</div>
             </div>
 
@@ -34,7 +34,7 @@
       </div>
 
       <div class="grid-container col relative-position">
-         <div :style="$q.screen.lt.sm ? { width: '69vw' } : { width: '87vw' }" style=" height: calc(100vh - 200px)"
+         <div :style="$q.screen.lt.sm ? { width: '69vw' } : { width: '75vw' }" style=" height: calc(100vh - 200px)"
             ref="tableRef" class="absolute-full"></div>
       </div>
 
@@ -49,7 +49,6 @@ import 'tabulator-tables/dist/css/tabulator.min.css';
 
 const tableRef = ref(null);
 const tabulatorInstance = ref(null);
-
 
 const surveyData = reactive({
    metadata: { substationName: '', inChargeName: '', surveyDate: '', engineerName: '' },
