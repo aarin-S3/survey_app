@@ -81,7 +81,7 @@
 
          <div class="col scroll-y relative-position" id="scroll-target">
 
-            <HomePage name="Substation 1 Survey" v-show="currentPage === 'home'"></HomePage>
+            <HomePage :name="surveyStore.currentSurveyName" v-show="currentPage === 'home'"></HomePage>
 
             <!-- <FormLayoutOne v-show="currentPage === 'form1'"/> -->
             <FormLayoutOne :name="arrSideMenu[0].MenuName" v-show="currentPage === `${arrSideMenu[0].currentListPage}`">
