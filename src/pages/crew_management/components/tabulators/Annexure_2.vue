@@ -17,24 +17,24 @@
     <q-dialog v-model="showPanelDialog" persistent>
       <q-card style="min-width: 350px; width: 90%; max-width: 500px;" class="dialog-card">
         <q-card-section>
-          <div class="text-h6 dialog-title">{{ selectedPanel }} Panel Details</div>
+          <div :class="labelClass" class="text-h6 dialog-title">{{ selectedPanel }} Panel Details</div>
         </q-card-section>
 
         <q-card-section class="q-pt-none q-gutter-y-md">
-          <q-select v-model="currentPanel.signalname" :options="signalnameOptions" label="Signal Name" outlined
+          <q-select :class="inputClass" v-model="currentPanel.signalname" :options="signalnameOptions" label="Signal Name" outlined
             dense class="field-input" behavior="menu" />
-          <q-select v-model="currentPanel.lampVoltages" :options="lampVoltageOptions" label="Lamp Voltages" outlined
+          <q-select :class="inputClass" v-model="currentPanel.lampVoltages" :options="lampVoltageOptions" label="Lamp Voltages" outlined
             dense class="field-input" behavior="menu" />
 
-          <q-select v-model="currentPanel.runningOnDualVoltage" :options="yesNoOptions" label="Running on Dual Voltage"
+          <q-select :class="inputClass" v-model="currentPanel.runningOnDualVoltage" :options="yesNoOptions" label="Running on Dual Voltage"
             outlined dense class="field-input" behavior="menu" />
 
-          <q-input v-model="currentPanel.remarks" label="Remarks" type="textarea" outlined dense class="field-input" />
+          <q-input :class="inputClass" v-model="currentPanel.remarks" label="Remarks" type="textarea" outlined dense class="field-input" />
         </q-card-section>
 
         <q-card-section class="row items-center justify-between q-pa-md">
-          <q-btn label="Cancel" color="red" unelevated flat v-close-popup />
-          <q-btn label="Save" color="blue" unelevated v-close-popup @click="savePanel" />
+          <q-btn :class="labelClass" label="Cancel" color="red" unelevated flat v-close-popup />
+          <q-btn :class="labelClass" label="Save" color="blue" unelevated v-close-popup @click="savePanel" />
         </q-card-section>
       </q-card>
     </q-dialog>
@@ -48,7 +48,7 @@
         <div class="voltage-blocks-container">
           <!-- 66kV Block -->
           <div class="voltage-block">
-            <div class="block-header">66kV</div>
+            <div :class="labelClass" class="block-header">66kV</div>
             <div class="q-gutter-y-md">
               <q-select v-model="panelMeteringData.kv66.panelMake" :options="panelMakeOptions" label="Panel Make"
                 outlined dense @update:model-value="checkIfOthers('66kv')" class="field-input" behavior="menu" />
@@ -119,7 +119,7 @@
 </template>
 
 <script setup>
-import { ref, reactive } from 'vue'
+import { ref, reactive, computed } from 'vue'
 import { useQuasar } from 'quasar'
 
 const $q = useQuasar();
@@ -175,6 +175,19 @@ const savePanel = () => {
 const checkIfOthers = (voltageLevel) => {
   // This can be used for additional logic if needed
 }
+
+const labelClass = computed(() =>
+   $q.dark.isActive ? 'dialog-field-label-dark' : 'dialog-field-label-light'
+)
+
+const inputClass = computed(() =>
+   $q.dark.isActive ? 'dialog-field-label-dark' : 'dialog-field-label-light'
+)
+
+const subtitleClass = computed(() =>
+   $q.dark.isActive ? 'dialog-subtitle-dark' : 'dialog-subtitle-light'
+)
+
 </script>
 
 <style scoped>
@@ -193,20 +206,12 @@ const checkIfOthers = (voltageLevel) => {
   font-size: 1.5rem;
 }
 
-:global(.body--dark) .page-title {
-  color: #ffffff;
-}
-
 .page-title {
   color: #000000;
 }
 
 .section-title {
   font-size: 1.1rem;
-}
-
-:global(.body--dark) .section-title {
-  color: #ffffff;
 }
 
 .section-title {
@@ -247,14 +252,9 @@ const checkIfOthers = (voltageLevel) => {
 
 /* Individual Voltage Block */
 .voltage-block {
-  background-color: #f5f5f5;
+  /* background-color: #f5f5f5; */
   border-radius: 12px;
   padding: 1.5rem;
-}
-
-:global(.body--dark) .voltage-block {
-  background-color: #555555;
-  border-left-color: #90caf9;
 }
 
 .block-header {
@@ -299,24 +299,10 @@ const checkIfOthers = (voltageLevel) => {
   width: 100%;
 }
 
-:global(.body--dark) .field-input :deep(.q-field__control) {
-  color: #ffffff;
-}
-
-:global(.body--dark) .field-input :deep(input),
-:global(.body--dark) .field-input :deep(.q-field__native) {
-  background-color: #666666;
-  color: #ffffff;
-}
-
 :global(.body--dark) .field-input :deep(.q-placeholder) {
   color: #999999;
 }
 
-/* Dialog Card */
-.dialog-card {
-  background-color: #ffffff;
-}
 
 :global(.body--dark) .dialog-card {
   background-color: #2a2a2a;
@@ -326,31 +312,8 @@ const checkIfOthers = (voltageLevel) => {
   font-weight: 600;
 }
 
-:global(.body--dark) .dialog-title {
-  color: #ffffff;
-}
-
 .dialog-title {
   color: #000000;
-}
-
-:global(.body--dark) .dialog-card :deep(.q-field__control) {
-  color: #ffffff;
-}
-
-:global(.body--dark) .dialog-card :deep(input),
-:global(.body--dark) .dialog-card :deep(.q-field__native) {
-  background-color: #555555;
-  color: #ffffff;
-}
-
-:global(.body--dark) .dialog-card :deep(textarea) {
-  background-color: #555555;
-  color: #ffffff;
-}
-
-:global(.body--dark) .dialog-card :deep(.q-placeholder) {
-  color: #999999;
 }
 
 /* Responsive adjustments */

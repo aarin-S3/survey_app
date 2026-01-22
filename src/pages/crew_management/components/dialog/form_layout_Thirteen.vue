@@ -1,331 +1,1155 @@
 <template>
-   <!-- <q-dialog v-model="internalModel" @before-show="resetPosition" transition-show="scale"
-    transition-hide="minimize-to-footer" seamless> -->
-   <q-card :class="[$q.dark.isActive ? 'bg-card-dark' : 'bg-card-light']"
-      :style="[{ height: $q.screen.lt.md ? 'calc(100vh - 160px)' : 'calc(100vh - 100px)', width: $q.screen.lt.md ? '100%' : '50%', display: 'flex', flexDirection: 'column', borderRadius: '2px', boxShadow: 'none !important' }]">
-
-      <q-bar class="my-dialog text-white" :style="$q.dark.isActive ? 'background: #2f2f2f' : 'background: #385562'">
-
-         <div :class="$q.dark.isActive ? 'dialog-header-dark' : 'dialog-header-light'">{{ props.name }}</div>
-
-         <q-space />
-
-         <!-- <q-btn dense flat icon="minimize" @click="onMinimize" class="q-mr-xs"
-            :class="$q.dark.isActive ? 'dialog-btn-dark' : 'dialog-btn-light'" style="padding-bottom: 13px;">
-            <q-tooltip>Minimize Window</q-tooltip>
-         </q-btn> -->
-
-         <!-- <q-btn dense flat icon="close" v-close-popup
-            :class="$q.dark.isActive ? 'dialog-btn-dark' : 'dialog-btn-light'" /> -->
-      </q-bar>
-
-      <q-separator :color="$q.dark.isActive ? 'grey-8' : 'grey-4'" style="margin: 0px;" />
-
-      <q-scroll-area class="col q-pa-md"
-         :thumb-style="{ backgroundColor: 'var(--scroll-bar-color)', width: '5px', borderRadius: '5px', opacity: 0.7 }"
-         style="padding-top: 5px; padding-bottom: 5px;">
-         <q-tab-panels v-model="tab" animated class="bg-transparent text-white">
-
-            <q-tab-panel name="notification_details" class="q-pa-none">
-
-               <div class="row q-col-gutter-sm">
-
-                  <div class="col-12 col-md-6">
-                     <div class="text-subtitle2 q-mb-sm"
-                        :class="$q.dark.isActive ? 'dialog-subtitle-dark' : 'dialog-subtitle-light'">Survey Creation
-                     </div>
-
-                     <div class="row items-center q-mb-xs">
-                        <div class="col-3 text-caption"
-                           :class="$q.dark.isActive ? 'dialog-field-label-dark' : 'dialog-field-label-light'">Name</div>
-                        <div class="col-9">
-                           <q-input dense outlined v-model="form.name"
-                              :class="$q.dark.isActive ? 'dialog-field-label-dark' : 'dialog-field-label-light'" />
-                        </div>
-                     </div>
-
-                     <div class="row items-center q-mb-xs">
-                        <div class="col-3 text-caption"
-                           :class="$q.dark.isActive ? 'dialog-field-label-dark' : 'dialog-field-label-light'">Phone
-                        </div>
-                        <div class="col-9">
-                           <q-input dense outlined v-model="form.phone"
-                              :class="$q.dark.isActive ? 'dialog-field-label-dark' : 'dialog-field-label-light'" />
-                        </div>
-                     </div>
-
-                     <div class="row items-center q-mb-xs">
-                        <div class="col-3 text-caption"
-                           :class="$q.dark.isActive ? 'dialog-field-label-dark' : 'dialog-field-label-light'">Email
-                        </div>
-                        <div class="col-9">
-                           <q-input dense outlined v-model="form.email"
-                              :class="$q.dark.isActive ? 'dialog-field-label-dark' : 'dialog-field-label-light'" />
-                        </div>
-                     </div>
-
-                     <div class="row items-center q-mb-md">
-                        <div class="col-3 text-caption"
-                           :class="$q.dark.isActive ? 'dialog-field-label-dark' : 'dialog-field-label-light'">Service
-                           Center
-                        </div>
-                        <div class="col-9">
-                           <q-input dense outlined v-model="form.serviceCenter"
-                              :class="$q.dark.isActive ? 'dialog-field-label-dark' : 'dialog-field-label-light'" />
-                        </div>
-                     </div>
-
-                     <div class="row items-start q-mb-xs">
-                        <div class="col-3 text-caption"
-                           :class="$q.dark.isActive ? 'dialog-field-label-dark' : 'dialog-field-label-light'">Mailing
-                           Address
-                        </div>
-                        <div class="col-9">
-                           <q-input dense outlined v-model="form.address"
-                              :class="$q.dark.isActive ? 'dialog-field-label-dark' : 'dialog-field-label-light'" />
-                        </div>
-                     </div>
-                  </div>
-
-                  <div class="col-12 col-md-6" :style="{ paddingTop: $q.screen.lt.md ? '0px' : '42px' }">
-
-                     <div class="row items-center q-mb-xs">
-                        <div class="text-caption"
-                           :class="[$q.dark.isActive ? 'dialog-field-label-dark' : 'dialog-field-label-light', $q.screen.lt.md ? 'col-3' : 'col-4']">
-                           Creation Date
-                        </div>
-                        <div class="" :class="[$q.screen.lt.md ? 'col-9' : 'col-8']">
-                           <q-input dense outlined v-model="form.creationDate" type="date"
-                              :class="['date-wrapper', $q.dark.isActive ? 'date-mode-dark' : 'date-mode-light', $q.dark.isActive ? 'dialog-field-label-dark' : 'dialog-field-label-light']" />
-                        </div>
-                     </div>
-
-                     <div class="row items-center q-mb-xs">
-                        <div class="" :class="[$q.screen.lt.md ? 'col-3' : 'col-4']"></div>
-                        <div class="" :class="[$q.screen.lt.md ? 'col-9' : 'col-8']">
-                           <q-checkbox
-                              :class="$q.dark.isActive ? 'dialog-field-label-dark' : 'dialog-field-label-light'"
-                              v-model="form.overrideMailing" label="Override Mailing Date" dense size="sm"
-                              style="font-size: 12px;" />
-                        </div>
-                     </div>
-
-                     <div class="row items-center q-mb-xs" style="margin-bottom: 20px;">
-                        <div class="text-caption"
-                           :class="[$q.dark.isActive ? 'dialog-field-label-dark' : 'dialog-field-label-light', $q.screen.lt.md ? 'col-3' : 'col-4']">
-                           Work Order ID
-                        </div>
-                        <div class="" :class="[$q.screen.lt.md ? 'col-9' : 'col-8']">
-                           <q-input dense outlined v-model="form.workOrderId"
-                              :class="$q.dark.isActive ? 'dialog-field-label-dark' : 'dialog-field-label-light'" />
-                        </div>
-                     </div>
-
-                     <div class="row items-center q-mb-xs">
-                        <div class="text-caption"
-                           :class="[$q.dark.isActive ? 'dialog-field-label-dark' : 'dialog-field-label-light', $q.screen.lt.md ? 'col-3' : 'col-4']">
-                           Event Type</div>
-                        <div class="" :class="[$q.screen.lt.md ? 'col-9' : 'col-8']">
-                           <q-select dense outlined v-model="form.eventType" :options="eventTypes" behavior="menu"
-                              :class="$q.dark.isActive ? 'dialog-field-label-dark' : 'dialog-field-label-light'" />
-                        </div>
-                     </div>
-
-                     <div class="row items-center q-mb-xs">
-                        <div class="text-caption"
-                           :class="[$q.dark.isActive ? 'dialog-field-label-dark' : 'dialog-field-label-light', $q.screen.lt.md ? 'col-3' : 'col-4']">
-                           Outage
-                        </div>
-                        <div class="" :class="[$q.screen.lt.md ? 'col-9' : 'col-8']">
-                           <q-select dense outlined v-model="form.outageType" :options="outageTypes" behavior="menu"
-                              :class="$q.dark.isActive ? 'dialog-field-label-dark' : 'dialog-field-label-light'" />
-                        </div>
-                     </div>
-                  </div>
-               </div>
-
-               <q-separator :color="$q.dark.isActive ? 'grey-8' : 'grey-4'" class="q-my-md" />
-
-               <div class="row q-col-gutter-md">
-
-                  <div class="col-12 col-md-6">
-                     <div class="text-subtitle2 q-mb-sm"
-                        :class="$q.dark.isActive ? 'dialog-subtitle-dark' : 'dialog-subtitle-light'">Scheduled Event
-                        Date and
-                        Time</div>
-
-                     <div class="row items-center q-mb-xs">
-                        <div class="col-3 text-caption"
-                           :class="$q.dark.isActive ? 'dialog-field-label-dark' : 'dialog-field-label-light'">Start Time
-                        </div>
-                        <div class="col-9">
-                           <q-input dense outlined v-model="form.schedStart" type="datetime-local"
-                              :class="['date-wrapper', $q.dark.isActive ? 'date-mode-dark' : 'date-mode-light', $q.dark.isActive ? 'dialog-field-label-dark' : 'dialog-field-label-light']" />
-                        </div>
-                     </div>
-
-                     <div class="row items-center q-mb-xs">
-                        <div class="col-3 text-caption"
-                           :class="$q.dark.isActive ? 'dialog-field-label-dark' : 'dialog-field-label-light'">End Time
-                        </div>
-                        <div class="col-9">
-                           <q-input dense outlined v-model="form.schedEnd" type="datetime-local"
-                              :class="['date-wrapper', $q.dark.isActive ? 'date-mode-dark' : 'date-mode-light', $q.dark.isActive ? 'dialog-field-label-dark' : 'dialog-field-label-light']" />
-                        </div>
-                     </div>
-
-                     <div class="row items-center q-mb-xs">
-                        <div class="col-3 text-caption"
-                           :class="$q.dark.isActive ? 'dialog-field-label-dark' : 'dialog-field-label-light'">Duration
-                           (h:m)
-                        </div>
-                        <div class="col-4">
-                           <q-input dense outlined v-model="form.schedDuration" mask="##:##" placeholder="00:05"
-                              :class="$q.dark.isActive ? 'dialog-field-label-dark' : 'dialog-field-label-light'" />
-                        </div>
-                     </div>
-                  </div>
-
-                  <div class="col-12 col-md-6">
-                     <div class="text-subtitle2 q-mb-sm"
-                        :class="$q.dark.isActive ? 'dialog-subtitle-dark' : 'dialog-subtitle-light'">Alternate Event
-                        Date and
-                        Time</div>
-
-                     <div class="row items-center q-mb-xs">
-                        <div class="col-3 text-caption"
-                           :class="$q.dark.isActive ? 'dialog-field-label-dark' : 'dialog-field-label-light'">Start Time
-                        </div>
-                        <div class="col-9">
-                           <q-input dense outlined v-model="form.altStart" type="datetime-local"
-                              :class="['date-wrapper', $q.dark.isActive ? 'date-mode-dark' : 'date-mode-light', $q.dark.isActive ? 'dialog-field-label-dark' : 'dialog-field-label-light']" />
-                        </div>
-                     </div>
-
-                     <div class="row items-center q-mb-xs">
-                        <div class="col-3 text-caption"
-                           :class="$q.dark.isActive ? 'dialog-field-label-dark' : 'dialog-field-label-light'">End Time
-                        </div>
-                        <div class="col-9">
-                           <q-input dense outlined v-model="form.altEnd" type="datetime-local"
-                              :class="['date-wrapper', $q.dark.isActive ? 'date-mode-dark' : 'date-mode-light', $q.dark.isActive ? 'dialog-field-label-dark' : 'dialog-field-label-light']" />
-                        </div>
-                     </div>
-
-                     <div class="row items-center q-mb-xs">
-                        <div class="col-3 text-caption"
-                           :class="$q.dark.isActive ? 'dialog-field-label-dark' : 'dialog-field-label-light'">Duration
-                           (h:m)
-                        </div>
-                        <div class="col-4">
-                           <q-input dense outlined v-model="form.altDuration" mask="##:##" placeholder="00:05"
-                              :class="$q.dark.isActive ? 'dialog-field-label-dark' : 'dialog-field-label-light'" />
-                        </div>
-                     </div>
-                  </div>
-               </div>
-               <q-separator :color="$q.dark.isActive ? 'grey-8' : 'grey-4'" class="q-my-md" />
-
-               <div class="text-subtitle2 q-mb-sm"
-                  :class="$q.dark.isActive ? 'dialog-subtitle-dark' : 'dialog-subtitle-light'">Switching Order</div>
-               <div class="row items-center q-mb-xs">
-                  <div class="col-12">
-                     <q-input dense outlined v-model="form.switchingOrder"
-                        :class="$q.dark.isActive ? 'dialog-field-label-dark' : 'dialog-field-label-light'" />
-                  </div>
-               </div>
-
-               <div class="text-subtitle2 q-mb-sm"
-                  :class="$q.dark.isActive ? 'dialog-subtitle-dark' : 'dialog-subtitle-light'">Creator Comment</div>
-               <div class="row items-center q-mb-xs">
-                  <div class="col-12">
-                     <q-input dense outlined v-model="form.creatorComment"
-                        :class="$q.dark.isActive ? 'dialog-field-label-dark' : 'dialog-field-label-light'" />
-                  </div>
-               </div>
-
-            </q-tab-panel>
+   <!-- <h3 :style="$q.screen.lt.sm ?  'margin-top: 15px; background-color: blue; line-height: 1.8rem; font-size: 1.4rem;' : ' margin-top: 20px; font-size: 1.6rem;'" style="text-align: center; " :class="$q.dark.isActive ? 'dialog-header-dark' : 'dialog-header-light'">{{ props.name }}</h3> -->
+   <!-- <h3 style="text-align: center; margin-bottom: -30px;" :class="$q.dark.isActive ? 'dialog-header-dark' : 'dialog-header-light'">{{ props.name }}</h3> -->
+   <q-card :class="[$q.dark.isActive ? 'background: #2f2f2f' : 'background: #385562']"
+      :style="[{ height: $q.screen.lt.md ? 'calc(100vh - 160px)' : 'calc(100vh - 100px)', width: '100%', display: 'flex', flexDirection: 'column', border: 'none', boxShadow: 'none !important' }]">
 
 
-         </q-tab-panels>
-      </q-scroll-area>
+      <q-tab-panel name="notification_details" class="q-pa-none"
+         :style="$q.screen.lt.sm ? 'width: 75%;' : 'width: 65%;'"
+         style="margin: 0px auto; padding-bottom: 2rem !important;">
+         <q-bar class="my-dialog text-white q-pa-none"
+            :style="$q.dark.isActive ? 'background: #2f2f2f' : 'background: #385562'" style="margin: auto;">
 
-      <q-separator :color="$q.dark.isActive ? 'grey-8' : 'grey-4'" class="q-my-xs" />
+            <div :class="$q.dark.isActive ? 'dialog-form-header-dark' : 'dialog-form-header-light'">{{ props.name }}
+            </div>
 
-      <q-card-actions class="row justify-between items-center" style=" padding: 2px;">
-         <div class="text-red-4 q-ml-md text-caption">
-            <q-icon name="error" /> Representative name required
+            <q-space />
+         </q-bar>
+
+         <q-separator spaced style="margin: 1.5rem 0;" />
+
+
+         <div class="text-subtitle1 q-mb-sm" :class="$q.dark.isActive ? 'dialog-header-dark' : 'dialog-header-light'">
          </div>
-         <!-- <div>
-            <q-btn label="Cancel" :class="$q.dark.isActive ? 'dialog-field-label-dark' : 'dialog-field-label-light'"
-               style="padding: 2.5px 4px !important; font-size:10.5px !important; border-radius: 0px; border-width: 2px !important;"
-               outline v-close-popup />
-            <button class="custom-create-btn"
-               style="padding: 4px 5px !important; font-size: 11px !important;  margin-left: 5px; margin-top: -1px !important;"
-               type="submit">
-               Save
-            </button>
-         </div> -->
-      </q-card-actions>
 
+         <div class="row q-col-gutter-md q-mb-md">
+
+            <!-- ===================== 1. SS Entry Photo ===================== -->
+            <div class="col-12">
+               <div class="text-subtitle2 q-mb-sm"
+                  :class="$q.dark.isActive ? 'dialog-subtitle-dark' : 'dialog-subtitle-light'">
+                  SS Entry from outside with surroundings and SS name visible
+               </div>
+
+               <q-option-group v-model="form.ssEntryPhotoStatus" :options="doneNotDoneOptions" color="secondary" inline
+                  dense :class="$q.dark.isActive ? 'dialog-field-label-dark' : 'dialog-field-label-light'" />
+            </div>
+
+            <!-- Photo + Remarks (only if Done) -->
+            <template v-if="form.ssEntryPhotoStatus === 'Done'">
+               <div class="col-12 col-sm-6">
+                  <q-file outlined accept="image/*" v-model="form.ssEntryPhoto" label="Upload SS Entry Photo" clearable>
+                     <template #prepend>
+                        <q-icon name="image" />
+                     </template>
+                  </q-file>
+               </div>
+
+               <div class="col-12 col-sm-6">
+                  <q-input outlined type="textarea" autogrow label="Remarks" v-model="form.ssEntryPhotoRemarks" />
+               </div>
+            </template>
+
+            <!-- ===================== 2. GPS Coordinates Screenshot ===================== -->
+            <div class="col-12 q-mt-md">
+               <div class="text-subtitle2 q-mb-sm"
+                  :class="$q.dark.isActive ? 'dialog-subtitle-dark' : 'dialog-subtitle-light'">
+                  GPS Coordinates Screenshot
+               </div>
+
+               <q-option-group v-model="form.gpsScreenshotStatus" :options="doneNotDoneOptions" color="secondary" inline
+                  dense :class="$q.dark.isActive ? 'dialog-field-label-dark' : 'dialog-field-label-light'" />
+            </div>
+
+            <!-- Photo + Remarks (only if Done) -->
+            <template v-if="form.gpsScreenshotStatus === 'Done'">
+               <div class="col-12 col-sm-6">
+                  <q-file outlined accept="image/*" v-model="form.gpsScreenshotPhoto" label="Upload GPS Screenshot"
+                     clearable>
+                     <template #prepend>
+                        <q-icon name="image" />
+                     </template>
+                  </q-file>
+               </div>
+
+               <div class="col-12 col-sm-6">
+                  <q-input outlined type="textarea" autogrow label="Remarks" v-model="form.gpsScreenshotRemarks" />
+               </div>
+            </template>
+
+            <!-- ===================== 1. Existing RTU Panels front view ===================== -->
+            <div class="col-12">
+               <div class="text-subtitle2 q-mb-sm"
+                  :class="$q.dark.isActive ? 'dialog-subtitle-dark' : 'dialog-subtitle-light'">
+                  Existing RTU Panels front view
+               </div>
+
+               <q-option-group v-model="form.rtuFrontViewStatus" :options="doneNotDoneOptions" color="secondary" inline
+                  dense :class="$q.dark.isActive ? 'dialog-field-label-dark' : 'dialog-field-label-light'" />
+            </div>
+
+            <!-- Photo + Remarks (only if Done) -->
+            <template v-if="form.rtuFrontViewStatus === 'Done'">
+               <div class="col-12 col-sm-6">
+                  <q-file outlined accept="image/*" v-model="form.rtuFrontViewPhoto" label="Upload RTU Front View Photo"
+                     clearable>
+                     <template #prepend>
+                        <q-icon name="image" />
+                     </template>
+                  </q-file>
+               </div>
+
+               <div class="col-12 col-sm-6">
+                  <q-input outlined type="textarea" autogrow label="Remarks" v-model="form.rtuFrontViewRemarks" />
+               </div>
+            </template>
+
+            <!-- ===================== 2. Existing RTU Panels side view ===================== -->
+            <div class="col-12 q-mt-md">
+               <div class="text-subtitle2 q-mb-sm"
+                  :class="$q.dark.isActive ? 'dialog-subtitle-dark' : 'dialog-subtitle-light'">
+                  Existing RTU Panels side view
+               </div>
+
+               <q-option-group v-model="form.rtuSideViewStatus" :options="doneNotDoneOptions" color="secondary" inline
+                  dense :class="$q.dark.isActive ? 'dialog-field-label-dark' : 'dialog-field-label-light'" />
+            </div>
+
+            <!-- Photo + Remarks (only if Done) -->
+            <template v-if="form.rtuSideViewStatus === 'Done'">
+               <div class="col-12 col-sm-6">
+                  <q-file outlined accept="image/*" v-model="form.rtuSideViewPhoto" label="Upload RTU Side View Photo"
+                     clearable>
+                     <template #prepend>
+                        <q-icon name="image" />
+                     </template>
+                  </q-file>
+               </div>
+
+               <div class="col-12 col-sm-6">
+                  <q-input outlined type="textarea" autogrow label="Remarks" v-model="form.rtuSideViewRemarks" />
+               </div>
+            </template>
+
+
+            <!-- ===================== 1. High gain antenna Location ===================== -->
+            <div class="col-12">
+               <div class="text-subtitle2 q-mb-sm"
+                  :class="$q.dark.isActive ? 'dialog-subtitle-dark' : 'dialog-subtitle-light'">
+                  High gain antenna Location
+               </div>
+
+               <q-option-group v-model="form.highGainAntennaStatus" :options="doneNotDoneOptions" color="secondary"
+                  inline dense :class="$q.dark.isActive ? 'dialog-field-label-dark' : 'dialog-field-label-light'" />
+            </div>
+
+            <!-- Photo + Remarks (only if Done) -->
+            <template v-if="form.highGainAntennaStatus === 'Done'">
+               <div class="col-12 col-sm-6">
+                  <q-file outlined accept="image/*" v-model="form.highGainAntennaPhoto"
+                     label="Upload High Gain Antenna Photo" clearable>
+                     <template #prepend>
+                        <q-icon name="image" />
+                     </template>
+                  </q-file>
+               </div>
+
+               <div class="col-12 col-sm-6">
+                  <q-input outlined type="textarea" autogrow label="Remarks" v-model="form.highGainAntennaRemarks" />
+               </div>
+            </template>
+
+            <!-- ===================== 2. Network switch (if available) ===================== -->
+            <div class="col-12 q-mt-md">
+               <div class="text-subtitle2 q-mb-sm"
+                  :class="$q.dark.isActive ? 'dialog-subtitle-dark' : 'dialog-subtitle-light'">
+                  Network switch (if available)
+               </div>
+
+               <q-option-group v-model="form.networkSwitchStatus" :options="doneNotDoneOptions" color="secondary" inline
+                  dense :class="$q.dark.isActive ? 'dialog-field-label-dark' : 'dialog-field-label-light'" />
+            </div>
+
+            <!-- Photo + Remarks (only if Done) -->
+            <template v-if="form.networkSwitchStatus === 'Done'">
+               <div class="col-12 col-sm-6">
+                  <q-file outlined accept="image/*" v-model="form.networkSwitchPhoto"
+                     label="Upload Network Switch Photo" clearable>
+                     <template #prepend>
+                        <q-icon name="image" />
+                     </template>
+                  </q-file>
+               </div>
+
+               <div class="col-12 col-sm-6">
+                  <q-input outlined type="textarea" autogrow label="Remarks" v-model="form.networkSwitchRemarks" />
+               </div>
+            </template>
+
+            <!-- ===================== 1. Transformer Name Plate Photo ===================== -->
+            <div class="col-12">
+               <div class="text-subtitle2 q-mb-sm"
+                  :class="$q.dark.isActive ? 'dialog-subtitle-dark' : 'dialog-subtitle-light'">
+                  Transformer Name Plate Photo
+
+               </div>
+
+               <q-option-group v-model="form.transformerNamePlateStatus" :options="doneNotDoneOptions" color="secondary"
+                  inline dense :class="$q.dark.isActive ? 'dialog-field-label-dark' : 'dialog-field-label-light'" />
+            </div>
+
+            <!-- Photo + Remarks (only if Done) -->
+            <template v-if="form.transformerNamePlateStatus === 'Done'">
+               <div class="col-12 col-sm-6">
+                  <q-file outlined accept="image/*" v-model="form.transformerNamePlatePhoto"
+                     label="Upload Transformer Name Plate Photo" clearable>
+                     <template #prepend>
+                        <q-icon name="image" />
+                     </template>
+                  </q-file>
+               </div>
+
+               <div class="col-12 col-sm-6">
+                  <q-input outlined type="textarea" autogrow label="Remarks"
+                     v-model="form.transformerNamePlateRemarks" />
+               </div>
+            </template>
+
+            <!-- ===================== 2. CB Name Plate Photo ===================== -->
+            <div class="col-12 q-mt-md">
+               <div class="text-subtitle2 q-mb-sm"
+                  :class="$q.dark.isActive ? 'dialog-subtitle-dark' : 'dialog-subtitle-light'">
+                  CB Name Plate Photo
+               </div>
+
+               <q-option-group v-model="form.cbNamePlateStatus" :options="doneNotDoneOptions" color="secondary" inline
+                  dense :class="$q.dark.isActive ? 'dialog-field-label-dark' : 'dialog-field-label-light'" />
+            </div>
+
+            <!-- Photo + Remarks (only if Done) -->
+            <template v-if="form.cbNamePlateStatus === 'Done'">
+               <div class="col-12 col-sm-6">
+                  <q-file outlined accept="image/*" v-model="form.cbNamePlatePhoto" label="Upload CB Name Plate Photo"
+                     clearable>
+                     <template #prepend>
+                        <q-icon name="image" />
+                     </template>
+                  </q-file>
+               </div>
+
+               <div class="col-12 col-sm-6">
+                  <q-input outlined type="textarea" autogrow label="Remarks" v-model="form.cbNamePlateRemarks" />
+               </div>
+            </template>
+
+            <!-- ===================== 1. Location Of MFT in feeder Panel after marking ===================== -->
+            <div class="col-12">
+               <div class="text-subtitle2 q-mb-sm"
+                  :class="$q.dark.isActive ? 'dialog-subtitle-dark' : 'dialog-subtitle-light'">
+                  Location Of MFT in feeder Panel after marking
+
+               </div>
+
+               <q-option-group v-model="form.mftLocationStatus" :options="doneNotDoneOptions" color="secondary" inline
+                  dense :class="$q.dark.isActive ? 'dialog-field-label-dark' : 'dialog-field-label-light'" />
+            </div>
+
+            <!-- Photo + Remarks (only if Done) -->
+            <template v-if="form.mftLocationStatus === 'Done'">
+               <div class="col-12 col-sm-6">
+                  <q-file outlined accept="image/*" v-model="form.mftLocationPhoto" label="Upload MFT Location Photo"
+                     clearable>
+                     <template #prepend>
+                        <q-icon name="image" />
+                     </template>
+                  </q-file>
+               </div>
+
+               <div class="col-12 col-sm-6">
+                  <q-input outlined type="textarea" autogrow label="Remarks" v-model="form.mftLocationRemarks" />
+               </div>
+            </template>
+
+            <!-- ===================== 2. Location Of FDI in feeder Panel after marking ===================== -->
+            <div class="col-12 q-mt-md">
+               <div class="text-subtitle2 q-mb-sm"
+                  :class="$q.dark.isActive ? 'dialog-subtitle-dark' : 'dialog-subtitle-light'">
+                  Location Of FDI in feeder Panel after marking
+               </div>
+
+               <q-option-group v-model="form.fdiLocationStatus" :options="doneNotDoneOptions" color="secondary" inline
+                  dense :class="$q.dark.isActive ? 'dialog-field-label-dark' : 'dialog-field-label-light'" />
+            </div>
+
+            <!-- Photo + Remarks (only if Done) -->
+            <template v-if="form.fdiLocationStatus === 'Done'">
+               <div class="col-12 col-sm-6">
+                  <q-file outlined accept="image/*" v-model="form.fdiLocationPhoto" label="Upload FDI Location Photo"
+                     clearable>
+                     <template #prepend>
+                        <q-icon name="image" />
+                     </template>
+                  </q-file>
+               </div>
+
+               <div class="col-12 col-sm-6">
+                  <q-input outlined type="textarea" autogrow label="Remarks" v-model="form.fdiLocationRemarks" />
+               </div>
+            </template>
+
+            <!-- ===================== 3. Location Of CMR in feeder Panel after marking ===================== -->
+            <div class="col-12 q-mt-md">
+               <div class="text-subtitle2 q-mb-sm"
+                  :class="$q.dark.isActive ? 'dialog-subtitle-dark' : 'dialog-subtitle-light'">
+                  Location Of CMR in feeder Panel after marking
+               </div>
+
+               <q-option-group v-model="form.cmrLocationStatus" :options="doneNotDoneOptions" color="secondary" inline
+                  dense :class="$q.dark.isActive ? 'dialog-field-label-dark' : 'dialog-field-label-light'" />
+            </div>
+
+            <!-- Photo + Remarks (only if Done) -->
+            <template v-if="form.cmrLocationStatus === 'Done'">
+               <div class="col-12 col-sm-6">
+                  <q-file outlined accept="image/*" v-model="form.cmrLocationPhoto" label="Upload CMR Location Photo"
+                     clearable>
+                     <template #prepend>
+                        <q-icon name="image" />
+                     </template>
+                  </q-file>
+               </div>
+
+               <div class="col-12 col-sm-6">
+                  <q-input outlined type="textarea" autogrow label="Remarks" v-model="form.cmrLocationRemarks" />
+               </div>
+            </template>
+
+            <!-- ===================== 4. Location Of HDR in feeder Panel after marking ===================== -->
+            <div class="col-12 q-mt-md">
+               <div class="text-subtitle2 q-mb-sm"
+                  :class="$q.dark.isActive ? 'dialog-subtitle-dark' : 'dialog-subtitle-light'">
+                  Location Of HDR in feeder Panel after marking
+               </div>
+
+               <q-option-group v-model="form.hdrLocationStatus" :options="doneNotDoneOptions" color="secondary" inline
+                  dense :class="$q.dark.isActive ? 'dialog-field-label-dark' : 'dialog-field-label-light'" />
+            </div>
+
+            <!-- Photo + Remarks (only if Done) -->
+            <template v-if="form.hdrLocationStatus === 'Done'">
+               <div class="col-12 col-sm-6">
+                  <q-file outlined accept="image/*" v-model="form.hdrLocationPhoto" label="Upload HDR Location Photo"
+                     clearable>
+                     <template #prepend>
+                        <q-icon name="image" />
+                     </template>
+                  </q-file>
+               </div>
+
+               <div class="col-12 col-sm-6">
+                  <q-input outlined type="textarea" autogrow label="Remarks" v-model="form.hdrLocationRemarks" />
+               </div>
+            </template>
+
+
+            <!-- ===================== 1. Panels Line up-1 Photo ===================== -->
+            <div class="col-12">
+               <div class="text-subtitle2 q-mb-sm"
+                  :class="$q.dark.isActive ? 'dialog-subtitle-dark' : 'dialog-subtitle-light'">
+                  Panels Line up-1 Photo
+
+               </div>
+
+               <q-option-group v-model="form.panelLineup1Status" :options="doneNotDoneOptions" color="secondary" inline
+                  dense :class="$q.dark.isActive ? 'dialog-field-label-dark' : 'dialog-field-label-light'" />
+            </div>
+
+            <!-- Photo + Remarks (only if Done) -->
+            <template v-if="form.panelLineup1Status === 'Done'">
+               <div class="col-12 col-sm-6">
+                  <q-file outlined accept="image/*" v-model="form.panelLineup1Photo" label="Upload Panel Lineup-1 Photo"
+                     clearable>
+                     <template #prepend>
+                        <q-icon name="image" />
+                     </template>
+                  </q-file>
+               </div>
+
+               <div class="col-12 col-sm-6">
+                  <q-input outlined type="textarea" autogrow label="Remarks" v-model="form.panelLineup1Remarks" />
+               </div>
+            </template>
+
+            <!-- ===================== 2. Panels Line up-2 Photo ===================== -->
+            <div class="col-12 q-mt-md">
+               <div class="text-subtitle2 q-mb-sm"
+                  :class="$q.dark.isActive ? 'dialog-subtitle-dark' : 'dialog-subtitle-light'">
+                  Panels Line up-2 Photo
+               </div>
+
+               <q-option-group v-model="form.panelLineup2Status" :options="doneNotDoneOptions" color="secondary" inline
+                  dense :class="$q.dark.isActive ? 'dialog-field-label-dark' : 'dialog-field-label-light'" />
+            </div>
+
+            <!-- Photo + Remarks (only if Done) -->
+            <template v-if="form.panelLineup2Status === 'Done'">
+               <div class="col-12 col-sm-6">
+                  <q-file outlined accept="image/*" v-model="form.panelLineup2Photo" label="Upload Panel Lineup-2 Photo"
+                     clearable>
+                     <template #prepend>
+                        <q-icon name="image" />
+                     </template>
+                  </q-file>
+               </div>
+
+               <div class="col-12 col-sm-6">
+                  <q-input outlined type="textarea" autogrow label="Remarks" v-model="form.panelLineup2Remarks" />
+               </div>
+            </template>
+
+            <!-- ===================== 3. Panels Line up-3 Photo ===================== -->
+            <div class="col-12 q-mt-md">
+               <div class="text-subtitle2 q-mb-sm"
+                  :class="$q.dark.isActive ? 'dialog-subtitle-dark' : 'dialog-subtitle-light'">
+                  Panels Line up-3 Photo
+               </div>
+
+               <q-option-group v-model="form.panelLineup3Status" :options="doneNotDoneOptions" color="secondary" inline
+                  dense :class="$q.dark.isActive ? 'dialog-field-label-dark' : 'dialog-field-label-light'" />
+            </div>
+
+            <!-- Photo + Remarks (only if Done) -->
+            <template v-if="form.panelLineup3Status === 'Done'">
+               <div class="col-12 col-sm-6">
+                  <q-file outlined accept="image/*" v-model="form.panelLineup3Photo" label="Upload Panel Lineup-3 Photo"
+                     clearable>
+                     <template #prepend>
+                        <q-icon name="image" />
+                     </template>
+                  </q-file>
+               </div>
+
+               <div class="col-12 col-sm-6">
+                  <q-input outlined type="textarea" autogrow label="Remarks" v-model="form.panelLineup3Remarks" />
+               </div>
+            </template>
+
+            <!-- ===================== 4. Panels Line up-4 Photo ===================== -->
+            <div class="col-12 q-mt-md">
+               <div class="text-subtitle2 q-mb-sm"
+                  :class="$q.dark.isActive ? 'dialog-subtitle-dark' : 'dialog-subtitle-light'">
+                  Panels Line up-4 Photo
+               </div>
+
+               <q-option-group v-model="form.panelLineup4Status" :options="doneNotDoneOptions" color="secondary" inline
+                  dense :class="$q.dark.isActive ? 'dialog-field-label-dark' : 'dialog-field-label-light'" />
+            </div>
+
+            <!-- Photo + Remarks (only if Done) -->
+            <template v-if="form.panelLineup4Status === 'Done'">
+               <div class="col-12 col-sm-6">
+                  <q-file outlined accept="image/*" v-model="form.panelLineup4Photo" label="Upload Panel Lineup-4 Photo"
+                     clearable>
+                     <template #prepend>
+                        <q-icon name="image" />
+                     </template>
+                  </q-file>
+               </div>
+
+               <div class="col-12 col-sm-6">
+                  <q-input outlined type="textarea" autogrow label="Remarks" v-model="form.panelLineup4Remarks" />
+               </div>
+            </template>
+
+            <!-- ===================== 5. Panels Line up-5 Photo ===================== -->
+            <div class="col-12 q-mt-md">
+               <div class="text-subtitle2 q-mb-sm"
+                  :class="$q.dark.isActive ? 'dialog-subtitle-dark' : 'dialog-subtitle-light'">
+                  Panels Line up-5 Photo
+               </div>
+
+               <q-option-group v-model="form.panelLineup5Status" :options="doneNotDoneOptions" color="secondary" inline
+                  dense :class="$q.dark.isActive ? 'dialog-field-label-dark' : 'dialog-field-label-light'" />
+            </div>
+
+            <!-- Photo + Remarks (only if Done) -->
+            <template v-if="form.panelLineup5Status === 'Done'">
+               <div class="col-12 col-sm-6">
+                  <q-file outlined accept="image/*" v-model="form.panelLineup5Photo" label="Upload Panel Lineup-5 Photo"
+                     clearable>
+                     <template #prepend>
+                        <q-icon name="image" />
+                     </template>
+                  </q-file>
+               </div>
+
+               <div class="col-12 col-sm-6">
+                  <q-input outlined type="textarea" autogrow label="Remarks" v-model="form.panelLineup5Remarks" />
+               </div>
+            </template>
+
+            <!-- ===================== 6. Panels Line up-6 Photo ===================== -->
+            <div class="col-12 q-mt-md">
+               <div class="text-subtitle2 q-mb-sm"
+                  :class="$q.dark.isActive ? 'dialog-subtitle-dark' : 'dialog-subtitle-light'">
+                  Panels Line up-6 Photo
+               </div>
+
+               <q-option-group v-model="form.panelLineup6Status" :options="doneNotDoneOptions" color="secondary" inline
+                  dense :class="$q.dark.isActive ? 'dialog-field-label-dark' : 'dialog-field-label-light'" />
+            </div>
+
+            <!-- Photo + Remarks (only if Done) -->
+            <template v-if="form.panelLineup6Status === 'Done'">
+               <div class="col-12 col-sm-6">
+                  <q-file outlined accept="image/*" v-model="form.panelLineup6Photo" label="Upload Panel Lineup-6 Photo"
+                     clearable>
+                     <template #prepend>
+                        <q-icon name="image" />
+                     </template>
+                  </q-file>
+               </div>
+
+               <div class="col-12 col-sm-6">
+                  <q-input outlined type="textarea" autogrow label="Remarks" v-model="form.panelLineup6Remarks" />
+               </div>
+            </template>
+
+            <!-- ===================== 1. Tap Transducer location Photo for XFMR-1 ===================== -->
+            <div class="col-12">
+               <div class="text-subtitle2 q-mb-sm"
+                  :class="$q.dark.isActive ? 'dialog-subtitle-dark' : 'dialog-subtitle-light'">
+                  Tap Transducer location Photo for XFMR-1
+
+               </div>
+
+               <q-option-group v-model="form.tapTransducerXfmr1Status" :options="doneNotDoneOptions" color="secondary"
+                  inline dense :class="$q.dark.isActive ? 'dialog-field-label-dark' : 'dialog-field-label-light'" />
+            </div>
+
+            <!-- Photo + Remarks (only if Done) -->
+            <template v-if="form.tapTransducerXfmr1Status === 'Done'">
+               <div class="col-12 col-sm-6">
+                  <q-file outlined accept="image/*" v-model="form.tapTransducerXfmr1Photo"
+                     label="Upload Tap Transducer XFMR-1 Photo" clearable>
+                     <template #prepend>
+                        <q-icon name="image" />
+                     </template>
+                  </q-file>
+               </div>
+
+               <div class="col-12 col-sm-6">
+                  <q-input outlined type="textarea" autogrow label="Remarks" v-model="form.tapTransducerXfmr1Remarks" />
+               </div>
+            </template>
+
+            <!-- ===================== 2. Tap Transducer location Photo for XFMR-2 ===================== -->
+            <div class="col-12 q-mt-md">
+               <div class="text-subtitle2 q-mb-sm"
+                  :class="$q.dark.isActive ? 'dialog-subtitle-dark' : 'dialog-subtitle-light'">
+                  Tap Transducer location Photo for XFMR-2
+               </div>
+
+               <q-option-group v-model="form.tapTransducerXfmr2Status" :options="doneNotDoneOptions" color="secondary"
+                  inline dense :class="$q.dark.isActive ? 'dialog-field-label-dark' : 'dialog-field-label-light'" />
+            </div>
+
+            <!-- Photo + Remarks (only if Done) -->
+            <template v-if="form.tapTransducerXfmr2Status === 'Done'">
+               <div class="col-12 col-sm-6">
+                  <q-file outlined accept="image/*" v-model="form.tapTransducerXfmr2Photo"
+                     label="Upload Tap Transducer XFMR-2 Photo" clearable>
+                     <template #prepend>
+                        <q-icon name="image" />
+                     </template>
+                  </q-file>
+               </div>
+
+               <div class="col-12 col-sm-6">
+                  <q-input outlined type="textarea" autogrow label="Remarks" v-model="form.tapTransducerXfmr2Remarks" />
+               </div>
+            </template>
+
+            <!-- ===================== 3. Tap Transducer location Photo for XFMR-3 ===================== -->
+            <div class="col-12 q-mt-md">
+               <div class="text-subtitle2 q-mb-sm"
+                  :class="$q.dark.isActive ? 'dialog-subtitle-dark' : 'dialog-subtitle-light'">
+                  Tap Transducer location Photo for XFMR-3
+               </div>
+
+               <q-option-group v-model="form.tapTransducerXfmr3Status" :options="doneNotDoneOptions" color="secondary"
+                  inline dense :class="$q.dark.isActive ? 'dialog-field-label-dark' : 'dialog-field-label-light'" />
+            </div>
+
+            <!-- Photo + Remarks (only if Done) -->
+            <template v-if="form.tapTransducerXfmr3Status === 'Done'">
+               <div class="col-12 col-sm-6">
+                  <q-file outlined accept="image/*" v-model="form.tapTransducerXfmr3Photo"
+                     label="Upload Tap Transducer XFMR-3 Photo" clearable>
+                     <template #prepend>
+                        <q-icon name="image" />
+                     </template>
+                  </q-file>
+               </div>
+
+               <div class="col-12 col-sm-6">
+                  <q-input outlined type="textarea" autogrow label="Remarks" v-model="form.tapTransducerXfmr3Remarks" />
+               </div>
+            </template>
+
+            <!-- ===================== 4. Tap Transducer location Photo for XFMR-4 ===================== -->
+            <div class="col-12 q-mt-md">
+               <div class="text-subtitle2 q-mb-sm"
+                  :class="$q.dark.isActive ? 'dialog-subtitle-dark' : 'dialog-subtitle-light'">
+                  Tap Transducer location Photo for XFMR-4
+               </div>
+
+               <q-option-group v-model="form.tapTransducerXfmr4Status" :options="doneNotDoneOptions" color="secondary"
+                  inline dense :class="$q.dark.isActive ? 'dialog-field-label-dark' : 'dialog-field-label-light'" />
+            </div>
+
+            <!-- Photo + Remarks (only if Done) -->
+            <template v-if="form.tapTransducerXfmr4Status === 'Done'">
+               <div class="col-12 col-sm-6">
+                  <q-file outlined accept="image/*" v-model="form.tapTransducerXfmr4Photo"
+                     label="Upload Tap Transducer XFMR-4 Photo" clearable>
+                     <template #prepend>
+                        <q-icon name="image" />
+                     </template>
+                  </q-file>
+               </div>
+
+               <div class="col-12 col-sm-6">
+                  <q-input outlined type="textarea" autogrow label="Remarks" v-model="form.tapTransducerXfmr4Remarks" />
+               </div>
+            </template>
+
+            <!-- ===================== 1. Individual Feeder/TRF panel full front view photo ===================== -->
+            <div class="col-12">
+               <div class="text-subtitle2 q-mb-sm"
+                  :class="$q.dark.isActive ? 'dialog-subtitle-dark' : 'dialog-subtitle-light'">
+                  Individual Feeder/TRF panel full front view photo
+               </div>
+
+               <q-option-group v-model="form.feederPanelFrontStatus" :options="doneNotDoneOptions" color="secondary"
+                  inline dense :class="$q.dark.isActive ? 'dialog-field-label-dark' : 'dialog-field-label-light'" />
+            </div>
+
+            <!-- Photo + Remarks (only if Done) -->
+            <template v-if="form.feederPanelFrontStatus === 'Done'">
+               <div class="col-12 col-sm-6">
+                  <q-file outlined accept="image/*" v-model="form.feederPanelFrontPhoto"
+                     label="Upload Feeder Panel Front View Photo" clearable>
+                     <template #prepend>
+                        <q-icon name="image" />
+                     </template>
+                  </q-file>
+               </div>
+
+               <div class="col-12 col-sm-6">
+                  <q-input outlined type="textarea" autogrow label="Remarks" v-model="form.feederPanelFrontRemarks" />
+               </div>
+            </template>
+
+            <!-- ===================== 66KV Capacitor Bank Photo ===================== -->
+            <div class="col-12">
+               <div class="text-subtitle2 q-mb-sm"
+                  :class="$q.dark.isActive ? 'dialog-subtitle-dark' : 'dialog-subtitle-light'">
+                  66KV Capacitor Bank Photo
+               </div>
+
+               <q-option-group v-model="form.capBank66Status" :options="doneNotDoneOptions" color="secondary" inline
+                  dense :class="$q.dark.isActive ? 'dialog-field-label-dark' : 'dialog-field-label-light'" />
+            </div>
+
+            <template v-if="form.capBank66Status === 'Done'">
+               <div class="col-12 col-sm-6">
+                  <q-file outlined accept="image/*" v-model="form.capBank66Photo"
+                     label="Upload 66KV Capacitor Bank Photo" clearable>
+                     <template #prepend>
+                        <q-icon name="image" />
+                     </template>
+                  </q-file>
+               </div>
+
+               <div class="col-12 col-sm-6">
+                  <q-input outlined type="textarea" autogrow label="Remarks" v-model="form.capBank66Remarks" />
+               </div>
+            </template>
+
+            <!-- ===================== 66KV Battery Charger Photo ===================== -->
+            <div class="col-12">
+               <div class="text-subtitle2 q-mb-sm"
+                  :class="$q.dark.isActive ? 'dialog-subtitle-dark' : 'dialog-subtitle-light'">
+                  66KV Battery Charger Photo
+               </div>
+
+               <q-option-group v-model="form.batteryCharger66Status" :options="doneNotDoneOptions" color="secondary"
+                  inline dense :class="$q.dark.isActive ? 'dialog-field-label-dark' : 'dialog-field-label-light'" />
+            </div>
+
+            <template v-if="form.batteryCharger66Status === 'Done'">
+               <div class="col-12 col-sm-6">
+                  <q-file outlined accept="image/*" v-model="form.batteryCharger66Photo"
+                     label="Upload 66KV Battery Charger Photo" clearable>
+                     <template #prepend>
+                        <q-icon name="image" />
+                     </template>
+                  </q-file>
+               </div>
+
+               <div class="col-12 col-sm-6">
+                  <q-input outlined type="textarea" autogrow label="Remarks" v-model="form.batteryCharger66Remarks" />
+               </div>
+            </template>
+
+            <!-- ===================== 66KV Battery Bank Photo ===================== -->
+            <div class="col-12">
+               <div class="text-subtitle2 q-mb-sm"
+                  :class="$q.dark.isActive ? 'dialog-subtitle-dark' : 'dialog-subtitle-light'">
+                  66KV Battery Bank Photo
+               </div>
+
+               <q-option-group v-model="form.batteryBank66Status" :options="doneNotDoneOptions" color="secondary" inline
+                  dense :class="$q.dark.isActive ? 'dialog-field-label-dark' : 'dialog-field-label-light'" />
+            </div>
+
+            <template v-if="form.batteryBank66Status === 'Done'">
+               <div class="col-12 col-sm-6">
+                  <q-file outlined accept="image/*" v-model="form.batteryBank66Photo"
+                     label="Upload 66KV Battery Bank Photo" clearable>
+                     <template #prepend>
+                        <q-icon name="image" />
+                     </template>
+                  </q-file>
+               </div>
+
+               <div class="col-12 col-sm-6">
+                  <q-input outlined type="textarea" autogrow label="Remarks" v-model="form.batteryBank66Remarks" />
+               </div>
+            </template>
+
+            <!-- ===================== 33KV Capacitor Bank Photo ===================== -->
+            <div class="col-12">
+               <div class="text-subtitle2 q-mb-sm"
+                  :class="$q.dark.isActive ? 'dialog-subtitle-dark' : 'dialog-subtitle-light'">
+                  33KV Capacitor Bank Photo
+               </div>
+
+               <q-option-group v-model="form.capBank33Status" :options="doneNotDoneOptions" color="secondary" inline
+                  dense :class="$q.dark.isActive ? 'dialog-field-label-dark' : 'dialog-field-label-light'" />
+            </div>
+
+            <template v-if="form.capBank33Status === 'Done'">
+               <div class="col-12 col-sm-6">
+                  <q-file outlined accept="image/*" v-model="form.capBank33Photo"
+                     label="Upload 33KV Capacitor Bank Photo" clearable>
+                     <template #prepend>
+                        <q-icon name="image" />
+                     </template>
+                  </q-file>
+               </div>
+
+               <div class="col-12 col-sm-6">
+                  <q-input outlined type="textarea" autogrow label="Remarks" v-model="form.capBank33Remarks" />
+               </div>
+            </template>
+
+            <!-- ===================== 33KV Battery Charger Photo ===================== -->
+            <div class="col-12">
+               <div class="text-subtitle2 q-mb-sm"
+                  :class="$q.dark.isActive ? 'dialog-subtitle-dark' : 'dialog-subtitle-light'">
+                  33KV Battery Charger Photo
+               </div>
+
+               <q-option-group v-model="form.batteryCharger33Status" :options="doneNotDoneOptions" color="secondary"
+                  inline dense :class="$q.dark.isActive ? 'dialog-field-label-dark' : 'dialog-field-label-light'" />
+            </div>
+
+            <template v-if="form.batteryCharger33Status === 'Done'">
+               <div class="col-12 col-sm-6">
+                  <q-file outlined accept="image/*" v-model="form.batteryCharger33Photo"
+                     label="Upload 33KV Battery Charger Photo" clearable>
+                     <template #prepend>
+                        <q-icon name="image" />
+                     </template>
+                  </q-file>
+               </div>
+
+               <div class="col-12 col-sm-6">
+                  <q-input outlined type="textarea" autogrow label="Remarks" v-model="form.batteryCharger33Remarks" />
+               </div>
+            </template>
+
+
+
+            <!-- ===================== 33KV Battery Bank Photo ===================== -->
+            <div class="col-12">
+               <div class="text-subtitle2 q-mb-sm"
+                  :class="$q.dark.isActive ? 'dialog-subtitle-dark' : 'dialog-subtitle-light'">
+                  33KV Battery Bank Photo
+               </div>
+
+               <q-option-group v-model="form.batteryBank33Status" :options="doneNotDoneOptions" color="secondary" inline
+                  dense :class="$q.dark.isActive ? 'dialog-field-label-dark' : 'dialog-field-label-light'" />
+            </div>
+
+            <template v-if="form.batteryBank33Status === 'Done'">
+               <div class="col-12 col-sm-6">
+                  <q-file outlined accept="image/*" v-model="form.batteryBank33Photo"
+                     label="Upload 33KV Battery Bank Photo" clearable>
+                     <template #prepend>
+                        <q-icon name="image" />
+                     </template>
+                  </q-file>
+               </div>
+
+               <div class="col-12 col-sm-6">
+                  <q-input outlined type="textarea" autogrow label="Remarks" v-model="form.batteryBank33Remarks" />
+               </div>
+            </template>
+
+
+
+            <!-- ===================== 11KV Capacitor Bank Photo ===================== -->
+            <div class="col-12">
+               <div class="text-subtitle2 q-mb-sm"
+                  :class="$q.dark.isActive ? 'dialog-subtitle-dark' : 'dialog-subtitle-light'">
+                  11KV Capacitor Bank Photo
+               </div>
+
+               <q-option-group v-model="form.capBank11Status" :options="doneNotDoneOptions" color="secondary" inline
+                  dense :class="$q.dark.isActive ? 'dialog-field-label-dark' : 'dialog-field-label-light'" />
+            </div>
+
+            <template v-if="form.capBank11Status === 'Done'">
+               <div class="col-12 col-sm-6">
+                  <q-file outlined accept="image/*" v-model="form.capBank11Photo"
+                     label="Upload 11KV Capacitor Bank Photo" clearable>
+                     <template #prepend>
+                        <q-icon name="image" />
+                     </template>
+                  </q-file>
+               </div>
+
+               <div class="col-12 col-sm-6">
+                  <q-input outlined type="textarea" autogrow label="Remarks" v-model="form.capBank11Remarks" />
+               </div>
+            </template>
+
+
+
+            <!-- ===================== 11KV Battery Charger Photo ===================== -->
+            <div class="col-12">
+               <div class="text-subtitle2 q-mb-sm"
+                  :class="$q.dark.isActive ? 'dialog-subtitle-dark' : 'dialog-subtitle-light'">
+                  11KV Battery Charger Photo
+               </div>
+
+               <q-option-group v-model="form.batteryCharger11Status" :options="doneNotDoneOptions" color="secondary"
+                  inline dense :class="$q.dark.isActive ? 'dialog-field-label-dark' : 'dialog-field-label-light'" />
+            </div>
+
+            <template v-if="form.batteryCharger11Status === 'Done'">
+               <div class="col-12 col-sm-6">
+                  <q-file outlined accept="image/*" v-model="form.batteryCharger11Photo"
+                     label="Upload 11KV Battery Charger Photo" clearable>
+                     <template #prepend>
+                        <q-icon name="image" />
+                     </template>
+                  </q-file>
+               </div>
+
+               <div class="col-12 col-sm-6">
+                  <q-input outlined type="textarea" autogrow label="Remarks" v-model="form.batteryCharger11Remarks" />
+               </div>
+            </template>
+
+
+
+            <!-- ===================== 11KV Battery Bank Photo ===================== -->
+            <div class="col-12">
+               <div class="text-subtitle2 q-mb-sm"
+                  :class="$q.dark.isActive ? 'dialog-subtitle-dark' : 'dialog-subtitle-light'">
+                  11KV Battery Bank Photo
+               </div>
+
+               <q-option-group v-model="form.batteryBank11Status" :options="doneNotDoneOptions" color="secondary" inline
+                  dense :class="$q.dark.isActive ? 'dialog-field-label-dark' : 'dialog-field-label-light'" />
+            </div>
+
+            <template v-if="form.batteryBank11Status === 'Done'">
+               <div class="col-12 col-sm-6">
+                  <q-file outlined accept="image/*" v-model="form.batteryBank11Photo"
+                     label="Upload 11KV Battery Bank Photo" clearable>
+                     <template #prepend>
+                        <q-icon name="image" />
+                     </template>
+                  </q-file>
+               </div>
+
+               <div class="col-12 col-sm-6">
+                  <q-input outlined type="textarea" autogrow label="Remarks" v-model="form.batteryBank11Remarks" />
+               </div>
+            </template>
+
+
+
+            <!-- ===================== Numerical Relays Photo ===================== -->
+            <div class="col-12">
+               <div class="text-subtitle2 q-mb-sm"
+                  :class="$q.dark.isActive ? 'dialog-subtitle-dark' : 'dialog-subtitle-light'">
+                  Numerical Relays Photo
+               </div>
+
+               <q-option-group v-model="form.numericalRelayStatus" :options="doneNotDoneOptions" color="secondary"
+                  inline dense :class="$q.dark.isActive ? 'dialog-field-label-dark' : 'dialog-field-label-light'" />
+            </div>
+
+            <template v-if="form.numericalRelayStatus === 'Done'">
+               <div class="col-12 col-sm-6">
+                  <q-file outlined accept="image/*" v-model="form.numericalRelayPhoto"
+                     label="Upload Numerical Relays Photo" clearable>
+                     <template #prepend>
+                        <q-icon name="image" />
+                     </template>
+                  </q-file>
+               </div>
+
+               <div class="col-12 col-sm-6">
+                  <q-input outlined type="textarea" autogrow label="Remarks" v-model="form.numericalRelayRemarks" />
+               </div>
+            </template>
+
+
+
+            <!-- ===================== Naming Convention Feeder ===================== -->
+            <div class="col-12">
+               <div class="text-subtitle2 q-mb-sm"
+                  :class="$q.dark.isActive ? 'dialog-subtitle-dark' : 'dialog-subtitle-light'">
+                  Naming Convention – Feeder
+               </div>
+
+               <q-option-group v-model="form.feederNamingStatus" :options="doneNotDoneOptions" color="secondary" inline
+                  dense :class="$q.dark.isActive ? 'dialog-field-label-dark' : 'dialog-field-label-light'" />
+            </div>
+
+            <template v-if="form.feederNamingStatus === 'Done'">
+               <div class="col-12 col-sm-6">
+                  <q-file outlined accept="image/*" v-model="form.feederNamingPhoto" label="Upload Feeder Naming Photo"
+                     clearable>
+                     <template #prepend>
+                        <q-icon name="image" />
+                     </template>
+                  </q-file>
+               </div>
+
+               <div class="col-12 col-sm-6">
+                  <q-input outlined type="textarea" autogrow label="Remarks" v-model="form.feederNamingRemarks" />
+               </div>
+            </template>
+
+         </div>
+
+
+      </q-tab-panel>
    </q-card>
-   <!-- </q-dialog> -->
+
 </template>
 
 <script setup>
-import { ref, reactive, computed } from 'vue'
-import { useWindowManager } from '../../../../stores/window_manager'
+import { reactive } from 'vue'
+import { useQuasar } from 'quasar'
 
-const props = defineProps(['modelValue', 'name'])
-const emit = defineEmits(['update:modelValue'])
-const store = useWindowManager()
+const $q = useQuasar()
 
-const internalModel = computed({
-   get: () => props.modelValue,
-   set: (val) => emit('update:modelValue', val)
+const props = defineProps(['name'])
+
+const doneNotDoneOptions = [
+   { label: 'Done', value: 'Done' },
+   { label: 'Not Done', value: 'Not Done' }
+]
+
+const form = reactive({
+   /* ===================== SS ENTRY & GPS ===================== */
+   ssEntryPhotoStatus: '',
+   ssEntryPhoto: null,
+   ssEntryPhotoRemarks: '',
+
+   gpsScreenshotStatus: '',
+   gpsScreenshotPhoto: null,
+   gpsScreenshotRemarks: '',
+
+   /* ===================== RTU PANELS ===================== */
+   rtuFrontViewStatus: '',
+   rtuFrontViewPhoto: null,
+   rtuFrontViewRemarks: '',
+
+   rtuSideViewStatus: '',
+   rtuSideViewPhoto: null,
+   rtuSideViewRemarks: '',
+
+   /* ===================== ANTENNA & NETWORK ===================== */
+   highGainAntennaStatus: '',
+   highGainAntennaPhoto: null,
+   highGainAntennaRemarks: '',
+
+   networkSwitchStatus: '',
+   networkSwitchPhoto: null,
+   networkSwitchRemarks: '',
+
+   /* ===================== NAME PLATES ===================== */
+   transformerNamePlateStatus: '',
+   transformerNamePlatePhoto: null,
+   transformerNamePlateRemarks: '',
+
+   cbNamePlateStatus: '',
+   cbNamePlatePhoto: null,
+   cbNamePlateRemarks: '',
+
+   /* ===================== FEEDER MARKINGS ===================== */
+   mftLocationStatus: '',
+   mftLocationPhoto: null,
+   mftLocationRemarks: '',
+
+   fdiLocationStatus: '',
+   fdiLocationPhoto: null,
+   fdiLocationRemarks: '',
+
+   cmrLocationStatus: '',
+   cmrLocationPhoto: null,
+   cmrLocationRemarks: '',
+
+   hdrLocationStatus: '',
+   hdrLocationPhoto: null,
+   hdrLocationRemarks: '',
+
+   /* ===================== PANEL LINE UPS ===================== */
+   panelLineup1Status: '',
+   panelLineup1Photo: null,
+   panelLineup1Remarks: '',
+
+   panelLineup2Status: '',
+   panelLineup2Photo: null,
+   panelLineup2Remarks: '',
+
+   panelLineup3Status: '',
+   panelLineup3Photo: null,
+   panelLineup3Remarks: '',
+
+   panelLineup4Status: '',
+   panelLineup4Photo: null,
+   panelLineup4Remarks: '',
+
+   panelLineup5Status: '',
+   panelLineup5Photo: null,
+   panelLineup5Remarks: '',
+
+   panelLineup6Status: '',
+   panelLineup6Photo: null,
+   panelLineup6Remarks: '',
+
+   /* ===================== TAP TRANSDUCER ===================== */
+   tapTransducerXfmr1Status: '',
+   tapTransducerXfmr1Photo: null,
+   tapTransducerXfmr1Remarks: '',
+
+   tapTransducerXfmr2Status: '',
+   tapTransducerXfmr2Photo: null,
+   tapTransducerXfmr2Remarks: '',
+
+   tapTransducerXfmr3Status: '',
+   tapTransducerXfmr3Photo: null,
+   tapTransducerXfmr3Remarks: '',
+
+   tapTransducerXfmr4Status: '',
+   tapTransducerXfmr4Photo: null,
+   tapTransducerXfmr4Remarks: '',
+
+   /* ===================== FEEDER / TRF PANEL ===================== */
+   feederPanelFrontStatus: '',
+   feederPanelFrontPhoto: null,
+   feederPanelFrontRemarks: '',
+
+   /* ===================== 66KV YARD ===================== */
+   capBank66Status: '',
+   capBank66Photo: null,
+   capBank66Remarks: '',
+
+   batteryCharger66Status: '',
+   batteryCharger66Photo: null,
+   batteryCharger66Remarks: '',
+
+   batteryBank66Status: '',
+   batteryBank66Photo: null,
+   batteryBank66Remarks: '',
+
+   /* ===================== 33KV YARD ===================== */
+   capBank33Status: '',
+   capBank33Photo: null,
+   capBank33Remarks: '',
+
+   batteryCharger33Status: '',
+   batteryCharger33Photo: null,
+   batteryCharger33Remarks: '',
+
+   batteryBank33Status: '',
+   batteryBank33Photo: null,
+   batteryBank33Remarks: '',
+
+   /* ===================== 11KV YARD ===================== */
+   capBank11Status: '',
+   capBank11Photo: null,
+   capBank11Remarks: '',
+
+   batteryCharger11Status: '',
+   batteryCharger11Photo: null,
+   batteryCharger11Remarks: '',
+
+   batteryBank11Status: '',
+   batteryBank11Photo: null,
+   batteryBank11Remarks: '',
+
+   /* ===================== RELAYS & NAMING ===================== */
+   numericalRelayStatus: '',
+   numericalRelayPhoto: null,
+   numericalRelayRemarks: '',
+
+   feederNamingStatus: '',
+   feederNamingPhoto: null,
+   feederNamingRemarks: ''
 })
 
-const tab = ref('notification_details')
-const dialogId = 'work-order-dia'
+</script>
 
-// Minimize Logic
-const onMinimize = () => {
-   store.minimize(dialogId, 'Work Order Dialog', () => {
-      internalModel.value = true
-   })
-   internalModel.value = false
-}
 
-// Draggable Logic
-const dialogPos = ref({ x: 0, y: 0 })
-const dialogStyle = computed(() => {
-   return {
-      transform: `translate(${dialogPos.value.x}px, ${dialogPos.value.y}px)`
-   }
-})
-const onPan = (evt) => {
-   dialogPos.value = {
-      x: dialogPos.value.x + evt.delta.x,
-      y: dialogPos.value.y + evt.delta.y
-   }
-}
-const resetPosition = () => {
-   dialogPos.value = { x: 0, y: 0 }
-}
+<!-- <script setup>
+import { reactive } from 'vue'
+
+const props = defineProps(['name'])
+
+const yesNoOptions = [
+   { label: 'Yes', value: 'yes' },
+   { label: 'No', value: 'no' }
+]
+const availNAOptions = [
+   { label: 'Available', value: 'available' },
+   { label: 'NA', value: 'na' }
+]
+
 
 // Form Data
 const eventTypes = ['replacing meters', 'maintenance', 'emergency']
 const outageTypes = ['Regular Outage', 'Planned Outage']
 
 const form = reactive({
-   name: '', phone: '', email: '', serviceCenter: '', address: '',
-   creationDate: '2025-09-29', overrideMailing: false, workOrderId: '',
-   eventType: 'replacing meters', outageType: 'Regular Outage',
-   schedStart: '2025-09-30T00:00', schedEnd: '2025-09-30T00:05', schedDuration: '00:05',
-   altStart: '2025-10-01T00:00', altEnd: '2025-10-01T00:05', altDuration: '00:05',
-   useAlternate: false, switchingOrder: "", creatorComment: ''
+   civilWorkCompletion: '', mplsAvailable: 'no', highGainRequired: 'no', rtuHighGainDistance: '', highGainCableRoute: 'no',
+   utilitiesAcAvailable: 'yes', dcVolt66: '', dcVolt33: '', dcVolt11: '', substationBatteryBank66kv: 'available'
+   , shuntAvailable66kv: 'available'
 })
-</script>
+</script> -->
+
 
 <style scoped>
 /* --- SCOPED STYLES (Colors, Buttons, Inputs) --- */
