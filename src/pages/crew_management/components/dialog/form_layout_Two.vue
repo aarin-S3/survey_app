@@ -5,8 +5,8 @@
       :style="[{ height: $q.screen.lt.md ? 'calc(100vh - 160px)' : 'calc(100vh - 100px)', width: '100%', display: 'flex', flexDirection: 'column', border: 'none', boxShadow: 'none !important' }]">
 
        
-      <q-tab-panel name="notification_details" class="q-pa-none" style=" width: 65%;  margin: 0px auto; padding-bottom: 2rem !important;">
-         <q-bar class="my-dialog text-white q-pa-none"
+      <q-tab-panel name="notification_details" class="q-pa-none" :style="$q.screen.lt.sm ? 'width: 75%;' : 'width: 65%;'" style="margin: 0px auto; padding-bottom: 2rem !important;">
+         <q-bar class="my-dialog text-white q-pa-none" 
             :style="$q.dark.isActive ? 'background: #2f2f2f' : 'background: #385562'" style="margin: auto;">
 
             <div :class="$q.dark.isActive ? 'dialog-form-header-dark' : 'dialog-form-header-light'">{{ props.name }}</div>

@@ -57,8 +57,8 @@
 
       <div class="row no-wrap overflow-hidden"
          :style="$q.screen.lt.sm ? 'height: calc(100vh - 160px); min-height: height: calc(100vh - 160px)' : '' || $q.screen.lt.md ? '' : 'height: calc(100vh - 100px); min-height: calc(100vh - 100px);'">
-         <div class="col-auto menu-container"
-            style="width: 200px; height: 85vh; border-right: 4px solid gray; padding: 0px; margin-left: 0px; margin-top: 7px; border-radius: 3px; ">
+         <div class="col-auto menu-container" :style="$q.screen.lt.sm ? 'width: 120px;' : 'width: 200px;'"
+            style="height: 85vh; border-right: 4px solid gray; padding: 0px; margin-left: 0px; margin-top: 7px; border-radius: 3px; ">
             <q-list>
                <q-item v-for="item in arrSideMenu" :key="item.currentListPage" clickable v-ripple
                   @click="currentPage = item.currentListPage" :active="currentPage === item.currentListPage"
@@ -91,8 +91,8 @@
             <Table2 :name="arrSideMenu[2].MenuName" v-show="currentPage === `${arrSideMenu[2].currentListPage}`"></Table2>
             <FormLayoutThree :name="arrSideMenu[3].MenuName"
                v-show="currentPage === `${arrSideMenu[3].currentListPage}`"></FormLayoutThree>
-            <FormLayoutFive :name="arrSideMenu[4].MenuName"
-               v-show="currentPage === `${arrSideMenu[4].currentListPage}`"></FormLayoutFive>
+            <CapacitorBank :name="arrSideMenu[4].MenuName"
+               v-show="currentPage === `${arrSideMenu[4].currentListPage}`"/>
             <FormLayoutSix :name="arrSideMenu[5].MenuName" v-show="currentPage === `${arrSideMenu[5].currentListPage}`">
             </FormLayoutSix>
             <FormLayoutSeven :name="arrSideMenu[6].MenuName"
@@ -172,8 +172,8 @@ import FormLayout from './components/dialog/form_layout.vue'
 import FormLayoutOne from './components/dialog/form_layout_One.vue'
 import FormLayoutTwo from './components/dialog/form_layout_Two.vue'
 import FormLayoutThree from './components/dialog/form_layout_Three.vue'
-import FormLayoutFour from './components/dialog/form_layout_Four.vue'
-import FormLayoutFive from './components/dialog/form_layout_Five.vue'
+import CapacitorBank from './components/tabulators/table_CapacitorBank.vue'
+// import FormLayoutFive from './components/dialog/form_layout_Five.vue'
 import FormLayoutSix from './components/dialog/form_layout_Six.vue'
 import FormLayoutSeven from './components/dialog/form_layout_Seven.vue'
 import FormLayoutEight from './components/dialog/form_layout_Eight.vue'
