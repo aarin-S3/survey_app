@@ -95,8 +95,9 @@
                v-show="currentPage === `${arrSideMenu[4].currentListPage}`"/>
             <FormLayoutSix :name="arrSideMenu[5].MenuName" v-show="currentPage === `${arrSideMenu[5].currentListPage}`">
             </FormLayoutSix>
-            <FormLayoutSeven :name="arrSideMenu[6].MenuName"
-               v-show="currentPage === `${arrSideMenu[6].currentListPage}`"></FormLayoutSeven>
+            <Table_CRPRelayDetails v-show="currentPage === `${arrSideMenu[6].currentListPage}`"></Table_CRPRelayDetails>
+            <!-- <FormLayoutSeven :name="arrSideMenu[6].MenuName"
+               v-show="currentPage === `${arrSideMenu[6].currentListPage}`"></FormLayoutSeven> -->
             <FormLayoutEight :name="arrSideMenu[7].MenuName"
                v-show="currentPage === `${arrSideMenu[7].currentListPage}`"></FormLayoutEight>
             <FormLayoutNine :name="arrSideMenu[8].MenuName"
@@ -186,6 +187,7 @@ import FormLayoutFourteen from './components/dialog/form_layout_Fourteen.vue'
 import FormLayoutFifteen from './components/dialog/form_layout_Fifteen.vue'
 import Table2 from './components/tabulators/table2.vue'
 import { useSurveyStore } from '../../stores/survey_store'
+import Table_CRPRelayDetails from './components/tabulators/table_CRPRelayDetails.vue'
 
 defineOptions({
    components: {

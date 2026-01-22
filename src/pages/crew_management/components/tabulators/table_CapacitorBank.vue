@@ -40,7 +40,7 @@
                   :class="$q.dark.isActive ? 'dialog-subtitle-dark' : 'dialog-subtitle-light'">
                   Capacitor Bank No
                </div>
-                <q-input dense outlined v-model="form.capacitorBankNo" placeholder="Enter distance..."
+                <q-input dense outlined v-model="form.capacitorBankNo" placeholder="Enter Bank No"
                   :class="$q.dark.isActive ? 'dialog-field-label-dark' : 'dialog-field-label-light'" />
             </div>
 
@@ -53,7 +53,7 @@
                   </div>
                   <div class="" :class="[$q.screen.lt.md ? 'col-9' : 'col-8']">
                      <q-select dense outlined v-model="form.voltageLevel" :options="voltageLevelOptions"
-                        behavior="menu"
+                        behavior="menu" emit-value map-options
                         :class="$q.dark.isActive ? 'dialog-field-label-dark' : 'dialog-field-label-light'" />
                   </div>
                </div>
@@ -69,7 +69,7 @@
                   </div>
                   <div class="" :class="[$q.screen.lt.md ? 'col-9' : 'col-8']">
                      <q-select dense outlined v-model="form.noOfBank" :options="noOfBankOptions"
-                        behavior="menu"
+                        behavior="menu" emit-value map-options
                         :class="$q.dark.isActive ? 'dialog-field-label-dark' : 'dialog-field-label-light'" />
                   </div>
                </div>
@@ -85,7 +85,7 @@
                   </div>
                   <div class="" :class="[$q.screen.lt.md ? 'col-9' : 'col-8']">
                      <q-select dense outlined v-model="form.regulatoryControl" :options="regulatoryControlOptions"
-                        behavior="menu"
+                        behavior="menu" emit-value map-options
                         :class="$q.dark.isActive ? 'dialog-field-label-dark' : 'dialog-field-label-light'" />
                   </div>
                </div>
@@ -111,7 +111,7 @@
                   </div>
                   <div class="" :class="[$q.screen.lt.md ? 'col-9' : 'col-8']">
                      <q-select dense outlined v-model="form.capacitorBank" :options="capacitorBankOptions"
-                        behavior="menu"
+                        behavior="menu" emit-value map-options
                         :class="$q.dark.isActive ? 'dialog-field-label-dark' : 'dialog-field-label-light'" />
                   </div>
                </div>
@@ -245,7 +245,7 @@ const deleteFeeder = () => {
 .feeder-survey-container {
   max-width: 100%;
   background-color: transparent;
-  min-height: 100vh;
+
 }
 
 .header-section {
@@ -304,9 +304,9 @@ const deleteFeeder = () => {
   /* Light cyan from image */
   color: #006064;
   border-radius: 20px;
-  padding: 8px 30px;
+  padding: 8px 20px;
   font-weight: bold;
-  font-size: 14px;
+  font-size: 12px;
 }
 
 /* Dialog Refinements */

@@ -4,12 +4,15 @@
    <q-card :class="[$q.dark.isActive ? 'background: #2f2f2f' : 'background: #385562']"
       :style="[{ height: $q.screen.lt.md ? 'calc(100vh - 160px)' : 'calc(100vh - 100px)', width: '100%', display: 'flex', flexDirection: 'column', border: 'none', boxShadow: 'none !important' }]">
 
-       
-      <q-tab-panel name="notification_details" class="q-pa-none" :style="$q.screen.lt.sm ? 'width: 75%;' : 'width: 65%;'" style="margin: 0px auto; padding-bottom: 2rem !important;">
-         <q-bar class="my-dialog text-white q-pa-none" 
+
+      <q-tab-panel name="notification_details" class="q-pa-none"
+         :style="$q.screen.lt.sm ? 'width: 75%;' : 'width: 65%;'"
+         style="margin: 0px auto; padding-bottom: 2rem !important;">
+         <q-bar class="my-dialog text-white q-pa-none"
             :style="$q.dark.isActive ? 'background: #2f2f2f' : 'background: #385562'" style="margin: auto;">
 
-            <div :class="$q.dark.isActive ? 'dialog-form-header-dark' : 'dialog-form-header-light'">{{ props.name }}</div>
+            <div :class="$q.dark.isActive ? 'dialog-form-header-dark' : 'dialog-form-header-light'">{{ props.name }}
+            </div>
 
             <q-space />
          </q-bar>
@@ -88,7 +91,8 @@
                   230VAC for Utilities available
                </div>
                <q-option-group v-model="form.utilitiesAcAvailable" :options="yesNoOptions" color="secondary" inline
-                  dense :class="$q.dark.isActive ? 'dialog-field-label-dark' : 'dialog-field-label-light'" />
+                  dense 
+                  :class="$q.dark.isActive ? 'dialog-field-label-dark' : 'dialog-field-label-light'" />
             </div>
 
             <div class="col-12 col-sm-6">
@@ -124,7 +128,8 @@
                   Details of Substation Battery Bank 66kv
                </div>
                <q-option-group v-model="form.substationBatteryBank66kv" :options="availNAOptions" color="secondary"
-                  inline dense :class="$q.dark.isActive ? 'dialog-field-label-dark' : 'dialog-field-label-light'" />
+                   inline dense
+                  :class="$q.dark.isActive ? 'dialog-field-label-dark' : 'dialog-field-label-light'" />
             </div>
 
             <div class="col-12 col-sm-6" v-if="form.substationBatteryBank66kv === 'available'">
@@ -133,7 +138,8 @@
                   Shunt available or not in 66kv Battery charger
                </div>
                <q-option-group v-model="form.shuntAvailable66kv" :options="availNAOptions" color="secondary" inline
-                  dense :class="$q.dark.isActive ? 'dialog-field-label-dark' : 'dialog-field-label-light'" />
+                  dense
+                  :class="$q.dark.isActive ? 'dialog-field-label-dark' : 'dialog-field-label-light'" />
             </div>
 
             <div class="col-12 col-sm-6"
@@ -155,7 +161,8 @@
                   Space available or Not for Transducer installation
                </div>
                <q-option-group v-model="form.spaceAvailableTransducer" :options="availNAOptions" color="secondary"
-                  inline dense :class="$q.dark.isActive ? 'dialog-field-label-dark' : 'dialog-field-label-light'" />
+                  inline dense
+                  :class="$q.dark.isActive ? 'dialog-field-label-dark' : 'dialog-field-label-light'" />
             </div>
 
             <div class="col-12 col-sm-6"
@@ -189,7 +196,8 @@
                   Details of Substation Battery Bank 33kv
                </div>
                <q-option-group v-model="form.substationBatteryBank33kv" :options="availNAOptions" color="secondary"
-                  inline dense :class="$q.dark.isActive ? 'dialog-field-label-dark' : 'dialog-field-label-light'" />
+                   inline dense
+                  :class="$q.dark.isActive ? 'dialog-field-label-dark' : 'dialog-field-label-light'" />
             </div>
 
             <div class="col-12 col-sm-6" v-if="form.substationBatteryBank33kv === 'available'">
@@ -198,7 +206,8 @@
                   Shunt available or not in 33kv Battery charger
                </div>
                <q-option-group v-model="form.shuntAvailable33kv" :options="availNAOptions" color="secondary" inline
-                  dense :class="$q.dark.isActive ? 'dialog-field-label-dark' : 'dialog-field-label-light'" />
+                  dense
+                  :class="$q.dark.isActive ? 'dialog-field-label-dark' : 'dialog-field-label-light'" />
             </div>
 
             <div class="col-12 col-sm-6"
@@ -220,7 +229,8 @@
                   Space available or Not for Transducer installation
                </div>
                <q-option-group v-model="form.spaceAvailableTransducer33kv" :options="availNAOptions" color="secondary"
-                  inline dense :class="$q.dark.isActive ? 'dialog-field-label-dark' : 'dialog-field-label-light'" />
+                   inline dense
+                  :class="$q.dark.isActive ? 'dialog-field-label-dark' : 'dialog-field-label-light'" />
             </div>
 
             <div class="col-12 col-sm-6"
@@ -254,7 +264,8 @@
                   Details of Substation Battery Bank 11kv
                </div>
                <q-option-group v-model="form.substationBatteryBank11kv" :options="availNAOptions" color="secondary"
-                  inline dense :class="$q.dark.isActive ? 'dialog-field-label-dark' : 'dialog-field-label-light'" />
+                  inline dense
+                  :class="$q.dark.isActive ? 'dialog-field-label-dark' : 'dialog-field-label-light'" />
             </div>
 
             <div class="col-12 col-sm-6" v-if="form.substationBatteryBank11kv === 'available'">
@@ -263,7 +274,8 @@
                   Shunt available or not in 11kv Battery charger
                </div>
                <q-option-group v-model="form.shuntAvailable11kv" :options="availNAOptions" color="secondary" inline
-                  dense :class="$q.dark.isActive ? 'dialog-field-label-dark' : 'dialog-field-label-light'" />
+                   dense
+                  :class="$q.dark.isActive ? 'dialog-field-label-dark' : 'dialog-field-label-light'" />
             </div>
 
             <div class="col-12 col-sm-6"
@@ -285,7 +297,8 @@
                   Space available or Not for Transducer installation
                </div>
                <q-option-group v-model="form.spaceAvailableTransducer11kv" :options="availNAOptions" color="secondary"
-                  inline dense :class="$q.dark.isActive ? 'dialog-field-label-dark' : 'dialog-field-label-light'" />
+                   inline dense
+                  :class="$q.dark.isActive ? 'dialog-field-label-dark' : 'dialog-field-label-light'" />
             </div>
 
             <div class="col-12 col-sm-6"
@@ -312,7 +325,7 @@
                   :class="$q.dark.isActive ? 'dialog-field-label-dark' : 'dialog-field-label-light'" />
             </div>
 
-            <div class="col-12 col-sm-6" v-if="form.substationBatteryBank11kv === 'available'">
+            <!-- <div class="col-12 col-sm-6" v-if="form.substationBatteryBank11kv === 'available'">
                <div class="text-subtitle2 q-mb-sm"
                   :class="$q.dark.isActive ? 'dialog-subtitle-dark' : 'dialog-subtitle-light'">
                   Proposed RTU to 11kv Battery charger distance
@@ -320,7 +333,7 @@
                <q-input dense outlined v-model="form.proposedRTUto11kvBatteryChargerDistance"
                   placeholder="Enter Distance"
                   :class="$q.dark.isActive ? 'dialog-field-label-dark' : 'dialog-field-label-light'" />
-            </div>
+            </div> -->
 
             <div class="col-12 col-sm-6" v-if="form.substationBatteryBank11kv === 'available'">
                <div class="text-subtitle2 q-mb-sm"
@@ -466,17 +479,12 @@
             </div>
 
             <div class="col-12 col-sm-6">
-               <div class="items-center q-mb-xs">
-                  <div class="text-subtitle2 q-mb-sm"
-                     :class="$q.dark.isActive ? 'dialog-subtitle-dark' : 'dialog-subtitle-light'">
-                     Qty. of switch available at Site
-                  </div>
-                  <div class="" :class="[$q.screen.lt.md ? 'col-9' : 'col-8']">
-                     <q-select dense outlined v-model="form.qtyOfSwitchAvailableAtSite"
-                        :options="availableSwitchOptions" behavior="menu"
-                        :class="$q.dark.isActive ? 'dialog-field-label-dark' : 'dialog-field-label-light'" />
-                  </div>
+               <div class="text-subtitle2 q-mb-sm"
+                  :class="$q.dark.isActive ? 'dialog-subtitle-dark' : 'dialog-subtitle-light'">
+                  Qty. of switch available at Site
                </div>
+               <q-select dense outlined v-model="form.qtyOfSwitchAvailableAtSite" :options="availableSwitchOptions"
+                  behavior="menu" :class="$q.dark.isActive ? 'dialog-field-label-dark' : 'dialog-field-label-light'" />
             </div>
 
             <template v-if="form.qtyOfSwitchAvailableAtSite > 0">
@@ -516,7 +524,8 @@
                   Relay to Ethernet Switch cable laid
                </div>
                <q-option-group v-model="form.relayToSwitchCableLaid" :options="yesNoOptions" color="secondary" inline
-                  dense :class="$q.dark.isActive ? 'dialog-field-label-dark' : 'dialog-field-label-light'" />
+                   dense
+                  :class="$q.dark.isActive ? 'dialog-field-label-dark' : 'dialog-field-label-light'" />
             </div>
 
             <div class="col-12 col-sm-6">
@@ -525,7 +534,8 @@
                   Ethernet Switch is working
                </div>
                <q-option-group v-model="form.ethernetSwitchIsWorking" :options="yesNoOptions" color="secondary" inline
-                  dense :class="$q.dark.isActive ? 'dialog-field-label-dark' : 'dialog-field-label-light'" />
+                   dense
+                  :class="$q.dark.isActive ? 'dialog-field-label-dark' : 'dialog-field-label-light'" />
             </div>
 
             <div class="col-12 col-sm-6" v-if="form.ethernetSwitchIsWorking === 'yes'">
@@ -558,7 +568,8 @@
                   Substation Single Line Diagram
                </div>
                <q-option-group v-model="form.substationSingleLineDiagram" :options="yesNoOptions" color="secondary"
-                  inline dense :class="$q.dark.isActive ? 'dialog-field-label-dark' : 'dialog-field-label-light'" />
+                   inline dense
+                  :class="$q.dark.isActive ? 'dialog-field-label-dark' : 'dialog-field-label-light'" />
             </div>
 
             <div class="col-12 col-sm-6" v-if="form.substationSingleLineDiagram === 'yes'">
@@ -580,6 +591,7 @@
                   Control Room Layout
                </div>
                <q-option-group v-model="form.controlRoomLayout" :options="yesNoOptions" color="secondary" inline dense
+                  
                   :class="$q.dark.isActive ? 'dialog-field-label-dark' : 'dialog-field-label-light'" />
             </div>
 
@@ -602,6 +614,7 @@
                   Space Available /Not for LDMS (only for 66/33Kv)
                </div>
                <q-option-group v-model="form.spaceAvailable" :options="yesNoOptions" color="secondary" inline dense
+                 
                   :class="$q.dark.isActive ? 'dialog-field-label-dark' : 'dialog-field-label-light'" />
             </div>
 
@@ -629,6 +642,7 @@
                   Furniture available or not for LDMS (Table & chair)
                </div>
                <q-option-group v-model="form.furnitureAvailable" :options="yesNoOptions" color="secondary" inline dense
+                  
                   :class="$q.dark.isActive ? 'dialog-field-label-dark' : 'dialog-field-label-light'" />
             </div>
 
@@ -706,7 +720,7 @@ const form = reactive({
    biggestVehicle: 'Pickup',
    makeOfSwitch: '',
    modelOfSwitch: '',
-   qtyOfSwitchAvailableAtSite: 0,
+   qtyOfSwitchAvailableAtSite: '0',
    switchPhotos: [],
    sw1Ports: '',
    sw2Ports: '',
