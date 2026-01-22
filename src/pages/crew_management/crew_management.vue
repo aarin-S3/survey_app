@@ -99,10 +99,10 @@
                v-show="currentPage === `${arrSideMenu[6].currentListPage}`"></FormLayoutSeven>
             <FormLayoutEight :name="arrSideMenu[7].MenuName"
                v-show="currentPage === `${arrSideMenu[7].currentListPage}`"></FormLayoutEight>
-            <FormLayoutNine :name="arrSideMenu[8].MenuName"
-               v-show="currentPage === `${arrSideMenu[8].currentListPage}`"></FormLayoutNine>
-            <FormLayoutTen :name="arrSideMenu[9].MenuName" v-show="currentPage === `${arrSideMenu[9].currentListPage}`">
-            </FormLayoutTen>
+            <Annexure_1 :name="arrSideMenu[8].MenuName"
+               v-show="currentPage === `${arrSideMenu[8].currentListPage}`"></Annexure_1>
+            <Annexure_2 :name="arrSideMenu[9].MenuName" v-show="currentPage === `${arrSideMenu[9].currentListPage}`">
+            </Annexure_2>
             <FormLayoutEleven :name="arrSideMenu[10].MenuName"
                v-show="currentPage === `${arrSideMenu[10].currentListPage}`"></FormLayoutEleven>
             <FormLayoutTwelve :name="arrSideMenu[11].MenuName"
@@ -186,6 +186,8 @@ import FormLayoutFourteen from './components/dialog/form_layout_Fourteen.vue'
 import FormLayoutFifteen from './components/dialog/form_layout_Fifteen.vue'
 import Table2 from './components/tabulators/table2.vue'
 import { useSurveyStore } from '../../stores/survey_store'
+import Annexure_1 from './components/tabulators/Annexure_1.vue'
+import Annexure_2 from './components/tabulators/Annexure_2.vue'
 
 defineOptions({
    components: {
@@ -199,22 +201,22 @@ defineOptions({
 const $q = useQuasar()
 const currentPage = ref('home')
 const surveyStore = useSurveyStore()
-// Dialogs 
+// Dialogs
 const showWorkOrderDialog = ref(false)
 const showCrewDialog = ref(false)
 const showAssignDialog = ref(false)
 const showWorkloadDialog = ref(false)
 
-// Editing flags 
+// Editing flags
 const editingWorkOrder = ref(false)
 const editingCrew = ref(false)
 
-// Selected items 
+// Selected items
 const selectedWorkOrder = ref(null)
 const assignCrewId = ref(null)
 const selectedCrewWorkload = ref(null)
 
-// Tabulator instances 
+// Tabulator instances
 const workOrdersTable = ref(null)
 const crewsTable = ref(null)
 const activityTable = ref(null)
@@ -268,7 +270,7 @@ const arrBreadCrumb = ref([
    { label: 'Crews', currentListPage: 'crews' },
    { label: 'Activity Log', currentListPage: 'activity' },
 ])
-// ========== ALERTIFY CONFIGURATION ========== 
+// ========== ALERTIFY CONFIGURATION ==========
 const alertMessages = [
    { type: 'success', message: 'Work order WO-245 completed successfully!' },
    { type: 'error', message: 'Connection lost to Crew-18. Retrying...' },
@@ -315,12 +317,12 @@ const showRandomAlert = () => {
 const startRandomAlerts = () => {
    if (alertInterval) clearInterval(alertInterval)
 
-   // Show first alert immediately 
+   // Show first alert immediately
    setTimeout(() => {
       showRandomAlert()
    }, 2000)
 
-   // Then show alerts every 8-15 seconds randomly 
+   // Then show alerts every 8-15 seconds randomly
    alertInterval = setInterval(() => {
       showRandomAlert()
    }, Math.floor(Math.random() * 7000) + 8000)
@@ -332,7 +334,7 @@ const stopRandomAlerts = () => {
       alertInterval = null
    }
 }
-// =============================================== 
+// ===============================================
 let dbInterval = null
 const arrCircularValues = ref([
    { value: 50, total: 100, title: 'SCHEDULED', subtitle: 'This Month', percentRanges: [{ value: 70, color: '#f44336' }, { value: 90, color: '#ff9800' }, { value: 100, color: '#4caf50' }], trend: [10, 40, 25, 50, 30, 60, 35, 55, 40, 50, 45, 60, 50, 40, 55, 35, 60, 30, 65, 25, 70, 20, 75, 15, 80, 10] },
@@ -548,7 +550,7 @@ const circularConfigs = [
    { value: 25.36, color: '#D2691E' }
 ]
 
-// Data Generators 
+// Data Generators
 const generateWorkOrders = (count) => {
    const titles = [
       'Power Outage Investigation', 'Transformer Maintenance', 'Line Inspection',
@@ -674,7 +676,7 @@ const generateCrews = (count) => {
    return crews
 }
 
-// Data - Generated 
+// Data - Generated
 const workOrders = ref(generateWorkOrders(50))
 const crews = ref(generateCrews(50))
 
@@ -687,7 +689,7 @@ const activities = ref([
    { id: 6, timestamp: '2025-11-01 09:00', action: 'Work order created', details: 'WO-25 created', user: 'System', type: 'create' }
 ])
 
-// Dashboard Stats 
+// Dashboard Stats
 const dashboardStats = computed(() => {
    return {
       totalWorkOrders: workOrders.value.length,
@@ -697,7 +699,7 @@ const dashboardStats = computed(() => {
    }
 })
 
-// Form data 
+// Form data
 const workOrderForm = ref({
    title: '',
    description: '',
@@ -843,20 +845,20 @@ const skillsFormatter = (cell) => {
 const actionsFormatter = (cell, type) => {
    // Matching the visual style from page 1 using inline styles and icons
    if (type === 'workorder') {
-      return ` 
-        <div style="display: flex; align-items: center; justify-content: left; height: 100%; margin-left:5px; "> 
+      return `
+        <div style="display: flex; align-items: center; justify-content: left; height: 100%; margin-left:5px; ">
           <i class="material-icons q-mr-sm action-icon" data-action="assign" title="Assign Crew" style="color: #388e3c; margin-right:1rem;">assignment_ind</i>
-          <i class="material-icons q-mr-sm action-icon edit-btn" data-action="edit" title="Edit Task" style="color: #1976D2; margin-right:1rem;">edit</i> 
-          <i class="material-icons action-icon delete-btn" data-action="delete" title="Delete Task" style="color: #C10015;">delete</i> 
-        </div> 
+          <i class="material-icons q-mr-sm action-icon edit-btn" data-action="edit" title="Edit Task" style="color: #1976D2; margin-right:1rem;">edit</i>
+          <i class="material-icons action-icon delete-btn" data-action="delete" title="Delete Task" style="color: #C10015;">delete</i>
+        </div>
         `;
    } else {
       // Crew actions
-      return ` 
-        <div style="display: flex; align-items: center; justify-content: left; height: 100%; margin-left:5px; "> 
-          <i class="material-icons q-mr-sm action-icon edit-btn" data-action="edit" title="Edit Crew" style="color: #1976D2; margin-right:1rem;">edit</i> 
-          <i class="material-icons action-icon delete-btn" data-action="delete" title="Delete Crew" style="color: #C10015;">delete</i> 
-        </div> 
+      return `
+        <div style="display: flex; align-items: center; justify-content: left; height: 100%; margin-left:5px; ">
+          <i class="material-icons q-mr-sm action-icon edit-btn" data-action="edit" title="Edit Crew" style="color: #1976D2; margin-right:1rem;">edit</i>
+          <i class="material-icons action-icon delete-btn" data-action="delete" title="Delete Crew" style="color: #C10015;">delete</i>
+        </div>
         `;
    }
 }
@@ -910,7 +912,7 @@ const deleteWorkOrder = (id) => {
          refreshTables()
          // updateMapMarkers() // MOVED TO CHILD
 
-         alertify.error(`âœ— Work order ${wo.title} deleted`) // Added Alertify 
+         alertify.error(`âœ— Work order ${wo.title} deleted`) // Added Alertify
 
          $q.notify({
             message: 'Work order deleted successfully',
@@ -937,7 +939,7 @@ const deleteCrew = (id) => {
          refreshTables()
          // updateMapMarkers() // MOVED TO CHILD
 
-         alertify.warning(`âš  Crew ${crew.id} has been removed from system`) // Added Alertify 
+         alertify.warning(`âš  Crew ${crew.id} has been removed from system`) // Added Alertify
 
          $q.notify({
             message: 'Crew deleted successfully',
@@ -1100,9 +1102,9 @@ const initTables = () => {
    }
 }
 
-// ========== LIFECYCLE HOOKS ========== 
+// ========== LIFECYCLE HOOKS ==========
 onMounted(async () => {
-   // Configure Alertify 
+   // Configure Alertify
    //    alertify.set('notifier', 'position', 'bottom-right')
    //   alertify.set('notifier', 'delay', 5)
 
@@ -1122,7 +1124,7 @@ onMounted(async () => {
    generateRandomBarData()
    generateRandomDonutData2()
 
-   // Start random alerts after 3 seconds 
+   // Start random alerts after 3 seconds
    // setTimeout(() => {
    //    startRandomAlerts()
    //    alertify.message('ℹ System initialized successfully')
@@ -1130,7 +1132,7 @@ onMounted(async () => {
 })
 
 onBeforeUnmount(() => {
-   stopRandomAlerts() // Stop alerts when component unmounts 
+   stopRandomAlerts() // Stop alerts when component unmounts
    chartInstances.value.forEach(chart => chart && chart.destroy())
    if (instAuditLogtable.value) {
       instAuditLogtable.value.destroy()
@@ -1151,7 +1153,7 @@ watch(currentPage, (newPage) => {
 
 watch([workOrders, crews], () => {
    updateDashboard()
-}, { deep: true }) 
+}, { deep: true })
 </script>
 
 <style>
