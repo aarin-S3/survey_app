@@ -25,7 +25,7 @@
             </q-breadcrumbs>
 
             <q-space />
-            <q-btn-dropdown flat dense borderless icon="folder" no-caps label="Saved" style="margin-right: 6px;"
+            <!-- <q-btn-dropdown flat dense borderless icon="folder" no-caps label="Saved" style="margin-right: 6px;"
                :class="$q.screen.lt.sm ? 'my-drop-btn-share-small' : 'my-drop-btn-share'">
                <q-list style="border-color: #005517 !important; border-color: transparent !important;"
                   :style="$q.screen.lt.sm ? 'height: 63px !important;' : ''">
@@ -41,7 +41,7 @@
                      </q-item-section>
                   </q-item>
                </q-list>
-            </q-btn-dropdown>
+            </q-btn-dropdown> -->
             <q-btn flat dense bordered label="Submit" text-color="grey-2" class=""
                :class="$q.screen.lt.sm ? 'btn-size-dialog-small' : 'btn-size-dialog'">
                <q-tooltip :offset="[10, 5]"

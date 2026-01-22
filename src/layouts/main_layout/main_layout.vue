@@ -205,66 +205,20 @@
           style="position: fixed; bottom: 90px; right: 0; width: 100%; height: 28px; margin-right: 0px; z-index: 7000; pointer-events: none;"
           :style="$q.screen.lt.sm ? '' : 'display: none;'">
           <div
-            style="pointer-events: auto; display: flex; width: 100%; height: 100%; align-items: center; justify-content: space-between; padding: 0 8px;"
+            style="pointer-events: auto; display: flex; width: 100%; height: 100%; align-items: center; justify-content: center; padding: 0 8px;"
             :style="$q.dark.isActive ? 'background: rgba(32, 58, 67, 0.95); backdrop-filter: blur(5px); border-top: 1px solid #444;' : 'background: rgba(255, 255, 255, 0.95); backdrop-filter: blur(5px); border-top: 1px solid #ccc;'">
 
-            <div v-if="store.minimizedWindows.length > 0"
-              style="flex: 1; display: flex; justify-content: flex-start; margin-left: 8px;">
-
-              <div class="dock-item mobile-restore-chip cursor-pointer relative-position"
-                :class="$q.dark.isActive ? 'dock-item-dark' : 'dock-item-light'">
-                <q-icon name="layers" size="11px" class="q-mr-xs" />
-                <span style="font-size: 10px;">Restore</span>
-
-                <q-badge color="red" floating rounded
-                  style="top: -4px !important; right: -2px !important; font-size: 6px !important; padding: 0px 4px !important; min-height: 10px !important;">
-                  {{ store.minimizedWindows.length }}
-                </q-badge>
-
-                <q-menu fit anchor="top middle" self="bottom middle" :offset="[0, 8]" transition-show="jump-up"
-                  transition-hide="jump-down" class=""
-                  :class="$q.dark.isActive ? 'bg-grey-9 text-white' : 'bg-white text-grey-9'"
-                  style="border: 1px solid rgba(128,128,128,0.2); max-width: 250px; margin-left: 1rem !important;">
-                  <q-list style="min-width: 150px">
-                    <q-item-label header class="text-caption q-pa-sm"
-                      :class="$q.dark.isActive ? 'text-grey-5' : 'text-grey-6'"
-                      style="font-size: 11px; min-height: auto;">
-                      Select to Restore
-                    </q-item-label>
-                    <q-separator :dark="$q.dark.isActive" />
-
-                    <q-item v-for="win in store.minimizedWindows" :key="win.id" clickable v-close-popup
-                      @click="handleRestore(win.id)" class="q-py-xs" dense>
-                      <q-item-section avatar style="min-width: 24px; padding-right: 8px;">
-                        <q-icon name="call_to_action" size="14px" color="primary" />
-                      </q-item-section>
-                      <q-item-section>
-                        <q-item-label class="ellipsis" style="font-size: 12px; font-weight: 500; max-width: 120px;">
-                          {{ win.title }}
-                        </q-item-label>
-                      </q-item-section>
-                      <q-item-section side>
-                        <q-icon name="north_east" size="10px" :color="$q.dark.isActive ? 'grey-5' : 'grey-7'" />
-                      </q-item-section>
-                    </q-item>
-                  </q-list>
-                </q-menu>
-              </div>
-
-            </div>
-            <div v-else style="flex: 1;"></div>
-
             <div style="flex: 0 0 auto;">
-              <p style="font-size: 9px; margin-bottom: 0px; white-space: nowrap; margin-right: 30px;"
+              <p style="font-size: 9px; margin-bottom: 0px; white-space: nowrap;"
                 :style="$q.dark.isActive ? 'color: #b0bec5;' : 'color: #606266'">
                 &copy; Synergy Systems & Solutions 2026
               </p>
             </div>
 
-            <div style="flex: 0 0 auto; display: flex; align-items: center;">
+            <!-- <div style="flex: 0 0 auto; display: flex; align-items: center;">
               <span class="server-pill-small" style="background-color: #2e7d32;">Server 1</span>
               <span class="server-pill-small" style="background-color: #a72020;">Server 2</span>
-            </div>
+            </div> -->
           </div>
         </div>
 

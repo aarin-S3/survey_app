@@ -306,7 +306,7 @@ const deleteFeeder = () => {
 }
 
 .header-section {
-  background: #1778da;
+  background: #46586b;
   /* Indigo dark background from image */
   padding: 20px;
   border-bottom: 1px solid #ffffff40;
