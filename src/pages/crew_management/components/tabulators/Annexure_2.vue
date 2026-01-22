@@ -1,12 +1,12 @@
 <template>
   <div class="annexure-container q-pa-md">
     <!-- Page Title -->
-    <div class="text-h6 q-mb-lg page-title">Annexure - B</div>
+    <div :class="labelClass" class="text-h6 q-mb-lg page-title">Annexure - B</div>
 
     <!-- Section 1: Choose Panel Details -->
     <q-card class="panel-selection-card q-mb-lg">
       <q-card-section>
-        <div class="text-subtitle2 text-weight-bold section-title q-mb-md">Choose Panel details</div>
+        <div :class="labelClass" class="text-subtitle2 text-weight-bold section-title q-mb-md">Choose Panel details</div>
 
         <q-select v-model="selectedPanel" :options="panelOptions" label="Choose" outlined dense emit-value map-options
           @update:model-value="onPanelSelect" class="panel-select-field" />
@@ -120,6 +120,9 @@
 
 <script setup>
 import { ref, reactive } from 'vue'
+import { useQuasar } from 'quasar'
+
+const $q = useQuasar();
 
 const panelOptions = [
   { label: '66kV', value: '66kV' },
@@ -180,12 +183,6 @@ const checkIfOthers = (voltageLevel) => {
   min-height: 100vh;
   padding: 1rem;
 }
-
-/* Light mode */
-.annexure-container {
-  background-color: rgb(255, 255, 255);
-}
-
 /* Dark mode */
 :global(.body--dark) .annexure-container {
   background-color: #000000;

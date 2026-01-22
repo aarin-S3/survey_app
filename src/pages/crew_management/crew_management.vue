@@ -68,7 +68,7 @@
                      <div style="display: flex; margin-top: 10px;">
                         <q-icon :name="item.icon" style="font-size: 21px;" />
                         <p style="font-size: 12px; display: inline; margin-top: 2px; margin-left: 3px;">{{ item.MenuName
-                        }}</p>
+                           }}</p>
                      </div>
                   </q-item-section>
                   <q-tooltip anchor="center right" self="center left" :offset="[10, 0]"
@@ -88,36 +88,34 @@
             </FormLayoutOne>
             <FormLayoutTwo :name="arrSideMenu[1].MenuName" v-show="currentPage === `${arrSideMenu[1].currentListPage}`">
             </FormLayoutTwo>
-            <Table2 :name="arrSideMenu[2].MenuName" v-show="currentPage === `${arrSideMenu[2].currentListPage}`"></Table2>
-            <FormLayoutThree :name="arrSideMenu[3].MenuName"
-               v-show="currentPage === `${arrSideMenu[3].currentListPage}`"></FormLayoutThree>
+            <Table2 :name="arrSideMenu[2].MenuName" v-show="currentPage === `${arrSideMenu[2].currentListPage}`">
+            </Table2>
+            <Table_CommCableDetails :name="arrSideMenu[3].MenuName"
+               v-show="currentPage === `${arrSideMenu[3].currentListPage}`"></Table_CommCableDetails>
             <CapacitorBank :name="arrSideMenu[4].MenuName"
-               v-show="currentPage === `${arrSideMenu[4].currentListPage}`"/>
-            <FormLayoutSix :name="arrSideMenu[5].MenuName" v-show="currentPage === `${arrSideMenu[5].currentListPage}`">
-            </FormLayoutSix>
-            <Table_CRPRelayDetails v-show="currentPage === `${arrSideMenu[6].currentListPage}`"></Table_CRPRelayDetails>
-            <!-- <FormLayoutSeven :name="arrSideMenu[6].MenuName"
-               v-show="currentPage === `${arrSideMenu[6].currentListPage}`"></FormLayoutSeven> -->
-            <FormLayoutEight :name="arrSideMenu[7].MenuName"
-               v-show="currentPage === `${arrSideMenu[7].currentListPage}`"></FormLayoutEight>
-            <Annexure_1 :name="arrSideMenu[8].MenuName"
-               v-show="currentPage === `${arrSideMenu[8].currentListPage}`"></Annexure_1>
-            <Annexure_2 :name="arrSideMenu[9].MenuName" v-show="currentPage === `${arrSideMenu[9].currentListPage}`">
+               v-show="currentPage === `${arrSideMenu[4].currentListPage}`" />
+            <Table_TransformerDetails :name="arrSideMenu[5].MenuName"
+               v-show="currentPage === `${arrSideMenu[5].currentListPage}`"></Table_TransformerDetails>
+            <Table_CRPRelayDetails :name="arrSideMenu[6].MenuName"
+               v-show="currentPage === `${arrSideMenu[6].currentListPage}`"></Table_CRPRelayDetails>
+            <Annexure_1 :name="arrSideMenu[7].MenuName" v-show="currentPage === `${arrSideMenu[7].currentListPage}`">
+            </Annexure_1>
+            <Annexure_2 :name="arrSideMenu[8].MenuName" v-show="currentPage === `${arrSideMenu[8].currentListPage}`">
             </Annexure_2>
-            <FormLayoutEleven :name="arrSideMenu[10].MenuName"
-               v-show="currentPage === `${arrSideMenu[10].currentListPage}`"></FormLayoutEleven>
-            <FormLayoutTwelve :name="arrSideMenu[11].MenuName"
-               v-show="currentPage === `${arrSideMenu[11].currentListPage}`"></FormLayoutTwelve>
-            <FormLayoutThirteen :name="arrSideMenu[12].MenuName"
-               v-show="currentPage === `${arrSideMenu[12].currentListPage}`"></FormLayoutThirteen>
-            <FormLayoutFourteen :name="arrSideMenu[13].MenuName"
+            <ExistingACDistributionPanel :name="arrSideMenu[9].MenuName"
+               v-show="currentPage === `${arrSideMenu[9].currentListPage}`"></ExistingACDistributionPanel>
+            <FormLayoutTwelve :name="arrSideMenu[10].MenuName"
+               v-show="currentPage === `${arrSideMenu[10].currentListPage}`"></FormLayoutTwelve>
+            <FormLayoutThirteen :name="arrSideMenu[11].MenuName"
+               v-show="currentPage === `${arrSideMenu[11].currentListPage}`"></FormLayoutThirteen>
+            <!-- <FormLayoutFourteen :name="arrSideMenu[13].MenuName"
                v-show="currentPage === `${arrSideMenu[13].currentListPage}`"></FormLayoutFourteen>
             <FormLayoutFifteen :name="arrSideMenu[14].MenuName"
-               v-show="currentPage === `${arrSideMenu[14].currentListPage}`"></FormLayoutFifteen>
-            <FormLayoutSixteen :name="arrSideMenu[15].MenuName"
+               v-show="currentPage === `${arrSideMenu[14].currentListPage}`"></FormLayoutFifteen> -->
+            <!-- <FormLayoutSixteen :name="arrSideMenu[15].MenuName"
                v-show="currentPage === `${arrSideMenu[15].currentListPage}`"></FormLayoutSixteen>
             <FormLayoutSixteen :name="arrSideMenu[15].MenuName"
-               v-show="currentPage === `${arrSideMenu[15].currentListPage}`"></FormLayoutSixteen>
+               v-show="currentPage === `${arrSideMenu[15].currentListPage}`"></FormLayoutSixteen> -->
             <!-- <Dashboard v-show="currentPage === 'dashboard'"
                :currentPage="currentPage"
                :dbnumberData="arrCircularValues"
@@ -169,13 +167,10 @@ import 'alertifyjs/build/css/themes/default.min.css'
 import DonutChart from '../dashboard/components/chartjs/donut_chart/donut_chart.vue'
 import BarChart from '../dashboard/components/chartjs/bar_chart/bar_chart.vue'
 import Dashboard from './components/sub_pages/dashboard.vue'
-import FormLayout from './components/dialog/form_layout.vue'
 import FormLayoutOne from './components/dialog/form_layout_One.vue'
 import FormLayoutTwo from './components/dialog/form_layout_Two.vue'
-import FormLayoutThree from './components/dialog/form_layout_Three.vue'
+import ExistingACDistributionPanel from './components/dialog/ExistingACDistributionPanel.vue'
 import CapacitorBank from './components/tabulators/table_CapacitorBank.vue'
-// import FormLayoutFive from './components/dialog/form_layout_Five.vue'
-import FormLayoutSix from './components/dialog/form_layout_Six.vue'
 import FormLayoutSeven from './components/dialog/form_layout_Seven.vue'
 import FormLayoutEight from './components/dialog/form_layout_Eight.vue'
 import FormLayoutNine from './components/dialog/form_layout_Nine.vue'
@@ -190,6 +185,8 @@ import { useSurveyStore } from '../../stores/survey_store'
 import Table_CRPRelayDetails from './components/tabulators/table_CRPRelayDetails.vue'
 import Annexure_1 from './components/tabulators/Annexure_1.vue'
 import Annexure_2 from './components/tabulators/Annexure_2.vue'
+import Table_CommCableDetails from './components/tabulators/table_CommCableDetails.vue'
+import Table_TransformerDetails from './components/tabulators/table_TransformerDetails.vue'
 
 defineOptions({
    components: {
@@ -241,20 +238,20 @@ const arrSideMenu = ref([
    { currentListPage: 'form4', MenuName: 'Communication Cable Details', icon: 'looks_4' },
    { currentListPage: 'form5', MenuName: 'Capacitor Bank Details', icon: 'looks_5' },
    { currentListPage: 'form6', MenuName: 'Transformer Details', icon: 'looks_6' },
-   { currentListPage: 'form7', MenuName: 'Feeder Details – ADM', icon: 'book' },
+   // { currentListPage: 'form7', MenuName: 'Feeder Details – ADM', icon: 'book' },
    { currentListPage: 'form8', MenuName: 'CRP Relay Details', icon: 'book' },
-   { currentListPage: 'form9', MenuName: 'Annexures 1', icon: 'book' },
-   { currentListPage: 'form10', MenuName: 'Annexures 2', icon: 'book' },
-   { currentListPage: 'form11', MenuName: 'Annexures 3', icon: 'book' },
-   { currentListPage: 'form12', MenuName: 'Annexures 4', icon: 'book' },
-   { currentListPage: 'form13', MenuName: 'Annexures 5', icon: 'book' },
-   { currentListPage: 'form14', MenuName: 'Annexures 6', icon: 'book' },
-   { currentListPage: 'form15', MenuName: 'Annexures 7', icon: 'book' },
-   { currentListPage: 'form16', MenuName: 'Panel Metering Chamber Dimensions', icon: 'book' },
+   { currentListPage: 'form9', MenuName: 'Annexures A', icon: 'book' },
+   { currentListPage: 'form10', MenuName: 'Annexures B', icon: 'book' },
+   // { currentListPage: 'form11', MenuName: 'Annexures C', icon: 'book' },
+   // { currentListPage: 'form12', MenuName: 'Annexures 4', icon: 'book' },
+   // { currentListPage: 'form13', MenuName: 'Annexures 5', icon: 'book' },
+   // { currentListPage: 'form14', MenuName: 'Annexures 6', icon: 'book' },
+   // { currentListPage: 'form15', MenuName: 'Annexures 7', icon: 'book' },
+   // { currentListPage: 'form16', MenuName: 'Panel Metering Chamber Dimensions', icon: 'book' },
    { currentListPage: 'form17', MenuName: 'Existing AC Distribution Panel', icon: 'book' },
-   { currentListPage: 'form18', MenuName: 'ACDB Details', icon: 'book' },
-   { currentListPage: 'form19', MenuName: 'DCDB Details', icon: 'book' },
-   { currentListPage: 'form20', MenuName: 'Mobile Connectivity', icon: 'book' },
+   { currentListPage: 'form18', MenuName: 'ACDB DCDB Details & Mobile Connectivity', icon: 'book' },
+   // { currentListPage: 'form19', MenuName: 'DCDB Details', icon: 'book' },
+   // { currentListPage: 'form20', MenuName: 'Mobile Connectivity', icon: 'book' },
    { currentListPage: 'form21', MenuName: 'List of SS Photos', icon: 'book' },
 ])
 

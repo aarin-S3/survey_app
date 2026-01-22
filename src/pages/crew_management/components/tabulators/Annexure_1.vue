@@ -1,22 +1,22 @@
 <template>
   <div class="annexure-container q-pa-md">
     <!-- Page Title -->
-    <div class="text-h6 q-mb-lg page-title">Annexure -A</div>
+    <div :class="labelClass" class="text-h6 q-mb-lg page-title">Annexure -A</div>
 
     <!-- Handmade CR Layout Section -->
     <q-card class="upload-card q-mb-md">
       <q-card-section>
-        <div class="text-subtitle2 text-weight-bold section-title q-mb-md">Block 1: Handmade Control Room Lay Out</div>
-        <q-file v-model="crLayoutFile" label="Upload Image" accept=".jpg, .jpeg, .png" max-file-size="10485760"
+        <div :class="labelClass" class="text-subtitle2 text-weight-bold section-title q-mb-md">Block 1: Handmade Control Room Lay Out</div>
+        <q-file :class="inputClass" v-model="crLayoutFile" label="Upload Image" accept=".jpg, .jpeg, .png" max-file-size="10485760"
           @rejected="onRejected" @update:model-value="updateCrPreview" class="custom-file-input" outlined dense>
           <template v-slot:append>
             <q-icon name="cloud_upload" color="primary" />
           </template>
         </q-file>
-        <div v-if="crLayoutFile" class="text-caption q-mt-xs file-info">
+        <div v-if="crLayoutFile" :class="labelClass" class="text-caption q-mt-xs file-info">
           Selected: {{ crLayoutFile.name }}
         </div>
-        <div v-if="crLayoutPreview" class="image-preview-container q-mt-md">
+        <div v-if="crLayoutPreview" :class="inputClass" class="image-preview-container q-mt-md">
           <img :src="crLayoutPreview" alt="CR Layout Preview" class="image-preview" />
         </div>
       </q-card-section>
@@ -25,8 +25,8 @@
     <!-- Handmade SLD Section -->
     <q-card class="upload-card q-mb-md">
       <q-card-section>
-        <div class="text-subtitle2 text-weight-bold section-title q-mb-md">Block 2: Handmade SLD</div>
-        <q-file v-model="sldFile" label="Upload Image" accept=".jpg, .jpeg, .png" max-file-size="10485760"
+        <div :class="labelClass" class="text-subtitle2 text-weight-bold section-title q-mb-md">Block 2: Handmade SLD</div>
+        <q-file :class="inputClass" v-model="sldFile" label="Upload Image" accept=".jpg, .jpeg, .png" max-file-size="10485760"
           @rejected="onRejected" @update:model-value="updateSldPreview" class="custom-file-input" outlined dense>
           <template v-slot:append>
             <q-icon name="cloud_upload" color="primary" />
@@ -44,13 +44,13 @@
     <!-- Interconnector Relay Details Section -->
     <q-card class="relay-section q-mt-xl">
       <q-card-section>
-        <div class="text-subtitle1 q-mb-md text-weight-bold section-title">Interconnector Relay Details</div>
+        <div :class="labelClass" class="text-subtitle1 q-mb-md text-weight-bold section-title">Interconnector Relay Details</div>
 
         <!-- Relay List -->
         <div class="q-gutter-y-md">
           <q-card v-for="(relay, index) in relays" :key="index" class="relay-card clickable" @click="editRelay(index)">
             <q-card-section class="flex items-center justify-between">
-              <div class="text-subtitle2 text-weight-medium relay-name">{{ relay.feederName || `Relay - ${index + 1}` }}
+              <div :class="labelClass" class="text-subtitle2 text-weight-medium relay-name">{{ relay.feederName || `Relay - ${index + 1}` }}
               </div>
               <q-icon name="delete" size="md" class="delete-icon" @click.stop="deleteRelay(index)" />
             </q-card-section>
@@ -58,7 +58,7 @@
         </div>
 
         <!-- Add Button -->
-        <div class="flex justify-end q-mt-md">
+        <div :class="labelClass" class="flex justify-end q-mt-md">
           <q-btn label="Add Relay" color="blue" class="q-px-lg" unelevated flat="" @click="addRelay" />
         </div>
       </q-card-section>
@@ -68,23 +68,23 @@
     <q-dialog v-model="showRelayDialog" persistent>
       <q-card style="min-width: 350px; width: 90%; max-width: 500px;" class="bg-white text-black">
         <q-card-section>
-          <div class="text-h6">Interconnector Relay Details</div>
+          <div :class="labelClass" class="text-h6">Interconnector Relay Details</div>
         </q-card-section>
 
         <q-card-section class="q-pt-none q-gutter-y-md">
-          <q-input v-model="currentRelay.feederName" label="Interconnector Feeder Name" outlined dense bg-color="white"
+          <q-input :class="inputClass" v-model="currentRelay.feederName" label="Interconnector Feeder Name" outlined dense bg-color="white"
             label-color="grey-8" color="black" />
 
-          <q-select v-model="currentRelay.voltageLevel" :options="['66 kV', '33 kV', '11 kV']" label="Voltage Level"
+          <q-select :class="inputClass" v-model="currentRelay.voltageLevel" :options="['66 kV', '33 kV', '11 kV']" label="Voltage Level"
             outlined dense bg-color="white" label-color="grey-8" color="black" behavior="menu" />
 
-          <q-input v-model="currentRelay.relayMake" label="Relay Make" outlined dense bg-color="white"
+          <q-input :class="inputClass" v-model="currentRelay.relayMake" label="Relay Make" outlined dense bg-color="white"
             label-color="grey-8" color="black" />
 
-          <q-input v-model="currentRelay.relayModel" label="Relay Model" outlined dense bg-color="white"
+          <q-input :class="inputClass" v-model="currentRelay.relayModel" label="Relay Model" outlined dense bg-color="white"
             label-color="grey-8" color="black" />
 
-          <q-input v-model="currentRelay.remarks" label="Remarks" type="textarea" outlined dense bg-color="white"
+          <q-input :class="inputClass" v-model="currentRelay.remarks" label="Remarks" type="textarea" outlined dense bg-color="white"
             label-color="grey-8" color="black" />
         </q-card-section>
 
@@ -98,14 +98,14 @@
     <!-- Numerical Relay DI/DO Points Details Section -->
     <q-card class="relay-section q-mt-xl">
       <q-card-section>
-        <div class="text-subtitle1 q-mb-md text-weight-bold section-title">Numerical Relay DI/DO Points Details</div>
+        <div :class="labelClass" class="text-subtitle1 q-mb-md text-weight-bold section-title">Numerical Relay DI/DO Points Details</div>
 
         <!-- Relay List -->
         <div class="q-gutter-y-md">
           <q-card v-for="(diDoRelay, index) in diDoRelays" :key="index" class="relay-card clickable"
             @click="editDiDoRelay(index)">
             <q-card-section class="flex items-center justify-between">
-              <div class="text-subtitle2 text-weight-medium relay-name">{{ diDoRelay.feederName || `Relay - ${index +
+              <div :class="labelClass" class="text-subtitle2 text-weight-medium relay-name">{{ diDoRelay.feederName || `Relay - ${index +
                 1}` }}
               </div>
               <q-icon name="delete" size="md" class="delete-icon" @click.stop="deleteDiDoRelay(index)" />
@@ -124,26 +124,26 @@
     <q-dialog v-model="showDiDoRelayDialog" persistent>
       <q-card style="min-width: 350px; width: 90%; max-width: 500px;" class="bg-white text-black">
         <q-card-section>
-          <div class="text-h6">Numerical Relay DI/DO Points Details</div>
+          <div :class="labelClass" class="text-h6">Numerical Relay DI/DO Points Details</div>
         </q-card-section>
 
         <q-card-section class="q-pt-none q-gutter-y-md">
-          <q-input v-model="currentDiDoRelay.feederName" label="Feeder Name" outlined dense bg-color="white"
+          <q-input :class="inputClass" v-model="currentDiDoRelay.feederName" label="Feeder Name" outlined dense bg-color="white"
             label-color="grey-8" color="black" />
 
-          <q-input v-model="currentDiDoRelay.relayMake" label="Relay Make" outlined dense bg-color="white"
+          <q-input :class="inputClass" v-model="currentDiDoRelay.relayMake" label="Relay Make" outlined dense bg-color="white"
             label-color="grey-8" color="black" />
 
-          <q-input v-model="currentDiDoRelay.relayModel" label="Relay Model" outlined dense bg-color="white"
+          <q-input :class="inputClass" v-model="currentDiDoRelay.relayModel" label="Relay Model" outlined dense bg-color="white"
             label-color="grey-8" color="black" />
 
-          <q-select v-model="currentDiDoRelay.noOfDiPoints" :options="diPointsOptions" label="No. of DI points in relay"
+          <q-select :class="inputClass" v-model="currentDiDoRelay.noOfDiPoints" :options="diPointsOptions" label="No. of DI points in relay"
             outlined dense bg-color="white" label-color="grey-8" color="black" behavior="menu" />
 
-          <q-select v-model="currentDiDoRelay.noOfDoPoints" :options="doPointsOptions" label="No. of DO points in relay"
+          <q-select :class="inputClass" v-model="currentDiDoRelay.noOfDoPoints" :options="doPointsOptions" label="No. of DO points in relay"
             outlined dense bg-color="white" label-color="grey-8" color="black" behavior="menu" />
 
-          <q-input v-model="currentDiDoRelay.remarks" label="Remarks" type="textarea" outlined dense bg-color="white"
+          <q-input :class="inputClass" v-model="currentDiDoRelay.remarks" label="Remarks" type="textarea" outlined dense bg-color="white"
             label-color="grey-8" color="black" />
         </q-card-section>
 
@@ -158,10 +158,10 @@
 </template>
 
 <script setup>
-import { ref, reactive } from 'vue'
+import { ref, reactive, computed } from 'vue'
 import { useQuasar } from 'quasar'
 
-const $q = useQuasar()
+const $q = useQuasar();
 
 const crLayoutFile = ref(null)
 const sldFile = ref(null)
@@ -303,6 +303,18 @@ const deleteDiDoRelay = (index) => {
   diDoRelays.value.splice(index, 1)
 }
 
+const labelClass = computed(() =>
+   $q.dark.isActive ? 'dialog-field-label-dark' : 'dialog-field-label-light'
+)
+
+const inputClass = computed(() =>
+   $q.dark.isActive ? 'dialog-field-label-dark' : 'dialog-field-label-light'
+)
+
+const subtitleClass = computed(() =>
+   $q.dark.isActive ? 'dialog-subtitle-dark' : 'dialog-subtitle-light'
+)
+
 </script>
 
 <style scoped>
@@ -311,27 +323,35 @@ const deleteDiDoRelay = (index) => {
   min-height: 100vh;
   padding: 1rem;
 }
+.dialog-subtitle-light {
+   color: #385562;
+}
+
+.dialog-subtitle-dark {
+   color: #81d4fa;
+}
+
+.dialog-field-label-light {
+   color: #333;
+}
+
+.dialog-field-label-dark {
+   color: #ccc;
+}
 
 /* Light mode */
-.annexure-container {
-  background-color: rgb(255, 255, 255);
-}
+/* .annexure-container {
+  background-color: #ddebfa;
 
-/* Dark mode */
-:global(.body--dark) .annexure-container {
-  background-color: #000000;
-}
+} */
 
 .page-title {
   font-weight: 600;
 }
 
-:global(.body--dark) .page-title {
-  color: #ffffff;
-}
 
 .page-title {
-  color: #000000;
+  color: #706f6f;
 }
 
 .section-title {

@@ -2,35 +2,8 @@
   <div class="feeder-survey-container q-pa-md">
     <!-- Header Section:-->
     <div class="header-section q-mb-md">
-      <div class="text-h6 text-white q-mb-sm">Feeder List</div>
-      <div class="row q-col-gutter-md q-col-gutter-y-md">
-        <div class="col-12 col-sm-6 col-md-3">
-          <div class="meta-field">
-            <label class="survey-label">SUBSTATION NAME</label>
-            <input v-model="headerData.substationName" type="text" class="survey-input" />
-          </div>
-        </div>
-        <div class="col-12 col-sm-6 col-md-3">
-          <div class="meta-field">
-            <label class="survey-label">IN-CHARGE NAME</label>
-            <input v-model="headerData.inChargeName" type="text" class="survey-input" />
-          </div>
-        </div>
-        <div class="col-12 col-sm-6 col-md-3">
-          <div class="meta-field">
-            <label class="survey-label">DATE</label>
-            <input v-model="headerData.date" type="date" class="survey-input" />
-          </div>
-        </div>
-        <div class="col-12 col-sm-6 col-md-3">
-          <div class="meta-field">
-            <label class="survey-label">ENGINEER</label>
-            <input v-model="headerData.engineerName" type="text" class="survey-input" />
-          </div>
-        </div>
-      </div>
+      <div class="text-h6 text-white q-mb-sm">{{ props.name }}</div>
     </div>
-
     <!-- Feeder List Content -->
     <div class="content-section q-mt-lg">
       <!-- Feeder Cards (Bars) -->
@@ -44,7 +17,7 @@
 
       <!-- Add Feeder Button: Cyan Rounded -->
       <div class="flex justify-center q-mt-xl">
-        <q-btn label="Add Feeder" unelevated class="survey-add-btn" @click="openAddDialog" />
+        <q-btn label="Add Comm Cable Row" unelevated class="survey-add-btn" @click="openAddDialog" />
       </div>
     </div>
 
@@ -53,148 +26,201 @@
       transition-hide="slide-down" persistent>
       <q-card class="survey-dialog-card" :style="$q.screen.gt.sm ? 'width: 70vw; max-width: 900px;' : ''">
         <q-toolbar class="bg-indigo-10 text-white">
-          <q-toolbar-title class="text-subtitle1">{{ editingIndex === -1 ? 'Add New' : 'Edit' }} Feeder
+          <q-toolbar-title class="text-subtitle1">{{ editingIndex === -1 ? 'Add New' : 'Edit' }} Transformer
             Details</q-toolbar-title>
           <q-btn flat round dense icon="close" v-close-popup />
         </q-toolbar>
 
         <q-card-section class="scroll" style="max-height: 70vh">
           <div class="row q-col-gutter-md">
-            <!-- Bay Name -->
+
+            <!-- Transformer Photo -->
             <div class="col-12 col-md-6">
               <div class="meta-field dark">
-                <label class="field-label-dark">Bay Name</label>
-                <input v-model="form.bayName" type="text" class="field-input-dark" placeholder="Name field" />
+                <q-file
+                  outlined
+                  accept="image/*"
+                  v-model="form.transformerPhoto"
+                  label="Upload Transformer No. Photo"
+                  :class="inputClass"
+                  clearable
+                >
+                  <template #prepend>
+                    <q-icon name="image" />
+                  </template>
+                </q-file>
               </div>
             </div>
 
-            <!-- Nominal Voltage -->
+            <!-- Voltage Level -->
             <div class="col-12 col-md-6">
               <div class="meta-field dark">
-                <label class="field-label-dark">Nominal Voltage</label>
-                <select v-model="form.nominalVoltage" class="field-input-dark">
-                  <option value="" disabled>Select Voltage</option>
-                  <option value="66kV">66kV</option>
-                  <option value="33kV">33kV</option>
-                  <option value="11kV">11kV</option>
-                </select>
+                <q-select
+                  stack-label
+                  label="Transformer Voltage Level"
+                  outlined
+                  emit-value
+                  map-options
+                  v-model="form.transformerVoltageLevel"
+                  :options="voltageLevels"
+                  :class="inputClass"
+                />
               </div>
             </div>
 
-            <!-- Description -->
-            <div class="col-12">
+            <!-- Rated Capacity -->
+            <div class="col-12 col-md-6">
               <div class="meta-field dark">
-                <label class="field-label-dark">Feeder / Transformer Description</label>
-                <textarea v-model="form.description" class="field-input-dark" rows="3"></textarea>
+                <q-input
+                  stack-label
+                  outlined
+                  class="field-input-dark"
+                  label="Rated (20 MVA, 50 MVA, kVA)"
+                  v-model="form.transformerRatedCapacity"
+                />
               </div>
             </div>
 
-            <!-- Space Availability -->
+            <!-- Resistance -->
             <div class="col-12 col-md-6">
               <div class="meta-field dark">
-                <label class="field-label-dark">Availability of SPACE in C&R Panel</label>
-                <input v-model="form.spaceAvail" type="text" class="field-input-dark" />
+                <q-input
+                  stack-label
+                  outlined
+                  class="field-input-dark"
+                  label="R (Resistance / % Impedance)"
+                  v-model="form.transformerResistance"
+                />
               </div>
             </div>
 
-            <!-- Feeder Category -->
+            <!-- Reactance -->
             <div class="col-12 col-md-6">
               <div class="meta-field dark">
-                <label class="field-label-dark">Feeder Category</label>
-                <input v-model="form.feederCategory" type="text" class="field-input-dark" />
+                <q-input
+                  stack-label
+                  outlined
+                  class="field-input-dark"
+                  label="X (Reactance)"
+                  v-model="form.transformerReactance"
+                />
               </div>
             </div>
 
-            <!-- Requirement of CMR -->
+            <!-- Grounded Neutral -->
             <div class="col-12 col-md-6">
               <div class="meta-field dark">
-                <label class="field-label-dark">Requirement of CMR</label>
-                <select v-model="form.reqCMR" class="field-input-dark">
-                  <option value="Yes">Yes</option>
-                  <option value="No">No</option>
-                </select>
+                <q-select
+                  label="Grounded (Neutral Status)"
+                  stack-label
+                  outlined
+                  emit-value
+                  map-options
+                  v-model="form.groundedNeutralStatus"
+                  :options="yesNoOptions"
+                  :class="inputClass"
+                />
               </div>
             </div>
 
-            <!-- Requirement of HDR -->
+            <!-- Vector Group -->
             <div class="col-12 col-md-6">
               <div class="meta-field dark">
-                <label class="field-label-dark">Requirement Of HDR</label>
-                <select v-model="form.reqHDR" class="field-input-dark">
-                  <option value="Yes">Yes</option>
-                  <option value="No">No</option>
-                </select>
+                <q-select
+                  label="Vector Group (Star / Delta)"
+                  stack-label
+                  outlined
+                  emit-value
+                  map-options
+                  v-model="form.vectorGroup"
+                  :options="vectorGroupOptions"
+                  :class="inputClass"
+                />
               </div>
             </div>
 
-            <!-- Potential Free Contacts -->
+            <!-- End Number -->
             <div class="col-12 col-md-6">
               <div class="meta-field dark">
-                <label class="field-label-dark">Potential free contacts available</label>
-                <select v-model="form.contactsAvail" class="field-input-dark">
-                  <option value="Yes">Yes</option>
-                  <option value="No">No</option>
-                </select>
+                <q-select
+                  label="End Number (Single / Dual O/P)"
+                  stack-label
+                  outlined
+                  emit-value
+                  map-options
+                  v-model="form.endNumber"
+                  :options="endNumberOptions"
+                  :class="inputClass"
+                />
               </div>
             </div>
 
-            <!-- Supply on Lamp -->
+            <!-- RTCC Steps -->
             <div class="col-12 col-md-6">
-              <div class="meta-field dark">
-                <label class="field-label-dark">Supply available on lamp</label>
-                <select v-model="form.supplyLamp" class="field-input-dark">
-                  <option value="Yes">Yes</option>
-                  <option value="No">No</option>
-                </select>
-              </div>
+              <q-input stack-label outlined label="RTCC High Step" v-model="form.rtccHighStep" />
             </div>
 
-            <!-- Metering Core CT -->
             <div class="col-12 col-md-6">
-              <div class="meta-field dark">
-                <label class="field-label-dark">Metering core CT available</label>
-                <select v-model="form.meteringCT" class="field-input-dark">
-                  <option value="Yes">Yes</option>
-                  <option value="No">No</option>
-                </select>
-              </div>
+              <q-input stack-label outlined label="RTCC Low Step" v-model="form.rtccLowStep" />
             </div>
 
-            <!-- PT Voltage -->
             <div class="col-12 col-md-6">
-              <div class="meta-field dark">
-                <label class="field-label-dark">PT voltage available</label>
-                <select v-model="form.ptVoltage" class="field-input-dark">
-                  <option value="Yes">Yes</option>
-                  <option value="No">No</option>
-                </select>
-              </div>
+              <q-input stack-label outlined label="RTCC Step Voltage Increment" v-model="form.rtccStepVoltageIncrement" />
             </div>
 
-            <!-- CT Ratio -->
             <div class="col-12 col-md-6">
-              <div class="meta-field dark">
-                <label class="field-label-dark">CT Ratio</label>
-                <input v-model="form.ctRatio" type="text" class="field-input-dark" />
-              </div>
+              <q-input stack-label outlined label="RTCC Neutral Step" v-model="form.rtccNeutralStep" />
             </div>
 
-            <!-- CT Cable Length -->
             <div class="col-12 col-md-6">
-              <div class="meta-field dark">
-                <label class="field-label-dark">CT Cable length from MFT location to VCB/CRP TB</label>
-                <input v-model="form.ctCableLength" type="text" class="field-input-dark" />
-              </div>
+              <q-input stack-label outlined label="RTCC Normal Step" v-model="form.rtccNormalStep" />
             </div>
 
-            <!-- PT Cable Length -->
             <div class="col-12 col-md-6">
-              <div class="meta-field dark">
-                <label class="field-label-dark">PT Cable length from MFT location to VCB/CRP TB</label>
-                <input v-model="form.ptCableLength" type="text" class="field-input-dark" />
-              </div>
+              <q-input stack-label outlined label="Neutral_U (U = Voltage)" v-model="form.neutralUVoltage" />
             </div>
+
+            <!-- Tap Position -->
+            <div class="col-12 col-md-6">
+              <q-select
+                stack-label
+                label="Tap Position Connection Type"
+                outlined
+                emit-value
+                map-options
+                v-model="form.tapPositionConnectionType"
+                :options="tapConnectionTypeOptions"
+                :class="inputClass"
+              />
+            </div>
+
+            <!-- RTCC Panel Status -->
+            <div class="col-12 col-md-6">
+              <q-select
+                stack-label
+                label="RTCC Panel Status"
+                outlined
+                emit-value
+                map-options
+                v-model="form.rtccPanelStatus"
+                :options="rtccPanelStatusOptions"
+                :class="inputClass"
+              />
+            </div>
+
+            <!-- Reference Panel -->
+            <div class="col-12 col-md-6">
+              <q-input
+                stack-label
+                outlined
+                label="Panel name from which TAP position is noted"
+                v-model="form.rtccPanelReference"
+                :disable="form.rtccPanelStatus !== 'Not Working'"
+              />
+            </div>
+
           </div>
+
         </q-card-section>
 
         <q-separator />
@@ -224,14 +250,18 @@
 </template>
 
 <script setup>
-import { ref, reactive } from 'vue'
+import { ref, reactive, computed } from 'vue'
+import { useWindowManager } from '../../../../stores/window_manager'
+import { useQuasar } from 'quasar'
+const $q = useQuasar()
 
-const headerData = reactive({
-  substationName: '',
-  inChargeName: '',
-  date: '',
-  engineerName: ''
-})
+const inputClass = computed(() =>
+   $q.dark.isActive ? 'dialog-field-label-dark' : 'dialog-field-label-light'
+)
+
+const props = defineProps(['modelValue', 'name'])
+const emit = defineEmits(['update:modelValue'])
+const store = useWindowManager()
 
 const feeders = ref([])
 
@@ -240,21 +270,61 @@ const deleteConfirmOpen = ref(false)
 const editingIndex = ref(-1)
 const selectedRow = ref(null)
 
+const dropdown12 = Array.from({ length: 12 }, (_, i) => i + 1)
+
+const voltageLevels = [
+  { label: '11 kV', value: '11kV' },
+  { label: '33 kV', value: '33kV' },
+  { label: '66 kV', value: '66kV' }
+]
+
+const yesNoOptions = [
+  { label: 'Yes', value: 'Yes' },
+  { label: 'No', value: 'No' }
+]
+
+const vectorGroupOptions = [
+  { label: 'Star', value: 'Star' },
+  { label: 'Delta', value: 'Delta' }
+]
+
+const endNumberOptions = [
+  { label: 'Single O/P', value: 'Single' },
+  { label: 'Dual O/P', value: 'Dual' }
+]
+
+const tapConnectionTypeOptions = [
+  { label: 'Resistance', value: 'Resistance' },
+  { label: 'Lamp', value: 'Lamp' }
+]
+
+const rtccPanelStatusOptions = [
+  { label: 'Working', value: 'Working' },
+  { label: 'Not Working', value: 'Not Working' }
+]
+
+
 const defaultForm = {
-  bayName: '',
-  nominalVoltage: '',
-  description: '',
-  spaceAvail: '',
-  feederCategory: '',
-  reqCMR: 'Yes',
-  reqHDR: 'Yes',
-  contactsAvail: 'Yes',
-  supplyLamp: 'Yes',
-  meteringCT: 'Yes',
-  ptVoltage: 'Yes',
-  ctRatio: '',
-  ctCableLength: '',
-  ptCableLength: ''
+  // Transformer / RTCC specific fields
+  transformerPhoto: null,
+  transformerVoltageLevel: '',
+  transformerRatedCapacity: '',
+  transformerResistance: '',
+  transformerReactance: '',
+  groundedNeutralStatus: '',
+  vectorGroup: '',
+  endNumber: '',
+  rtccHighStep: '',
+  rtccLowStep: '',
+  rtccStepVoltageIncrement: '',
+  rtccNeutralStep: '',
+  rtccNormalStep: '',
+  neutralUVoltage: '',
+  tapPositionConnectionType: '',
+
+  // 🔹 NEW FIELD YOU ASKED FOR
+  rtccPanelStatus: '',
+  rtccPanelReferencePanel: ''
 }
 
 const form = reactive({ ...defaultForm })
@@ -366,7 +436,7 @@ const deleteFeeder = () => {
 
 /* Dialog Refinements */
 .survey-dialog-card {
-  background: #d4d4d4;
+  background: #ffffff;
   /* Grey background for modal content */
 }
 
@@ -381,7 +451,7 @@ const deleteFeeder = () => {
 .field-input-dark {
   /* background: #0e0d0d; */
   /* White box */
-  border: 1px solid #bdbdbd;
+  /* border: 1px solid #bdbdbd; */
   border-radius: 4px;
   padding: 8px 12px;
   width: 100%;
