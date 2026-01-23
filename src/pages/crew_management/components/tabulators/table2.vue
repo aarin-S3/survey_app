@@ -2,29 +2,29 @@
   <div class="feeder-survey-container q-pa-md">
     <!-- Header Section:-->
     <div class="header-section q-mb-md">
-      <div class="text-h6 text-white q-mb-sm">Feeder List</div>
+      <div :class="labelClass" class="text-h6 q-mb-sm">Feeder List</div>
       <div class="row q-col-gutter-md q-col-gutter-y-md">
         <div class="col-12 col-sm-6 col-md-3">
           <div class="meta-field">
-            <label class="survey-label">SUBSTATION NAME</label>
+            <label :class="labelClass" class="survey-label">SUBSTATION NAME</label>
             <input v-model="headerData.substationName" type="text" class="survey-input" />
           </div>
         </div>
         <div class="col-12 col-sm-6 col-md-3">
           <div class="meta-field">
-            <label class="survey-label">IN-CHARGE NAME</label>
+            <label :class="labelClass" class="survey-label">IN-CHARGE NAME</label>
             <input v-model="headerData.inChargeName" type="text" class="survey-input" />
           </div>
         </div>
         <div class="col-12 col-sm-6 col-md-3">
           <div class="meta-field">
-            <label class="survey-label">DATE</label>
+            <label :class="labelClass" class="survey-label">DATE</label>
             <input v-model="headerData.date" type="date" class="survey-input" />
           </div>
         </div>
         <div class="col-12 col-sm-6 col-md-3">
           <div class="meta-field">
-            <label class="survey-label">ENGINEER</label>
+            <label :class="labelClass" class="survey-label">ENGINEER</label>
             <input v-model="headerData.engineerName" type="text" class="survey-input" />
           </div>
         </div>
@@ -52,10 +52,11 @@
     <q-dialog v-model="feederDialogOpen" :maximized="$q.screen.lt.md" transition-show="slide-up"
       transition-hide="slide-down" persistent>
       <q-card class="survey-dialog-card" :style="$q.screen.gt.sm ? 'width: 70vw; max-width: 900px;' : ''">
-        <q-toolbar class="bg-indigo-10 text-white">
-          <q-toolbar-title class="text-subtitle1">{{ editingIndex === -1 ? 'Add New' : 'Edit' }} Feeder
+        <q-toolbar class="text-white">
+          <q-toolbar-title :class="labelClass" class="text-subtitle1">{{ editingIndex === -1 ? 'Add New' : 'Edit' }}
+            Feeder
             Details</q-toolbar-title>
-          <q-btn flat round dense icon="close" v-close-popup />
+          <q-btn flat :class="labelClass" round dense icon="close" v-close-popup />
         </q-toolbar>
 
         <q-card-section class="scroll" style="max-height: 70vh">
@@ -63,7 +64,7 @@
             <!-- Bay Name -->
             <div class="col-12 col-md-6">
               <div class="meta-field dark">
-                <label class="field-label-dark">Bay Name</label>
+                <q-label :class="labelClass" class="field-label-dark">Bay Name</q-label>
                 <input v-model="form.bayName" type="text" class="field-input-dark" placeholder="Name field" />
               </div>
             </div>
@@ -71,7 +72,7 @@
             <!-- Nominal Voltage -->
             <div class="col-12 col-md-6">
               <div class="meta-field dark">
-                <label class="field-label-dark">Nominal Voltage</label>
+                <q-label :class="labelClass" class="field-label-dark">Nominal Voltage</q-label>
                 <select v-model="form.nominalVoltage" class="field-input-dark">
                   <option value="" disabled>Select Voltage</option>
                   <option value="66kV">66kV</option>
@@ -84,7 +85,7 @@
             <!-- Description -->
             <div class="col-12">
               <div class="meta-field dark">
-                <label class="field-label-dark">Feeder / Transformer Description</label>
+                <q-label :class="labelClass" class="field-label-dark">Feeder / Transformer Description</q-label>
                 <textarea v-model="form.description" class="field-input-dark" rows="3"></textarea>
               </div>
             </div>
@@ -92,7 +93,7 @@
             <!-- Space Availability -->
             <div class="col-12 col-md-6">
               <div class="meta-field dark">
-                <label class="field-label-dark">Availability of SPACE in C&R Panel</label>
+                <q-label :class="labelClass" class="field-label-dark">Availability of SPACE in C&R Panel</q-label>
                 <input v-model="form.spaceAvail" type="text" class="field-input-dark" />
               </div>
             </div>
@@ -100,7 +101,7 @@
             <!-- Feeder Category -->
             <div class="col-12 col-md-6">
               <div class="meta-field dark">
-                <label class="field-label-dark">Feeder Category</label>
+                <q-label :class="labelClass" class="field-label-dark">Feeder Category</q-label>
                 <input v-model="form.feederCategory" type="text" class="field-input-dark" />
               </div>
             </div>
@@ -108,7 +109,7 @@
             <!-- Requirement of CMR -->
             <div class="col-12 col-md-6">
               <div class="meta-field dark">
-                <label class="field-label-dark">Requirement of CMR</label>
+                <q-label :class="labelClass" class="field-label-dark">Requirement of CMR</q-label>
                 <select v-model="form.reqCMR" class="field-input-dark">
                   <option value="Yes">Yes</option>
                   <option value="No">No</option>
@@ -119,7 +120,7 @@
             <!-- Requirement of HDR -->
             <div class="col-12 col-md-6">
               <div class="meta-field dark">
-                <label class="field-label-dark">Requirement Of HDR</label>
+                <q-label :class="labelClass" class="field-label-dark">Requirement Of HDR</q-label>
                 <select v-model="form.reqHDR" class="field-input-dark">
                   <option value="Yes">Yes</option>
                   <option value="No">No</option>
@@ -130,7 +131,7 @@
             <!-- Potential Free Contacts -->
             <div class="col-12 col-md-6">
               <div class="meta-field dark">
-                <label class="field-label-dark">Potential free contacts available</label>
+                <q-label :class="labelClass" class="field-label-dark">Potential free contacts available</q-label>
                 <select v-model="form.contactsAvail" class="field-input-dark">
                   <option value="Yes">Yes</option>
                   <option value="No">No</option>
@@ -141,7 +142,7 @@
             <!-- Supply on Lamp -->
             <div class="col-12 col-md-6">
               <div class="meta-field dark">
-                <label class="field-label-dark">Supply available on lamp</label>
+                <q-label :class="labelClass" class="field-label-dark">Supply available on lamp</q-label>
                 <select v-model="form.supplyLamp" class="field-input-dark">
                   <option value="Yes">Yes</option>
                   <option value="No">No</option>
@@ -152,7 +153,7 @@
             <!-- Metering Core CT -->
             <div class="col-12 col-md-6">
               <div class="meta-field dark">
-                <label class="field-label-dark">Metering core CT available</label>
+                <q-label :class="labelClass" class="field-label-dark">Metering core CT available</q-label>
                 <select v-model="form.meteringCT" class="field-input-dark">
                   <option value="Yes">Yes</option>
                   <option value="No">No</option>
@@ -163,7 +164,7 @@
             <!-- PT Voltage -->
             <div class="col-12 col-md-6">
               <div class="meta-field dark">
-                <label class="field-label-dark">PT voltage available</label>
+                <q-label :class="labelClass" class="field-label-dark">PT voltage available</q-label>
                 <select v-model="form.ptVoltage" class="field-input-dark">
                   <option value="Yes">Yes</option>
                   <option value="No">No</option>
@@ -174,7 +175,7 @@
             <!-- CT Ratio -->
             <div class="col-12 col-md-6">
               <div class="meta-field dark">
-                <label class="field-label-dark">CT Ratio</label>
+                <q-label :class="labelClass" class="field-label-dark">CT Ratio</q-label>
                 <input v-model="form.ctRatio" type="text" class="field-input-dark" />
               </div>
             </div>
@@ -182,7 +183,8 @@
             <!-- CT Cable Length -->
             <div class="col-12 col-md-6">
               <div class="meta-field dark">
-                <label class="field-label-dark">CT Cable length from MFT location to VCB/CRP TB</label>
+                <q-label :class="labelClass" class="field-label-dark">CT Cable length from MFT location to VCB/CRP
+                  TB</q-label>
                 <input v-model="form.ctCableLength" type="text" class="field-input-dark" />
               </div>
             </div>
@@ -190,7 +192,8 @@
             <!-- PT Cable Length -->
             <div class="col-12 col-md-6">
               <div class="meta-field dark">
-                <label class="field-label-dark">PT Cable length from MFT location to VCB/CRP TB</label>
+                <q-label :class="labelClass" class="field-label-dark">PT Cable length from MFT location to VCB/CRP
+                  TB</q-label>
                 <input v-model="form.ptCableLength" type="text" class="field-input-dark" />
               </div>
             </div>
@@ -224,7 +227,10 @@
 </template>
 
 <script setup>
-import { ref, reactive } from 'vue'
+import { ref, reactive, computed } from 'vue'
+import { useQuasar } from 'quasar'
+
+const $q = useQuasar();
 
 const headerData = reactive({
   substationName: '',
@@ -296,9 +302,38 @@ const deleteFeeder = () => {
   deleteConfirmOpen.value = false
   feederDialogOpen.value = false
 }
+
+const labelClass = computed(() =>
+  $q.dark.isActive ? 'dialog-field-label-dark' : 'dialog-field-label-light'
+)
+
+const inputClass = computed(() =>
+  $q.dark.isActive ? 'dialog-field-label-dark' : 'dialog-field-label-light'
+)
+
+const subtitleClass = computed(() =>
+  $q.dark.isActive ? 'dialog-subtitle-dark' : 'dialog-subtitle-light'
+)
+
 </script>
 
 <style scoped>
+.dialog-subtitle-light {
+  color: #385562;
+}
+
+.dialog-subtitle-dark {
+  color: #81d4fa;
+}
+
+.dialog-field-label-light {
+  color: #333;
+}
+
+.dialog-field-label-dark {
+  color: #ccc;
+}
+
 .feeder-survey-container {
   max-width: 100%;
   background-color: transparent;
@@ -306,7 +341,7 @@ const deleteFeeder = () => {
 }
 
 .header-section {
-  background: #46586b;
+  /* background: #84aedb; */
   /* Indigo dark background from image */
   padding: 20px;
   border-bottom: 1px solid #ffffff40;
@@ -328,7 +363,7 @@ const deleteFeeder = () => {
 
 .survey-input {
   /* background: #ffffff; */
-  border: none;
+  border: 1px solid gray;
   height: 28px;
   padding: 4px 8px;
   border-radius: 2px;
@@ -366,7 +401,7 @@ const deleteFeeder = () => {
 
 /* Dialog Refinements */
 .survey-dialog-card {
-  background: #d4d4d4;
+  /* background: #d4d4d4; */
   /* Grey background for modal content */
 }
 
