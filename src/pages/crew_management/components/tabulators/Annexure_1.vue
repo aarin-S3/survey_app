@@ -8,7 +8,7 @@
       <q-card-section>
         <div :class="labelClass" class="text-subtitle2 text-weight-bold section-title q-mb-md">Block 1: Handmade Control Room Lay Out</div>
         <q-file :class="inputClass" v-model="crLayoutFile" label="Upload Image" accept=".jpg, .jpeg, .png" max-file-size="10485760"
-          @rejected="onRejected" @update:model-value="updateCrPreview" class="custom-file-input" outlined dense>
+          @rejected="onRejected" @update:model-value="updateCrPreview" class="custom-file-input" outlined >
           <template v-slot:append>
             <q-icon name="cloud_upload" color="primary" />
           </template>
@@ -27,7 +27,7 @@
       <q-card-section>
         <div :class="labelClass" class="text-subtitle2 text-weight-bold section-title q-mb-md">Block 2: Handmade SLD</div>
         <q-file :class="inputClass" v-model="sldFile" label="Upload Image" accept=".jpg, .jpeg, .png" max-file-size="10485760"
-          @rejected="onRejected" @update:model-value="updateSldPreview" class="custom-file-input" outlined dense>
+          @rejected="onRejected" @update:model-value="updateSldPreview" class="custom-file-input" outlined >
           <template v-slot:append>
             <q-icon name="cloud_upload" color="primary" />
           </template>
@@ -72,20 +72,20 @@
         </q-card-section>
 
         <q-card-section class="q-pt-none q-gutter-y-md">
-          <q-input :class="inputClass" v-model="currentRelay.feederName" label="Interconnector Feeder Name" outlined dense bg-color="white"
-            label-color="grey-8" color="black" />
+          <q-input :class="inputClass" v-model="currentRelay.feederName" placeholder="Interconnector Feeder Name" outlined  
+            label-color="grey-8" />
 
           <q-select :class="inputClass" v-model="currentRelay.voltageLevel" :options="['66 kV', '33 kV', '11 kV']" label="Voltage Level"
-            outlined dense bg-color="white" label-color="grey-8" color="black" behavior="menu" />
+            outlined   label-color="grey-8" behavior="menu" />
 
-          <q-input :class="inputClass" v-model="currentRelay.relayMake" label="Relay Make" outlined dense bg-color="white"
-            label-color="grey-8" color="black" />
+          <q-input :class="inputClass" v-model="currentRelay.relayMake" placeholder="Relay Make" outlined  
+            label-color="grey-8" />
 
-          <q-input :class="inputClass" v-model="currentRelay.relayModel" label="Relay Model" outlined dense bg-color="white"
-            label-color="grey-8" color="black" />
+          <q-input :class="inputClass" v-model="currentRelay.relayModel" placeholder="Relay Model" outlined  
+            label-color="grey-8" />
 
-          <q-input :class="inputClass" v-model="currentRelay.remarks" label="Remarks" type="textarea" outlined dense bg-color="white"
-            label-color="grey-8" color="black" />
+          <q-input :class="inputClass" v-model="currentRelay.remarks" placeholder="Remarks" type="textarea" outlined  
+            label-color="grey-8" />
         </q-card-section>
 
         <q-card-section class="row items-center justify-between q-pa-md">
@@ -128,23 +128,23 @@
         </q-card-section>
 
         <q-card-section class="q-pt-none q-gutter-y-md">
-          <q-input :class="inputClass" v-model="currentDiDoRelay.feederName" label="Feeder Name" outlined dense bg-color="white"
-            label-color="grey-8" color="black" />
+          <q-input :class="inputClass" v-model="currentDiDoRelay.feederName" placeholder="Feeder Name" outlined  
+            label-color="grey-8"  />
 
-          <q-input :class="inputClass" v-model="currentDiDoRelay.relayMake" label="Relay Make" outlined dense bg-color="white"
-            label-color="grey-8" color="black" />
+          <q-input :class="inputClass" v-model="currentDiDoRelay.relayMake" placeholder="Relay Make" outlined  
+            label-color="grey-8"  />
 
-          <q-input :class="inputClass" v-model="currentDiDoRelay.relayModel" label="Relay Model" outlined dense bg-color="white"
-            label-color="grey-8" color="black" />
+          <q-input :class="inputClass" v-model="currentDiDoRelay.relayModel" placeholder="Relay Model" outlined  
+            label-color="grey-8"  />
 
           <q-select :class="inputClass" v-model="currentDiDoRelay.noOfDiPoints" :options="diPointsOptions" label="No. of DI points in relay"
-            outlined dense bg-color="white" label-color="grey-8" color="black" behavior="menu" />
+            outlined   label-color="grey-8"  behavior="menu" />
 
           <q-select :class="inputClass" v-model="currentDiDoRelay.noOfDoPoints" :options="doPointsOptions" label="No. of DO points in relay"
-            outlined dense bg-color="white" label-color="grey-8" color="black" behavior="menu" />
+            outlined   label-color="grey-8"  behavior="menu" />
 
-          <q-input :class="inputClass" v-model="currentDiDoRelay.remarks" label="Remarks" type="textarea" outlined dense bg-color="white"
-            label-color="grey-8" color="black" />
+          <q-input :class="inputClass" v-model="currentDiDoRelay.remarks" placeholder="Remarks" type="textarea" outlined  
+            label-color="grey-8"  />
         </q-card-section>
 
         <q-card-section class="row items-center justify-between q-pa-md">
@@ -358,10 +358,6 @@ const subtitleClass = computed(() =>
   font-size: 1.1rem;
 }
 
-:global(.body--dark) .section-title {
-  color: #ffffff;
-}
-
 .section-title {
   color: #000000;
 }
@@ -379,20 +375,6 @@ const subtitleClass = computed(() =>
 
 .upload-card :deep(.q-field__control) {
   color: #333;
-}
-
-:global(.body--dark) .upload-card :deep(.q-field__control) {
-  color: #ffffff;
-}
-
-:global(.body--dark) .upload-card :deep(.q-field__input) {
-  color: #ffffff;
-}
-
-:global(.body--dark) .upload-card :deep(.q-field__native),
-:global(.body--dark) .upload-card :deep(input) {
-  background-color: #555555;
-  color: #ffffff;
 }
 
 :global(.body--dark) .upload-card :deep(.q-placeholder) {
@@ -418,7 +400,7 @@ const subtitleClass = computed(() =>
   align-items: center;
   border-radius: 8px;
   overflow: hidden;
-  background-color: #f5f5f5;
+  /* background-color: #f5f5f5; */
   padding: 1rem;
 }
 
@@ -435,7 +417,7 @@ const subtitleClass = computed(() =>
 
 /* Relay Card Styling */
 .relay-card {
-  background-color: #faf9f9;
+  /* background-color: #faf9f9; */
   border-radius: 12px;
   cursor: pointer;
   transition: all 0.3s ease;
@@ -448,14 +430,14 @@ const subtitleClass = computed(() =>
 }
 
 .relay-card:hover {
-  background-color: #e8e8e8;
-  border-color: #90caf9;
+  /* background-color: #e8e8e8; */
+  /* border-color: #90caf9; */
   box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
 }
 
 :global(.body--dark) .relay-card:hover {
   background-color: #333333;
-  border-color: #90caf9;
+  /* border-color: #90caf9; */
   box-shadow: 0 4px 12px rgba(0, 0, 0, 0.4);
 }
 

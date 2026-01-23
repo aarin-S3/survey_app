@@ -50,7 +50,7 @@
 
             <div class="col-12 col-md-6">
               <div class="meta-field dark">
-                <q-input stack-label outlined  class="field-input-dark" label="RTU to feeder distance" v-model="form.distance" />
+                <q-input stack-label outlined  class="field-input-dark" placeholder="RTU to feeder distance" v-model="form.distance" />
               </div>
             </div>
 
@@ -64,7 +64,7 @@
 
             <div class="col-12 col-md-6">
               <div class="meta-field dark">
-                <q-input stack-label outlined label="Panel to Panel looping cable length"
+                <q-input stack-label outlined placeholder="Panel to Panel looping cable length"
                      v-model="form.loopingLength" />
               </div>
             </div>

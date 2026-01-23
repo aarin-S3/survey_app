@@ -72,10 +72,9 @@
             <div class="col-12 col-md-6">
               <div class="meta-field dark">
                 <q-input
-                  stack-label
                   outlined
                   class="field-input-dark"
-                  label="Rated (20 MVA, 50 MVA, kVA)"
+                  placeholder="Rated (20 MVA, 50 MVA, kVA)"
                   v-model="form.transformerRatedCapacity"
                 />
               </div>
@@ -85,10 +84,9 @@
             <div class="col-12 col-md-6">
               <div class="meta-field dark">
                 <q-input
-                  stack-label
                   outlined
                   class="field-input-dark"
-                  label="R (Resistance / % Impedance)"
+                  placeholder="R (Resistance / % Impedance)"
                   v-model="form.transformerResistance"
                 />
               </div>
@@ -98,10 +96,9 @@
             <div class="col-12 col-md-6">
               <div class="meta-field dark">
                 <q-input
-                  stack-label
                   outlined
                   class="field-input-dark"
-                  label="X (Reactance)"
+                  placeholder="X (Reactance)"
                   v-model="form.transformerReactance"
                 />
               </div>
@@ -157,27 +154,27 @@
 
             <!-- RTCC Steps -->
             <div class="col-12 col-md-6">
-              <q-input stack-label outlined label="RTCC High Step" v-model="form.rtccHighStep" />
+              <q-input outlined placeholder="RTCC High Step" v-model="form.rtccHighStep" />
             </div>
 
             <div class="col-12 col-md-6">
-              <q-input stack-label outlined label="RTCC Low Step" v-model="form.rtccLowStep" />
+              <q-input outlined placeholder="RTCC Low Step" v-model="form.rtccLowStep" />
             </div>
 
             <div class="col-12 col-md-6">
-              <q-input stack-label outlined label="RTCC Step Voltage Increment" v-model="form.rtccStepVoltageIncrement" />
+              <q-input outlined placeholder="RTCC Step Voltage Increment" v-model="form.rtccStepVoltageIncrement" />
             </div>
 
             <div class="col-12 col-md-6">
-              <q-input stack-label outlined label="RTCC Neutral Step" v-model="form.rtccNeutralStep" />
+              <q-input outlined placeholder="RTCC Neutral Step" v-model="form.rtccNeutralStep" />
             </div>
 
             <div class="col-12 col-md-6">
-              <q-input stack-label outlined label="RTCC Normal Step" v-model="form.rtccNormalStep" />
+              <q-input outlined placeholder="RTCC Normal Step" v-model="form.rtccNormalStep" />
             </div>
 
             <div class="col-12 col-md-6">
-              <q-input stack-label outlined label="Neutral_U (U = Voltage)" v-model="form.neutralUVoltage" />
+              <q-input outlined placeholder="Neutral_U (U = Voltage)" v-model="form.neutralUVoltage" />
             </div>
 
             <!-- Tap Position -->
@@ -211,9 +208,8 @@
             <!-- Reference Panel -->
             <div class="col-12 col-md-6">
               <q-input
-                stack-label
                 outlined
-                label="Panel name from which TAP position is noted"
+                placeholder="Panel name from which TAP position is noted"
                 v-model="form.rtccPanelReference"
                 :disable="form.rtccPanelStatus !== 'Not Working'"
               />

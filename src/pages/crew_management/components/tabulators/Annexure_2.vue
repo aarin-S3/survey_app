@@ -8,8 +8,8 @@
       <q-card-section>
         <div :class="labelClass" class="text-subtitle2 text-weight-bold section-title q-mb-md">Choose Panel details</div>
 
-        <q-select v-model="selectedPanel" :options="panelOptions" label="Choose" outlined dense emit-value map-options
-          @update:model-value="onPanelSelect" class="panel-select-field" />
+        <q-select v-model="selectedPanel" label="Choose" :options="panelOptions" outlined emit-value map-options
+          @update:model-value="onPanelSelect" :dark="$q.dark.isActive" class="panel-select-field" />
       </q-card-section>
     </q-card>
 
@@ -22,14 +22,14 @@
 
         <q-card-section class="q-pt-none q-gutter-y-md">
           <q-select :class="inputClass" v-model="currentPanel.signalname" :options="signalnameOptions" label="Signal Name" outlined
-            dense class="field-input" behavior="menu" />
+             class="field-input" behavior="menu" />
           <q-select :class="inputClass" v-model="currentPanel.lampVoltages" :options="lampVoltageOptions" label="Lamp Voltages" outlined
-            dense class="field-input" behavior="menu" />
+             class="field-input" behavior="menu" />
 
           <q-select :class="inputClass" v-model="currentPanel.runningOnDualVoltage" :options="yesNoOptions" label="Running on Dual Voltage"
-            outlined dense class="field-input" behavior="menu" />
+            outlined  class="field-input" behavior="menu" />
 
-          <q-input :class="inputClass" v-model="currentPanel.remarks" label="Remarks" type="textarea" outlined dense class="field-input" />
+          <q-input :class="inputClass" v-model="currentPanel.remarks" label="Remarks" type="textarea" outlined  class="field-input" />
         </q-card-section>
 
         <q-card-section class="row items-center justify-between q-pa-md">
@@ -42,7 +42,7 @@
     <!-- Section 2: Panel Metering Chamber Dimension -->
     <q-card class="metering-chamber-card">
       <q-card-section>
-        <div class="text-subtitle1 q-mb-md text-weight-bold section-title">Panel Metering chamber dimension</div>
+        <div :class="labelClass" class="text-subtitle1 q-mb-md text-weight-bold section-title">Panel Metering chamber dimension</div>
 
         <!-- Voltage Blocks Container -->
         <div class="voltage-blocks-container">
@@ -51,18 +51,18 @@
             <div :class="labelClass" class="block-header">66kV</div>
             <div class="q-gutter-y-md">
               <q-select v-model="panelMeteringData.kv66.panelMake" :options="panelMakeOptions" label="Panel Make"
-                outlined dense @update:model-value="checkIfOthers('66kv')" class="field-input" behavior="menu" />
+                outlined  @update:model-value="checkIfOthers('66kv')" class="field-input" behavior="menu" />
 
               <q-input v-if="panelMeteringData.kv66.panelMake === 'Others'"
-                v-model="panelMeteringData.kv66.customPanelMake" label="Specify Panel Make" outlined dense
+                v-model="panelMeteringData.kv66.customPanelMake" label="Specify Panel Make" outlined 
                 class="field-input" />
 
               <div class="dimensions-row">
-                <q-input v-model.number="panelMeteringData.kv66.height" label="Height(m)" type="number" outlined dense
+                <q-input v-model.number="panelMeteringData.kv66.height" stack-label label="Height(m)" type="number" outlined 
                   class="field-input dimension-field" />
-                <q-input v-model.number="panelMeteringData.kv66.width" label="Width(m)" type="number" outlined dense
+                <q-input v-model.number="panelMeteringData.kv66.width" stack-label label="Width(m)" type="number" outlined 
                   class="field-input dimension-field" />
-                <q-input v-model.number="panelMeteringData.kv66.depth" label="Depth(m)" type="number" outlined dense
+                <q-input v-model.number="panelMeteringData.kv66.depth" stack-label label="Depth(m)" type="number" outlined 
                   class="field-input dimension-field" />
               </div>
             </div>
@@ -70,21 +70,21 @@
 
           <!-- 33kV Block -->
           <div class="voltage-block">
-            <div class="block-header">33kV</div>
+            <div :class="labelClass" class="block-header">33kV</div>
             <div class="q-gutter-y-md">
               <q-select v-model="panelMeteringData.kv33.panelMake" :options="panelMakeOptions" label="Panel Make"
-                outlined dense @update:model-value="checkIfOthers('33kv')" class="field-input" behavior="menu" />
+                outlined  @update:model-value="checkIfOthers('33kv')" class="field-input" behavior="menu" />
 
               <q-input v-if="panelMeteringData.kv33.panelMake === 'Others'"
-                v-model="panelMeteringData.kv33.customPanelMake" label="Specify Panel Make" outlined dense
+                v-model="panelMeteringData.kv33.customPanelMake" label="Specify Panel Make" outlined 
                 class="field-input" />
 
               <div class="dimensions-row">
-                <q-input v-model.number="panelMeteringData.kv33.height" label="Height(m)" type="text" outlined dense
+                <q-input v-model.number="panelMeteringData.kv33.height" stack-label label="Height(m)" type="text" outlined 
                   class="field-input dimension-field" />
-                <q-input v-model.number="panelMeteringData.kv33.width" label="Width(m)" type="text" outlined dense
+                <q-input v-model.number="panelMeteringData.kv33.width" stack-label label="Width(m)" type="text" outlined 
                   class="field-input dimension-field" />
-                <q-input v-model.number="panelMeteringData.kv33.depth" label="Depth(m)" type="text" outlined dense
+                <q-input v-model.number="panelMeteringData.kv33.depth" stack-label label="Depth(m)" type="text" outlined 
                   class="field-input dimension-field" />
               </div>
             </div>
@@ -92,21 +92,21 @@
 
           <!-- 11kV Block -->
           <div class="voltage-block">
-            <div class="block-header">11kV</div>
+            <div :class="labelClass" class="block-header">11kV</div>
             <div class="q-gutter-y-md">
               <q-select v-model="panelMeteringData.kv11.panelMake" :options="panelMakeOptions" label="Panel Make"
-                outlined dense @update:model-value="checkIfOthers('11kv')" class="field-input" behavior="menu" />
+                outlined  @update:model-value="checkIfOthers('11kv')" class="field-input" behavior="menu" />
 
               <q-input v-if="panelMeteringData.kv11.panelMake === 'Others'"
-                v-model="panelMeteringData.kv11.customPanelMake" label="Specify Panel Make" outlined dense
+                v-model="panelMeteringData.kv11.customPanelMake" label="Specify Panel Make" outlined 
                 class="field-input" />
 
               <div class="dimensions-row">
-                <q-input v-model.number="panelMeteringData.kv11.height" label="Height(m)" type="number" outlined dense
+                <q-input v-model.number="panelMeteringData.kv11.height" stack-label label="Height(m)" type="number" outlined 
                   class="field-input dimension-field" />
-                <q-input v-model.number="panelMeteringData.kv11.width" label="Width(m)" type="number" outlined dense
+                <q-input v-model.number="panelMeteringData.kv11.width" stack-label label="Width(m)" type="number" outlined 
                   class="field-input dimension-field" />
-                <q-input v-model.number="panelMeteringData.kv11.depth" label="Depth(m)" type="number" outlined dense
+                <q-input v-model.number="panelMeteringData.kv11.depth" stack-label label="Depth(m)" type="number" outlined 
                   class="field-input dimension-field" />
               </div>
             </div>
@@ -191,6 +191,22 @@ const subtitleClass = computed(() =>
 </script>
 
 <style scoped>
+  
+.dialog-subtitle-light {
+   color: #385562;
+}
+
+.dialog-subtitle-dark {
+   color: #81d4fa;
+}
+
+.dialog-field-label-light {
+   color: #333;
+}
+
+.dialog-field-label-dark {
+   color: #ccc;
+}
 .annexure-container {
   max-width: 100%;
   min-height: 100vh;
@@ -221,12 +237,12 @@ const subtitleClass = computed(() =>
 /* Panel Selection Card */
 .panel-selection-card {
   border-radius: 12px;
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+  /* box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1); */
 }
 
 :global(.body--dark) .panel-selection-card {
-  background-color: #333333;
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
+  /* background-color: #333333; */
+  /* box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3); */
 }
 
 .panel-select-field {
