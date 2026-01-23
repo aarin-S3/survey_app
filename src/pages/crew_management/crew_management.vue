@@ -104,8 +104,8 @@
             </Annexure_2>
             <ExistingACDistributionPanel :name="arrSideMenu[9].MenuName"
                v-show="currentPage === `${arrSideMenu[9].currentListPage}`"></ExistingACDistributionPanel>
-            <FormLayoutTwelve :name="arrSideMenu[10].MenuName"
-               v-show="currentPage === `${arrSideMenu[10].currentListPage}`"></FormLayoutTwelve>
+            <Adms :name="arrSideMenu[10].MenuName"
+               v-show="currentPage === `${arrSideMenu[10].currentListPage}`"></Adms>
             <FormLayoutThirteen :name="arrSideMenu[11].MenuName"
                v-show="currentPage === `${arrSideMenu[11].currentListPage}`"></FormLayoutThirteen>
             <!-- <FormLayoutFourteen :name="arrSideMenu[13].MenuName"
@@ -187,7 +187,9 @@ import Annexure_1 from './components/tabulators/Annexure_1.vue'
 import Annexure_2 from './components/tabulators/Annexure_2.vue'
 import Table_CommCableDetails from './components/tabulators/table_CommCableDetails.vue'
 import Table_TransformerDetails from './components/tabulators/table_TransformerDetails.vue'
+import Adms from './components/tabulators/adms.vue'
 
+import adms from './components/tabulators/adms.vue'
 defineOptions({
    components: {
       DbNumber,
